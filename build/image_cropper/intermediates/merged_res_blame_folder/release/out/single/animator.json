@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_open_enter.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_open_enter.xml"
+    },
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_close_exit.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_close_exit.xml"
+    },
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_fade_enter.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_fade_enter.xml"
+    },
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_open_exit.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_open_exit.xml"
+    },
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_close_enter.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_close_enter.xml"
+    },
+    {
+        "merged": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\animator\\fragment_fade_exit.xml",
+        "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\6264c52e7eded51c9ced56df6012db34\\transformed\\fragment-1.3.4\\res\\animator\\fragment_fade_exit.xml"
+    }
+]

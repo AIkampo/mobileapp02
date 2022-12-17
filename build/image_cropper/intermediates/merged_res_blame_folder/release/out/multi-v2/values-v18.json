@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\merged_res\\release\\values-v18\\values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\abd2422cf6d4d9ae0ae28f9e3763c0c7\\transformed\\appcompat-1.3.0\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "D:\\Projects\\AiKampo\\ai_kampo_app\\build\\image_cropper\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v18\\values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\abd2422cf6d4d9ae0ae28f9e3763c0c7\\transformed\\appcompat-1.3.0\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}
