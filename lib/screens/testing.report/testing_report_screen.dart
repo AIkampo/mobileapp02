@@ -200,28 +200,32 @@ class TestResultView extends StatelessWidget {
         ),
         NineSystemButtons(),
         TestStatusTips(),
-        KampoSliverTitle(title: "肺部健康指數"),
-        LungInfo(),
-        KampoSliverTitle(title: "免疫系統指數"),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                child: Card(
-                  child: ListTile(
-                    leading: Image(
-                      image: AssetImage("assets/icons/immune_system.png"),
-                      width: 42,
-                    ),
-                    title: Text("免疫系統指數"),
-                    trailing: Text("88%"),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        //檢測資料API 已去除此資料 所以不顯示
+        // KampoSliverTitle(title: "肺部健康指數"),
+        // LungInfo(),
+
+        //檢測資料API 已去除此資料 所以不顯示
+        // KampoSliverTitle(title: "免疫系統指數"),
+        // SliverToBoxAdapter(
+        //   child: Column(
+        //     children: [
+        //       Padding(
+        //         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        //         child: Card(
+        //           child: ListTile(
+        //             leading: Image(
+        //               image: AssetImage("assets/icons/immune_system.png"),
+        //               width: 42,
+        //             ),
+        //             title: Text("免疫系統指數"),
+        //             trailing: Text("88%"),
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   ),
+        // ),
+
         KampoSliverTitle(title: "細菌與微生物評估"),
         GermsAndMicroorganism(),
         KampoSliverTitle(title: "過敏原評估"),

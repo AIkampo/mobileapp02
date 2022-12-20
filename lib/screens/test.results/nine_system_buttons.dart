@@ -24,7 +24,11 @@ class _NineSystemButtonsState extends State<NineSystemButtons> {
             delegate: SliverChildBuilderDelegate((context, index) {
               return InkWell(
                   onTap: () {
-                    Get.to(() => ReportScreen());
+                    _controller.fetchOrganSystemData("cycle");
+                    Get.to(
+                      () => ReportScreen(),
+                      arguments: {"organ": "cycle", "score": 88},
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.all(4),

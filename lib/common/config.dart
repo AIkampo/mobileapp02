@@ -45,4 +45,18 @@ class KampoColors {
     }
     return scoreColor;
   }
+
+  static Color getOrganSystemScoreColor(double score) {
+    Color scoreColor;
+    if (score > 1) {
+      scoreColor = KampoColors.scoreGreen;
+    } else if (score > 0.75) {
+      scoreColor = KampoColors.scoreYellow;
+    } else if (score > 0.45) {
+      scoreColor = KampoColors.scoreOrange;
+    } else {
+      scoreColor = KampoColors.scoreRed;
+    }
+    return scoreColor;
+  }
 }

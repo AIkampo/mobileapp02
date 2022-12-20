@@ -1,8 +1,9 @@
 import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/screens/test.results.report/analysis_report.dart';
+import 'package:ai_kampo_app/screens/test.results/test_results_controller.dart';
 import 'package:ai_kampo_app/widgets/common/KampoTitle.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -37,11 +38,11 @@ class _ReportScreenState extends State<ReportScreen> {
                       LineSeries<AnalysisData, String>(
                           // Bind data source
                           dataSource: <AnalysisData>[
-                            AnalysisData('2022/03/01', 66),
-                            AnalysisData('2022/04/01', 60),
-                            AnalysisData('2022/05/01', 62),
-                            AnalysisData('2022/06/01', 70),
-                            AnalysisData('2022/07/01', 88)
+                            // AnalysisData('2022/03/01', 66),
+                            // AnalysisData('2022/04/01', 60),
+                            // AnalysisData('2022/05/01', 62),
+                            // AnalysisData('2022/06/01', 70),
+                            // AnalysisData('2022/07/01', 88)
                           ],
                           xValueMapper: (AnalysisData sales, _) => sales.date,
                           yValueMapper: (AnalysisData sales, _) => sales.score)
@@ -68,13 +69,17 @@ class ReportAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var reportArguments = Get.arguments;
+    print("reportArguments:$reportArguments['score']");
+    final controller = Get.find<TestResultsController>();
+
     return SliverAppBar(
       toolbarHeight: 92,
       floating: true,
       pinned: true,
       snap: true,
       expandedHeight: 200,
-      backgroundColor: KampoColors.getScoreColor(18),
+      backgroundColor: KampoColors.getScoreColor(reportArguments['score']),
       actions: [
         Card(
           child: Container(
@@ -108,7 +113,7 @@ class ReportAppBar extends StatelessWidget {
         ),
       ],
       flexibleSpace: FlexibleSpaceBar(
-        background: Image.asset("assets/icons/circulatory_system.png"),
+        background: Image.asset(controller.nineSystemList[0].img!),
         title: Text("循環系統"),
         centerTitle: true,
       ),
