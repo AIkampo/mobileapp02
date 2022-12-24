@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
+import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -94,6 +95,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       validator: FormBuilderValidators.required(),
                       decoration:
                           InputDecoration(filled: true, labelText: "phone".tr),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FormBuilderTextField(
+                      obscureText: true,
+                      name: "password",
+                      validator: FormBuilderValidators.required(),
+                      decoration: InputDecoration(
+                          filled: true, labelText: "password".tr),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FormBuilderTextField(
+                      obscureText: true,
+                      name: "confirmPassword",
+                      validator: FormBuilderValidators.required(),
+                      decoration: InputDecoration(
+                          filled: true, labelText: "confirmPassword".tr),
                     ),
                     SizedBox(
                       height: 20,
@@ -197,16 +218,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future getImageFromGallery() async {
     final _img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    try {
+      if (_img == null) return;
+      File? tempImg = File(_img.path);
+      tempImg = await CropImage(imgFile: tempImg);
+      setState(() {
+        _userImg = tempImg;
+      });
 
-    if (_img == null) return;
-    File? tempImg = File(_img.path);
-    tempImg = await CropImage(imgFile: tempImg);
-    setState(() {
-      _userImg = tempImg;
-    });
-
-    final ref = FirebaseStorage.instance.ref().child(tempImg!.path);
-    ref.putFile(tempImg!);
+      // final ref =
+      //     FirebaseStorage.instance.ref("userAvatar/test2.jpg").child("");
+      // ref.putFile(tempImg!);
+    } catch (e) {
+      print("********** Update Image:" + e.toString());
+    }
   }
 
   Future<File?> CropImage({required File imgFile}) async {
@@ -216,21 +241,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return File(_croppedImg.path);
   }
 
-  Stream readUsers() => FirebaseFirestore.instance
-      .collection("user")
-      .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => print("***************${doc.data().toString()}")));
+  Stream readUsers() =>
+      FirebaseFirestore.instance.collection("user").snapshots().map(
+            (snapshot) => snapshot.docs.map(
+              (doc) => print("***${doc.data().toString()}"),
+            ),
+          );
 
   Future registerUser() async {
+    final password =
+        await encryptPassword(_formKey.currentState!.fields['password']?.value);
+
     await FirebaseFirestore.instance.collection("user").add({
       "name": _formKey.currentState!.fields['name']?.value,
       "phone": _formKey.currentState!.fields['phone']?.value,
+      "password": password,
       "birthday": _formKey.currentState!.fields['birthday']?.value,
       "sex": _formKey.currentState!.fields['sex']?.value,
       "bloodType": _formKey.currentState!.fields['bloodType']?.value,
       "rh": _formKey.currentState!.fields['rh']?.value,
     });
+
+    final ref = FirebaseStorage.instance
+        .ref("userAvatar/${_formKey.currentState!.fields['phone']?.value}.jpg")
+        .child("");
+    ref.putFile(_userImg!);
   }
 
   void _onChanged(dynamic val) => debugPrint(val.toString());

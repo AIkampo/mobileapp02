@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">548555097194-8kf53mep6850eeerkvhstrmkbh5b2lce.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">548555097194</string>
+    <string name="google_api_key" translatable="false">AIzaSyC9BtE8X3BUECNSrU6s3kwp203xfghICHY</string>
+    <string name="google_app_id" translatable="false">1:548555097194:android:9cbeebf2b76d54bfc47613</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyC9BtE8X3BUECNSrU6s3kwp203xfghICHY</string>
+    <string name="google_storage_bucket" translatable="false">aikampo-app.appspot.com</string>
+    <string name="project_id" translatable="false">aikampo-app</string>
+</resources>

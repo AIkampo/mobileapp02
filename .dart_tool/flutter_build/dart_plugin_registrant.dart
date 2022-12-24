@@ -12,6 +12,7 @@ import 'package:rich_clipboard_android/rich_clipboard_android.dart';
 import 'package:google_maps_flutter_ios/google_maps_flutter_ios.dart';
 import 'package:image_picker_ios/image_picker_ios.dart';
 import 'package:rich_clipboard_ios/rich_clipboard_ios.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:rich_clipboard_linux/rich_clipboard_linux.dart';
 import 'package:rich_clipboard_macos/rich_clipboard_macos.dart';
 import 'package:rich_clipboard_windows/rich_clipboard_windows.dart';
@@ -84,6 +85,16 @@ class _PluginRegistrant {
       }
 
     } else if (Platform.isLinux) {
+      try {
+        ConnectivityPlusLinuxPlugin.registerWith();
+      } catch (err) {
+        print(
+          '`connectivity_plus` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+        rethrow;
+      }
+
       try {
         MethodChannelRichClipboard.registerWith();
       } catch (err) {

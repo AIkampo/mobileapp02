@@ -48,7 +48,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/main",
+      initialRoute: "/sign.in",
       getPages: [
         GetPage(
           name: "/splash",
