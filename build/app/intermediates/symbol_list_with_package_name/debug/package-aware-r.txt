@@ -420,6 +420,10 @@ color bright_foreground_inverse_material_dark
 color bright_foreground_inverse_material_light
 color bright_foreground_material_dark
 color bright_foreground_material_light
+color browser_actions_bg_grey
+color browser_actions_divider_color
+color browser_actions_text_color
+color browser_actions_title_color
 color button_material_dark
 color button_material_light
 color common_google_signin_btn_text_dark
@@ -585,6 +589,8 @@ dimen abc_text_size_subhead_material
 dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
+dimen browser_actions_context_menu_max_width
+dimen browser_actions_context_menu_min_padding
 dimen compat_button_inset_horizontal_material
 dimen compat_button_inset_vertical_material
 dimen compat_button_padding_horizontal_material
@@ -857,6 +863,11 @@ id auto
 id beginning
 id blocking
 id bottom
+id browser_actions_header_text
+id browser_actions_menu_item_icon
+id browser_actions_menu_item_text
+id browser_actions_menu_items
+id browser_actions_menu_view
 id buttonPanel
 id center_vertical
 id checkbox
@@ -1061,6 +1072,8 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout browser_actions_context_menu_page
+layout browser_actions_context_menu_row
 layout custom_dialog
 layout notification_action
 layout notification_action_tombstone
@@ -1127,7 +1140,11 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string copy_toast_msg
 string default_web_client_id
+string fallback_menu_item_copy_link
+string fallback_menu_item_open_in_browser
+string fallback_menu_item_share_link
 string gcm_defaultSenderId
 string google_api_key
 string google_app_id
@@ -1558,3 +1575,4 @@ styleable ViewStubCompat android_id android_layout android_inflatedId
 styleable ucrop_AspectRatioTextView ucrop_artv_ratio_title ucrop_artv_ratio_x ucrop_artv_ratio_y
 styleable ucrop_UCropView ucrop_aspect_ratio_x ucrop_aspect_ratio_y ucrop_circle_dimmed_layer ucrop_dimmed_color ucrop_frame_color ucrop_frame_stroke_size ucrop_grid_color ucrop_grid_column_count ucrop_grid_row_count ucrop_grid_stroke_size ucrop_show_frame ucrop_show_grid ucrop_show_oval_crop_frame
 xml flutter_image_picker_file_paths
+xml image_share_filepaths

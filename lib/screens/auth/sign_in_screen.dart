@@ -4,6 +4,7 @@ import 'package:ai_kampo_app/screens/auth/forgot_password_screen.dart';
 import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:ai_kampo_app/utils/check.network.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,9 +62,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Column(
                     children: [
                       TextField(
+                        keyboardType: TextInputType.number,
                         enabled: !authController.isLoading.value,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.phone_android_sharp),
+                            suffixIcon: TextButton(
+                              onPressed: () {
+                                getVerificationCode("0970483255");
+                              },
+                              child: Text("取得驗證碼"),
+                            ),
                             border: OutlineInputBorder(),
                             labelText: "phone".tr),
                       ),
@@ -72,16 +80,16 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       TextField(
                         enabled: !authController.isLoading.value,
-                        obscureText: true,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.password),
-                            suffixIcon: TextButton(
-                                onPressed: () {
-                                  Get.to(() => ForgotPasswordScreen());
-                                },
-                                child: Text("forgotPassword".tr)),
+                            suffixIcon: TextButton.icon(
+                              onPressed: null,
+                              icon: Icon(Icons.login),
+                              label: Text("signIn".tr),
+                            ),
                             border: OutlineInputBorder(),
-                            labelText: "password".tr),
+                            labelText: "驗證碼"),
                       ),
                       SizedBox(
                         height: 20,
@@ -96,15 +104,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                   : Get.toNamed("/sign.up");
                             },
                             child: Text("signUp".tr),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              authController.isLoading.value
-                                  ? null
-                                  : doSignIn();
-                            },
-                            icon: Icon(Icons.login),
-                            label: Text("signIn".tr),
                           ),
                         ],
                       ),
@@ -136,6 +135,24 @@ class _SignInScreenState extends State<SignInScreen> {
               )
               .toList(),
         );
+      }),
+    );
+  }
+
+  Future<void> getVerificationCode(String phoneNumber) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+886 0963517217",
+      verificationCompleted: ((PhoneAuthCredential credential) {
+        print("** verificationCompleted");
+      }),
+      verificationFailed: ((FirebaseAuthException error) {
+        print("** verificationFailed");
+      }),
+      codeSent: ((String verificationId, int? forceResendingToken) {
+        print("** codeSent");
+      }),
+      codeAutoRetrievalTimeout: ((String verificationId) {
+        print("** codeAutoRetrievalTimeout");
       }),
     );
   }
