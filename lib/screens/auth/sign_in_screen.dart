@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -18,6 +19,12 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final authController = Get.find<AuthController>();
+  final _signInFormKey = GlobalKey<FormBuilderState>();
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String _verificationId = '';
+  String _verificationCode = '';
+  var _canGetVerificationCode = false.obs;
 
   @override
   initState() {
@@ -59,55 +66,77 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Container(
                   width: 300,
-                  child: Column(
-                    children: [
-                      TextField(
-                        keyboardType: TextInputType.number,
-                        enabled: !authController.isLoading.value,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.phone_android_sharp),
-                            suffixIcon: TextButton(
-                              onPressed: () {
-                                getVerificationCode("0970483255");
-                              },
-                              child: Text("取得驗證碼"),
-                            ),
-                            border: OutlineInputBorder(),
-                            labelText: "phone".tr),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        enabled: !authController.isLoading.value,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.password),
-                            suffixIcon: TextButton.icon(
-                              onPressed: null,
-                              icon: Icon(Icons.login),
-                              label: Text("signIn".tr),
-                            ),
-                            border: OutlineInputBorder(),
-                            labelText: "驗證碼"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              authController.isLoading.value
+                  child: FormBuilder(
+                    key: _signInFormKey,
+                    initialValue: {
+                      'phoneNumber': '',
+                      'verificationCode': '',
+                    },
+                    child: Column(
+                      children: [
+                        FormBuilderTextField(
+                          name: 'phoneNumber',
+                          keyboardType: TextInputType.number,
+                          enabled: !authController.isLoading.value,
+                          onChanged: (value) {
+                            _canGetVerificationCode.value = _signInFormKey
+                                    .currentState!
+                                    .fields["phoneNumber"]
+                                    ?.value
+                                    .length >=
+                                9;
+                          },
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.phone_android_sharp),
+                              suffixIcon: TextButton(
+                                onPressed: _canGetVerificationCode.value
+                                    ? () => getVerificationCode()
+                                    : null,
+                                child: Text("取得驗證碼"),
+                              ),
+                              border: OutlineInputBorder(),
+                              labelText: "phone".tr),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        FormBuilderTextField(
+                          name: 'verificationCode',
+                          enabled: !authController.isLoading.value &&
+                              _canGetVerificationCode.value,
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            if (value!.length == 6) {
+                              checkVerificationCode();
+                              authController.isLoading.value = true;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.password),
+                              // suffixIcon: TextButton.icon(
+                              //   onPressed: () => checkVerificationCode(),
+                              //   icon: Icon(Icons.login),
+                              //   label: Text("signIn".tr),
+                              // ),
+                              border: OutlineInputBorder(),
+                              labelText: "驗證碼"),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: authController.isLoading.value
                                   ? null
-                                  : Get.toNamed("/sign.up");
-                            },
-                            child: Text("signUp".tr),
-                          ),
-                        ],
-                      ),
-                    ],
+                                  : () => Get.toNamed("/sign.up"),
+                              child: Text("signUp".tr),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -139,22 +168,43 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Future<void> getVerificationCode(String phoneNumber) async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "+886 0963517217",
+  Future<void> getVerificationCode() async {
+    await auth.verifyPhoneNumber(
+      phoneNumber:
+          '+886${_signInFormKey.currentState!.fields["phoneNumber"]?.value}',
       verificationCompleted: ((PhoneAuthCredential credential) {
         print("** verificationCompleted");
       }),
       verificationFailed: ((FirebaseAuthException error) {
         print("** verificationFailed");
       }),
-      codeSent: ((String verificationId, int? forceResendingToken) {
-        print("** codeSent");
+      codeSent: ((String verificationId, int? forceResendingToken) async {
+        print('** codeSent');
+
+        _verificationId = verificationId;
       }),
       codeAutoRetrievalTimeout: ((String verificationId) {
         print("** codeAutoRetrievalTimeout");
       }),
     );
+  }
+
+  Future<void> checkVerificationCode() async {
+    try {
+      // Create a PhoneAuthCredential with the code
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: _verificationId,
+          smsCode:
+              _signInFormKey.currentState!.fields["verificationCode"]?.value);
+
+      // Sign the user in (or link) with the credential
+      await auth.signInWithCredential(credential);
+      authController.isLoading.value = false;
+      Get.offAndToNamed("/main");
+    } catch (e) {
+      Get.snackbar("無法登入", "請檢查驗證碼");
+      authController.isLoading.value = false;
+    }
   }
 
   Future<void> doSignIn() async {

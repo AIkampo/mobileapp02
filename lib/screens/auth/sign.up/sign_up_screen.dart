@@ -22,6 +22,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   File? _userImg;
+  final _fs = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -31,6 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _usersCollection = _fs.collection("users");
+
     // final db = FirebaseFirestore.instance;
     // db.collection("user").doc("d11S7VxcAD0DfoPrQ4zN").get().then(
     //     (DocumentSnapshot doc) {
@@ -99,26 +102,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    FormBuilderTextField(
-                      obscureText: true,
-                      name: "password",
-                      validator: FormBuilderValidators.required(),
-                      decoration: InputDecoration(
-                          filled: true, labelText: "password".tr),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FormBuilderTextField(
-                      obscureText: true,
-                      name: "confirmPassword",
-                      validator: FormBuilderValidators.required(),
-                      decoration: InputDecoration(
-                          filled: true, labelText: "confirmPassword".tr),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    // FormBuilderTextField(
+                    //   obscureText: true,
+                    //   name: "password",
+                    //   validator: FormBuilderValidators.required(),
+                    //   decoration: InputDecoration(
+                    //       filled: true, labelText: "password".tr),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                    // FormBuilderTextField(
+                    //   obscureText: true,
+                    //   name: "confirmPassword",
+                    //   validator: FormBuilderValidators.required(),
+                    //   decoration: InputDecoration(
+                    //       filled: true, labelText: "confirmPassword".tr),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
                     FormBuilderDateTimePicker(
                       name: 'birthday',
                       initialEntryMode: DatePickerEntryMode.calendar,
@@ -216,6 +219,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  Future<void> checkPhoneNumber() async {
+    try {
+      // await _usersCollection.
+    } catch (e) {}
+  }
+
   Future getImageFromGallery() async {
     final _img = await ImagePicker().pickImage(source: ImageSource.gallery);
     try {
@@ -249,13 +258,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           );
 
   Future registerUser() async {
-    final password =
-        await encryptPassword(_formKey.currentState!.fields['password']?.value);
+    // final password =
+    //     await encryptPassword(_formKey.currentState!.fields['password']?.value);
 
     await FirebaseFirestore.instance.collection("user").add({
       "name": _formKey.currentState!.fields['name']?.value,
       "phone": _formKey.currentState!.fields['phone']?.value,
-      "password": password,
+      // "password": password,
       "birthday": _formKey.currentState!.fields['birthday']?.value,
       "sex": _formKey.currentState!.fields['sex']?.value,
       "bloodType": _formKey.currentState!.fields['bloodType']?.value,

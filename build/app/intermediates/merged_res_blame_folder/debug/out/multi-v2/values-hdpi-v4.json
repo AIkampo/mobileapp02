@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Projects\\AiKampo\\ai_kampo_app-phase1\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "outputFile": "com.aikampo.app-mergeDebugResources-23:/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\abd2422cf6d4d9ae0ae28f9e3763c0c7\\transformed\\appcompat-1.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+                    "source": "C:\\Users\\front\\.gradle\\caches\\transforms-3\\f1fe4b411f9c9258754750e5b619e77b\\transformed\\appcompat-1.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
