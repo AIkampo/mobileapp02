@@ -2,6 +2,7 @@ import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
+import 'package:ai_kampo_app/screens/auth/verify_code_screen.dart';
 import 'package:ai_kampo_app/screens/common/loading_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guide/healthy_guide_screen.dart';
 import 'package:ai_kampo_app/screens/info.center/my.points/my_points_screen.dart';
@@ -48,7 +49,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/sign.in",
+      initialRoute: "/sign.up",
       getPages: [
         GetPage(
           name: "/splash",
@@ -68,7 +69,10 @@ class AIKampoApp extends StatelessWidget {
         GetPage(name: "/loading", page: () => LoadingScreen()),
         GetPage(name: "/healthy.guide", page: () => HealthyGuideScreen()),
         GetPage(
-            name: "/headset.connecting", page: () => HeadsetConnectingScreen())
+          name: "/headset.connecting",
+          page: () => HeadsetConnectingScreen(),
+        ),
+        GetPage(name: "/verify.code", page: () => VerifyCodeScreen())
       ],
       translationsKeys: AppTranslation.translations,
       locale: Locale('zh', 'TW'),

@@ -20,9 +20,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  final _signUpFormKey = GlobalKey<FormBuilderState>();
   File? _userImg;
   final _fs = FirebaseFirestore.instance;
+  var _phoneNumberCheckable = false.obs;
 
   @override
   void initState() {
@@ -32,8 +33,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _usersCollection = _fs.collection("users");
-
     // final db = FirebaseFirestore.instance;
     // db.collection("user").doc("d11S7VxcAD0DfoPrQ4zN").get().then(
     //     (DocumentSnapshot doc) {
@@ -42,177 +41,203 @@ class _SignUpScreenState extends State<SignUpScreen> {
     // }, onError: (e) => print("Error getting doc:$e"));
     return Scaffold(
       appBar: AppBar(title: Text("signUp".tr)),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: 330,
-            child: FormBuilder(
-                key: _formKey,
-                onChanged: () {
-                  print("++++${_formKey.currentState!.fields}");
-                },
-                initialValue: {
-                  "name": "12345",
-                  "phone": "0912345678",
-                  "birthday": "",
-                  "sex": "",
-                  "bloodType": "",
-                  "rh": ""
-                },
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        getImageFromGallery();
-                      },
-                      child: _userImg == null
-                          ? CircleAvatar(
-                              child: Icon(
-                                CupertinoIcons.person,
-                                size: 50,
+      body: Obx(
+        () => SingleChildScrollView(
+          child: Center(
+            child: Container(
+              width: 330,
+              child: FormBuilder(
+                  key: _signUpFormKey,
+                  initialValue: {
+                    "name": "",
+                    "phoneNumber": "0963517217",
+                    "birthday": "",
+                    "sex": "",
+                    "bloodType": "",
+                    "rh": ""
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          getImageFromGallery();
+                        },
+                        child: _userImg == null
+                            ? CircleAvatar(
+                                child: Icon(
+                                  CupertinoIcons.person,
+                                  size: 50,
+                                ),
+                                radius: 50,
+                              )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(_userImg!),
+                                radius: 50,
                               ),
-                              radius: 50,
-                            )
-                          : CircleAvatar(
-                              backgroundImage: FileImage(_userImg!),
-                              radius: 50,
-                            ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FormBuilderTextField(
-                      name: "name",
-                      validator: FormBuilderValidators.required(),
-                      decoration:
-                          InputDecoration(labelText: "name".tr, filled: true),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FormBuilderTextField(
-                      name: "phone",
-                      validator: FormBuilderValidators.required(),
-                      decoration:
-                          InputDecoration(filled: true, labelText: "phone".tr),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // FormBuilderTextField(
-                    //   obscureText: true,
-                    //   name: "password",
-                    //   validator: FormBuilderValidators.required(),
-                    //   decoration: InputDecoration(
-                    //       filled: true, labelText: "password".tr),
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // FormBuilderTextField(
-                    //   obscureText: true,
-                    //   name: "confirmPassword",
-                    //   validator: FormBuilderValidators.required(),
-                    //   decoration: InputDecoration(
-                    //       filled: true, labelText: "confirmPassword".tr),
-                    // ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    FormBuilderDateTimePicker(
-                      name: 'birthday',
-                      initialEntryMode: DatePickerEntryMode.calendar,
-                      initialValue: DateTime.now(),
-                      inputType: InputType.date,
-                      decoration: InputDecoration(
-                        filled: true,
-                        labelText: 'birthday'.tr,
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.close),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      FormBuilderTextField(
+                        name: "name",
+                        validator: FormBuilderValidators.required(),
+                        decoration:
+                            InputDecoration(labelText: "name".tr, filled: true),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderTextField(
+                        keyboardType: TextInputType.phone,
+                        name: "phoneNumber",
+                        validator: FormBuilderValidators.required(),
+                        onChanged: (value) {
+                          _phoneNumberCheckable.value = value!.length == 10;
+                        },
+                        decoration: InputDecoration(
+                          filled: true,
+                          labelText: "phone".tr,
+                          suffix: TextButton(
+                            onPressed: _phoneNumberCheckable.value
+                                ? () => checkPhoneNumber()
+                                : null,
+                            child: Text("驗證"),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderTextField(
+                        keyboardType: TextInputType.phone,
+                        name: "verificationCode",
+                        validator: FormBuilderValidators.required(),
+                        decoration: InputDecoration(
+                          labelText: "手機驗證碼",
+                        ),
+                        // onEditingComplete: () {
+                        //   print(" ***** onEditingComplete");
+                        // },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // FormBuilderTextField(
+                      //   obscureText: true,
+                      //   name: "password",
+                      //   validator: FormBuilderValidators.required(),
+                      //   decoration: InputDecoration(
+                      //       filled: true, labelText: "password".tr),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      // FormBuilderTextField(
+                      //   obscureText: true,
+                      //   name: "confirmPassword",
+                      //   validator: FormBuilderValidators.required(),
+                      //   decoration: InputDecoration(
+                      //       filled: true, labelText: "confirmPassword".tr),
+                      // ),
+                      // SizedBox(
+                      //   height: 20,
+                      // ),
+                      FormBuilderDateTimePicker(
+                        name: 'birthday',
+                        initialEntryMode: DatePickerEntryMode.calendar,
+                        initialValue: DateTime.now(),
+                        inputType: InputType.date,
+                        decoration: InputDecoration(
+                          filled: true,
+                          labelText: 'birthday'.tr,
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              _signUpFormKey.currentState!.fields['date']
+                                  ?.didChange(null);
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        validator: FormBuilderValidators.required(),
+                        decoration: InputDecoration(
+                          labelText: 'sex'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'sex',
+                        options: ['male'.tr, 'female'.tr]
+                            .map((sex) => FormBuilderFieldOption(
+                                  value: sex,
+                                  child: Text(sex),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        decoration: InputDecoration(
+                          labelText: 'bloodType'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'bloodType',
+                        validator: FormBuilderValidators.required(),
+                        options: [
+                          'A',
+                          'B',
+                          'O',
+                          'AB',
+                        ]
+                            .map((type) => FormBuilderFieldOption(
+                                  value: type,
+                                  child: Text(type),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        decoration: InputDecoration(
+                          labelText: 'rh'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'rh',
+                        validator: FormBuilderValidators.required(),
+                        options: [
+                          '1',
+                          '2',
+                          '3',
+                          '?',
+                        ]
+                            .map((rh) => FormBuilderFieldOption(
+                                  value: rh,
+                                  child: Text(rh),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        width: double.infinity,
+                        child: CupertinoButton.filled(
+                          child: Text("confirm".tr),
                           onPressed: () {
-                            _formKey.currentState!.fields['date']
-                                ?.didChange(null);
+                            // Get.to(() => ServiceAgreementScreen());
+                            if (_signUpFormKey.currentState?.validate() ??
+                                false) {
+                              registerUser();
+                            }
+                            // registerUser();
                           },
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    FormBuilderRadioGroup<String>(
-                      validator: FormBuilderValidators.required(),
-                      decoration: InputDecoration(
-                        labelText: 'sex'.tr,
-                      ),
-                      initialValue: null,
-                      name: 'sex',
-                      options: ['male'.tr, 'female'.tr]
-                          .map((sex) => FormBuilderFieldOption(
-                                value: sex,
-                                child: Text(sex),
-                              ))
-                          .toList(growable: false),
-                      controlAffinity: ControlAffinity.trailing,
-                    ),
-                    FormBuilderRadioGroup<String>(
-                      decoration: InputDecoration(
-                        labelText: 'bloodType'.tr,
-                      ),
-                      initialValue: null,
-                      name: 'bloodType',
-                      validator: FormBuilderValidators.required(),
-                      options: [
-                        'A',
-                        'B',
-                        'O',
-                        'AB',
-                      ]
-                          .map((type) => FormBuilderFieldOption(
-                                value: type,
-                                child: Text(type),
-                              ))
-                          .toList(growable: false),
-                      controlAffinity: ControlAffinity.trailing,
-                    ),
-                    FormBuilderRadioGroup<String>(
-                      decoration: InputDecoration(
-                        labelText: 'rh'.tr,
-                      ),
-                      initialValue: null,
-                      name: 'rh',
-                      validator: FormBuilderValidators.required(),
-                      options: [
-                        '1',
-                        '2',
-                        '3',
-                        '?',
-                      ]
-                          .map((rh) => FormBuilderFieldOption(
-                                value: rh,
-                                child: Text(rh),
-                              ))
-                          .toList(growable: false),
-                      controlAffinity: ControlAffinity.trailing,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      width: double.infinity,
-                      child: CupertinoButton.filled(
-                        child: Text("confirm".tr),
-                        onPressed: () {
-                          // Get.to(() => ServiceAgreementScreen());
-                          if (_formKey.currentState?.validate() ?? false) {
-                            registerUser();
-                          }
-                          // registerUser();
-                        },
-                      ),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+            ),
           ),
         ),
       ),
@@ -220,9 +245,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> checkPhoneNumber() async {
+    final usersCollection = _fs.collection("users");
+    final phoneNumber =
+        _signUpFormKey.currentState!.fields["phoneNumber"]?.value;
     try {
-      // await _usersCollection.
-    } catch (e) {}
+      usersCollection
+          .where(
+            'phoneNumber',
+            isEqualTo: phoneNumber,
+          )
+          .get()
+          .then((value) {
+        if (value.docs.length == 1) {
+          Get.snackbar("驗證失敗", "手機號碼已註冊！");
+        } else {
+          Get.toNamed("/verify.code", arguments: {'phoneNumber': phoneNumber});
+        }
+      });
+    } catch (e) {
+      print('************* Failed~ checkPhoneNumber e:${e}');
+    }
   }
 
   Future getImageFromGallery() async {
@@ -234,10 +276,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _userImg = tempImg;
       });
-
-      // final ref =
-      //     FirebaseStorage.instance.ref("userAvatar/test2.jpg").child("");
-      // ref.putFile(tempImg!);
     } catch (e) {
       print("********** Update Image:" + e.toString());
     }
@@ -258,21 +296,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           );
 
   Future registerUser() async {
-    // final password =
-    //     await encryptPassword(_formKey.currentState!.fields['password']?.value);
-
     await FirebaseFirestore.instance.collection("user").add({
-      "name": _formKey.currentState!.fields['name']?.value,
-      "phone": _formKey.currentState!.fields['phone']?.value,
-      // "password": password,
-      "birthday": _formKey.currentState!.fields['birthday']?.value,
-      "sex": _formKey.currentState!.fields['sex']?.value,
-      "bloodType": _formKey.currentState!.fields['bloodType']?.value,
-      "rh": _formKey.currentState!.fields['rh']?.value,
+      "name": _signUpFormKey.currentState!.fields['name']?.value,
+      "phone": _signUpFormKey.currentState!.fields['phone']?.value,
+      "birthday": _signUpFormKey.currentState!.fields['birthday']?.value,
+      "sex": _signUpFormKey.currentState!.fields['sex']?.value,
+      "bloodType": _signUpFormKey.currentState!.fields['bloodType']?.value,
+      "rh": _signUpFormKey.currentState!.fields['rh']?.value,
     });
 
     final ref = FirebaseStorage.instance
-        .ref("userAvatar/${_formKey.currentState!.fields['phone']?.value}.jpg")
+        .ref(
+            "userAvatar/${_signUpFormKey.currentState!.fields['phone']?.value}.jpg")
         .child("");
     ref.putFile(_userImg!);
   }

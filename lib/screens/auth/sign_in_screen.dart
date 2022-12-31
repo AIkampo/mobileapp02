@@ -1,6 +1,5 @@
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/screens/auth/forgot_password_screen.dart';
 import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:ai_kampo_app/utils/check.network.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
