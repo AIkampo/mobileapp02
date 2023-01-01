@@ -1,5 +1,6 @@
 import 'package:ai_kampo_app/controller/auth.controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class _CheckPhoneNumberScreenState extends State<CheckPhoneNumberScreen> {
           (() => FormBuilder(
                 key: _formKey,
                 initialValue: const {
-                  'phoneNumber': '091234567',
+                  'phoneNumber': '096351721',
                 },
                 child: Container(
                   margin: EdgeInsets.all(20),
@@ -52,7 +53,7 @@ class _CheckPhoneNumberScreenState extends State<CheckPhoneNumberScreen> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
+                        child: CupertinoButton.filled(
                           onPressed: _phoneNumberCheckable.value
                               ? () => checkPhoneNumber()
                               : null,
@@ -81,7 +82,7 @@ class _CheckPhoneNumberScreenState extends State<CheckPhoneNumberScreen> {
           Get.snackbar("驗證失敗", "手機號碼已註冊！");
         } else {
           // Get.toNamed("/verify.code", arguments: {'phoneNumber': phoneNumber});
-          Get.toNamed('/sign.up');
+          Get.toNamed('/sign.up', arguments: {'phoneNumber': phoneNumber});
         }
       });
     } catch (e) {
