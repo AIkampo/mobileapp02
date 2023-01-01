@@ -50,7 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   key: _signUpFormKey,
                   initialValue: {
                     "name": "",
-                    "phoneNumber": "0963517217",
+                    "phoneNumber": "096351721",
                     "birthday": "",
                     "sex": "",
                     "bloodType": "",
