@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ai_kampo_app/controller/auth.controller.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
 import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,14 +34,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final db = FirebaseFirestore.instance;
-    // db.collection("user").doc("d11S7VxcAD0DfoPrQ4zN").get().then(
-    //     (DocumentSnapshot doc) {
-    //   final data = doc.data() as Map<String, dynamic>;
-    //   print("********** $data");
-    // }, onError: (e) => print("Error getting doc:$e"));
+    final _authController = Get.find<AuthController>();
     return Scaffold(
-      appBar: AppBar(title: Text("signUp".tr)),
+      appBar: AppBar(
+        title: Text("signUp".tr),
+        centerTitle: true,
+      ),
       body: Obx(
         () => SingleChildScrollView(
           child: Center(
@@ -50,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   key: _signUpFormKey,
                   initialValue: {
                     "name": "",
-                    "phoneNumber": "096351721",
+                    "phoneNumber": "097048325",
                     "birthday": "",
                     "sex": "",
                     "bloodType": "",
@@ -91,6 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 20,
                       ),
                       FormBuilderTextField(
+                        enabled: !_authController.isAvailablePhoneNumber.value,
                         keyboardType: TextInputType.phone,
                         name: "phoneNumber",
                         validator: FormBuilderValidators.required(),
@@ -100,51 +100,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         decoration: InputDecoration(
                           filled: true,
                           labelText: "phone".tr,
-                          suffix: TextButton(
-                            onPressed: _phoneNumberCheckable.value
-                                ? () => checkPhoneNumber()
-                                : null,
-                            child: Text("驗證"),
-                          ),
+                          suffix: _authController.isAvailablePhoneNumber.value
+                              ? Icon(
+                                  Icons.check_circle_outline,
+                                  color: Colors.green,
+                                )
+                              : TextButton(
+                                  onPressed: _phoneNumberCheckable.value
+                                      ? () => checkPhoneNumber()
+                                      : null,
+                                  child: Text("驗證"),
+                                ),
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      FormBuilderTextField(
-                        keyboardType: TextInputType.phone,
-                        name: "verificationCode",
-                        validator: FormBuilderValidators.required(),
-                        decoration: InputDecoration(
-                          labelText: "手機驗證碼",
-                        ),
-                        // onEditingComplete: () {
-                        //   print(" ***** onEditingComplete");
-                        // },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      // FormBuilderTextField(
-                      //   obscureText: true,
-                      //   name: "password",
-                      //   validator: FormBuilderValidators.required(),
-                      //   decoration: InputDecoration(
-                      //       filled: true, labelText: "password".tr),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      // FormBuilderTextField(
-                      //   obscureText: true,
-                      //   name: "confirmPassword",
-                      //   validator: FormBuilderValidators.required(),
-                      //   decoration: InputDecoration(
-                      //       filled: true, labelText: "confirmPassword".tr),
-                      // ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
                       FormBuilderDateTimePicker(
                         name: 'birthday',
                         initialEntryMode: DatePickerEntryMode.calendar,

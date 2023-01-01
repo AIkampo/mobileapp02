@@ -1,5 +1,6 @@
 import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
+import 'package:ai_kampo_app/screens/auth/sign.up/check_phone_number_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
 import 'package:ai_kampo_app/screens/auth/verify_code_screen.dart';
@@ -16,13 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   SystemChrome.setPreferredOrientations(
-//       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-//   runApp(const MyApp());
-// }
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +43,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/sign.up",
+      initialRoute: "/sign.up.check.phone",
       getPages: [
         GetPage(
           name: "/splash",
@@ -57,6 +51,8 @@ class AIKampoApp extends StatelessWidget {
         ),
         GetPage(name: "/sign.in", page: () => SignInScreen()),
         GetPage(name: "/sign.up", page: () => SignUpScreen()),
+        GetPage(
+            name: "/sign.up.check.phone", page: () => CheckPhoneNumberScreen()),
         GetPage(
           name: "/main",
           page: () => MainScreen(),

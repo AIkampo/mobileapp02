@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ai_kampo_app/controller/auth.controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 
 class VerifyCodeScreen extends StatelessWidget {
   VerifyCodeScreen({super.key});
+
+  final _authController = Get.find<AuthController>();
   FirebaseAuth _auth = FirebaseAuth.instance;
   String _verificationId = '';
   //可重新發送驗證碼的時間
@@ -90,7 +93,7 @@ class VerifyCodeScreen extends StatelessWidget {
   }
 
   Future<void> getVerificationCode() async {
-    print("++++++++++ getVerificationCode()");
+    print("++++++++++ getVerificationCode()  _phoneNumber:${_phoneNumber}");
     await _auth.verifyPhoneNumber(
       phoneNumber: '+886 ${_phoneNumber}',
       timeout: Duration(seconds: _verificationTimeout),
@@ -98,7 +101,7 @@ class VerifyCodeScreen extends StatelessWidget {
         print("** verificationCompleted");
       }),
       verificationFailed: ((FirebaseAuthException error) {
-        print("***** verificationFailed");
+        print("***** verificationFailed error:${error}");
         Get.back();
         Get.snackbar("驗證失敗", "請確認手機號碼");
       }),
@@ -125,6 +128,7 @@ class VerifyCodeScreen extends StatelessWidget {
 
       // authController.isLoading.value = false;
       // Get.offAndToNamed("/main");
+      _authController.isAvailablePhoneNumber.value = true;
       Get.back();
     } catch (e) {
       Get.snackbar("驗證失敗", "請檢查驗證碼");
