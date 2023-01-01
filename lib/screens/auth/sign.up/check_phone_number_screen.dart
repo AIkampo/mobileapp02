@@ -57,7 +57,7 @@ class _CheckPhoneNumberScreenState extends State<CheckPhoneNumberScreen> {
                           onPressed: _phoneNumberCheckable.value
                               ? () => checkPhoneNumber()
                               : null,
-                          child: Text("驗證"),
+                          child: Text("confirm".tr),
                         ),
                       )
                     ],
@@ -81,8 +81,7 @@ class _CheckPhoneNumberScreenState extends State<CheckPhoneNumberScreen> {
         if (value.docs.length == 1) {
           Get.snackbar("驗證失敗", "手機號碼已註冊！");
         } else {
-          // Get.toNamed("/verify.code", arguments: {'phoneNumber': phoneNumber});
-          Get.toNamed('/sign.up', arguments: {'phoneNumber': phoneNumber});
+          Get.toNamed("/verify.code", arguments: {'phoneNumber': phoneNumber});
         }
       });
     } catch (e) {

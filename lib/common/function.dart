@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 //檢測結果之背景色
@@ -28,4 +29,12 @@ Color getTestFontColor(int score) {
     _color = Color.fromRGBO(237, 7, 7, 1);
 
   return _color;
+}
+
+Future<bool> checkPhoneNumber(String phoneNumber) async {
+  final usersCollection = FirebaseFirestore.instance.collection("users");
+
+  var res =
+      await usersCollection.where('phoneNumber', isEqualTo: phoneNumber).get();
+  return res.docs.length == 1;
 }

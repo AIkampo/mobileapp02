@@ -1,8 +1,8 @@
 import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/check_phone_number_screen.dart';
-import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
+import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/verify_code_screen.dart';
 import 'package:ai_kampo_app/screens/common/loading_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guide/healthy_guide_screen.dart';
@@ -11,7 +11,6 @@ import 'package:ai_kampo_app/screens/main_screen.dart';
 import 'package:ai_kampo_app/screens/physical.check/headset_connecting_screen.dart';
 import 'package:ai_kampo_app/screens/splash_screen.dart';
 import 'package:ai_kampo_app/screens/subscribe/payment/payment_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +42,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/sign.up.check.phone",
+      initialRoute: "/sign.in",
       getPages: [
         GetPage(
           name: "/splash",

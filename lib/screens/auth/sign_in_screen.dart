@@ -1,4 +1,5 @@
 import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/controller/auth.controller.dart';
 import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:ai_kampo_app/utils/check.network.dart';
@@ -129,7 +130,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             TextButton(
                               onPressed: authController.isLoading.value
                                   ? null
-                                  : () => Get.toNamed("/sign.up"),
+                                  : () => Get.toNamed("/sign.up.check.phone"),
                               child: Text("signUp".tr),
                             ),
                           ],
@@ -167,25 +168,53 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Future<void> getVerificationCode() async {
-    await auth.verifyPhoneNumber(
-      phoneNumber:
-          '+886${_signInFormKey.currentState!.fields["phoneNumber"]?.value}',
-      verificationCompleted: ((PhoneAuthCredential credential) {
-        print("** verificationCompleted");
-      }),
-      verificationFailed: ((FirebaseAuthException error) {
-        print("** verificationFailed");
-      }),
-      codeSent: ((String verificationId, int? forceResendingToken) async {
-        print('** codeSent');
+  // Future<void> checkPhoneNumber() async {
+  //   try {
+  //     final usersCollection = FirebaseFirestore.instance.collection("users");
+  //     final phoneNumber =
+  //         _signInFormKey.currentState!.fields["phoneNumber"]!.value;
+  //     usersCollection
+  //         .where('phoneNumber', isEqualTo: phoneNumber)
+  //         .get()
+  //         .then((value) {
+  //       if (value.docs.length == 1) {
+  //         getVerificationCode();
+  //       } else {
+  //         Get.snackbar("登入失敗", "手機號碼尚未註冊！");
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print('************* Failed~ checkPhoneNumber e:${e}');
+  //   }
+  // }
 
-        _verificationId = verificationId;
-      }),
-      codeAutoRetrievalTimeout: ((String verificationId) {
-        print("** codeAutoRetrievalTimeout");
-      }),
-    );
+  Future<void> getVerificationCode() async {
+    String phoneNumber =
+        _signInFormKey.currentState!.fields["phoneNumber"]!.value;
+    //檢查手機號碼是否已註冊
+    // 已註冊 則進行驗證
+    if (await checkPhoneNumber(phoneNumber)) {
+      await auth.verifyPhoneNumber(
+        phoneNumber:
+            '+886${_signInFormKey.currentState!.fields["phoneNumber"]?.value}',
+        verificationCompleted: ((PhoneAuthCredential credential) {
+          print("** verificationCompleted");
+        }),
+        verificationFailed: ((FirebaseAuthException error) {
+          print("** verificationFailed");
+        }),
+        codeSent: ((String verificationId, int? forceResendingToken) async {
+          print('** codeSent');
+
+          _verificationId = verificationId;
+        }),
+        codeAutoRetrievalTimeout: ((String verificationId) {
+          print("** codeAutoRetrievalTimeout");
+        }),
+      );
+    } else {
+      Get.snackbar("登入失敗", "手機號碼尚未註冊！");
+    }
   }
 
   Future<void> checkVerificationCode() async {

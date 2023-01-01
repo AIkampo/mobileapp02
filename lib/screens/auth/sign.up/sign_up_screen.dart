@@ -1,8 +1,5 @@
 import 'dart:io';
-
 import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
-import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +11,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -22,16 +19,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _signUpFormKey = GlobalKey<FormBuilderState>();
-  File? _userImg;
   final _fs = FirebaseFirestore.instance;
-  var _phoneNumberCheckable = false.obs;
-  dynamic _userAvater = null.obs;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  File? _userAvater = null;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onTap: () {
                         getImageFromGallery();
                       },
-                      child: _userImg == null
+                      child: _userAvater == null
                           ? CircleAvatar(
                               child: Icon(
                                 CupertinoIcons.person,
@@ -72,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               radius: 50,
                             )
                           : CircleAvatar(
-                              backgroundImage: FileImage(_userImg!),
+                              backgroundImage: FileImage(_userAvater!),
                               radius: 50,
                             ),
                     ),
@@ -189,14 +178,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future getImageFromGallery() async {
     final _img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print(_img);
     try {
       if (_img == null) return;
       File? tempImg = File(_img.path);
       tempImg = await CropImage(imgFile: tempImg);
       setState(() {
-        _userImg = tempImg;
+        _userAvater = tempImg;
       });
-      _userAvater.value = tempImg;
+      print(_userAvater);
     } catch (e) {
       print("********** Update Image:" + e.toString());
     }
@@ -210,24 +200,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future registerUser() async {
-    print(' **************************** registerUser() ***');
-    print(_userAvater);
+    final phoneNumber = Get.arguments['phoneNumber'];
+    var userAvatarRef = "";
+
+    //使用者有上傳照片=> _userAvater.value != null 才需執行
+    if (_userAvater != null) {
+      userAvatarRef = "userAvatar/$phoneNumber.jpg";
+      final ref = FirebaseStorage.instance.ref(userAvatarRef).child("");
+      ref.putFile(_userAvater!);
+    }
+
     await _fs.collection("users").add({
+      "userAvatar": userAvatarRef,
       "username": _signUpFormKey.currentState!.fields['username']?.value,
-      "phoneNumber": Get.arguments['phoneNumber'],
+      "phoneNumber": phoneNumber,
       "birthday": _signUpFormKey.currentState!.fields['birthday']?.value,
       "sex": _signUpFormKey.currentState!.fields['sex']?.value,
       "bloodType": _signUpFormKey.currentState!.fields['bloodType']?.value,
       "rh": _signUpFormKey.currentState!.fields['rh']?.value,
+    }).then((value) {
+      Get.offAndToNamed('/sign.in');
+      Get.snackbar("註冊成功", "");
     });
-    if (_userAvater.value != null) {
-      final ref = FirebaseStorage.instance
-          .ref(
-              "userAvatar/${_signUpFormKey.currentState!.fields['phoneNumber']?.value}.jpg")
-          .child("");
-      ref.putFile(_userImg!);
-    }
   }
-
-  void _onChanged(dynamic val) => debugPrint(val.toString());
 }

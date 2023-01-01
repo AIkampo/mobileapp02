@@ -129,7 +129,7 @@ class VerifyCodeScreen extends StatelessWidget {
       // authController.isLoading.value = false;
       // Get.offAndToNamed("/main");
       _authController.isAvailablePhoneNumber.value = true;
-      Get.back();
+      Get.toNamed('/sign.up', arguments: {'phoneNumber': _phoneNumber});
     } catch (e) {
       Get.snackbar("驗證失敗", "請檢查驗證碼");
       // authController.isLoading.value = false;
