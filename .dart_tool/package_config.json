@@ -416,6 +416,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl_phone_field",
+      "rootUri": "file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl_phone_field-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
@@ -468,6 +474,12 @@
       "rootUri": "file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "pin_code_fields",
+      "rootUri": "file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/pin_code_fields-7.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
@@ -716,7 +728,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-12-31T00:06:40.749188Z",
+  "generated": "2023-01-02T00:52:43.711067Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

@@ -28,6 +28,8 @@ class KampoConfig {
 }
 
 class KampoColors {
+  static const primary = Color(0xFF7890C8);
+  static const secondary = Color(0xFFB6ADDE);
   static const scoreGreen = Color(0xFF9ECE6D);
   static const scoreYellow = Color(0xFFEDDA80);
   static const scoreOrange = Color(0xFFFCCD9B);

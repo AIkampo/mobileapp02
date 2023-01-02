@@ -1,14 +1,12 @@
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/utils/EncryptPassword.dart';
 import 'package:ai_kampo_app/utils/check.network.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -18,13 +16,15 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final authController = Get.find<AuthController>();
-  final _signInFormKey = GlobalKey<FormBuilderState>();
-
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final _authController = Get.find<AuthController>();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   String _verificationId = '';
-  String _verificationCode = '';
-  var _canGetVerificationCode = false.obs;
+  final _phoneNumber = ''.obs;
+  final _verificationCode = ''.obs;
+
+  // 0 => 待使用者輸入手機號碼 （呈現輸入手機畫面）
+  // 1 => 確認使用者輸入的手機號碼已註冊 （呈現輸入驗證碼畫面）
+  final _signInStatus = 0.obs;
 
   @override
   initState() {
@@ -34,115 +34,68 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            elevation: 0,
-            backgroundColor: Colors.white,
-            actions: [
-              Row(
-                children: [
-                  TextButton.icon(
-                      onPressed: () => _showLanguageActionSheet(context),
-                      icon: Icon(CupertinoIcons.globe),
-                      label: Text(
-                          "${KampoConfig.localeList.where((e) => e['key'] == Get.locale.toString()).toList()[0]['name']}"
-                              .tr)),
-                  SizedBox(
-                    width: 10,
-                  ),
-                ],
-              )
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        actions: [
+          Row(
+            children: [
+              TextButton.icon(
+                  onPressed: () => _showLanguageActionSheet(context),
+                  icon: Icon(CupertinoIcons.globe),
+                  label: Text(
+                      "${KampoConfig.localeList.where((e) => e['key'] == Get.locale.toString()).toList()[0]['name']}"
+                          .tr)),
+              SizedBox(
+                width: 10,
+              ),
             ],
+          )
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset("assets/images/logo.png"),
+          SizedBox(
+            height: 70,
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/logo.png"),
-                SizedBox(
-                  height: 70,
-                ),
-                Container(
-                  width: 300,
-                  child: FormBuilder(
-                    key: _signInFormKey,
-                    initialValue: {
-                      'phoneNumber': '',
-                      'verificationCode': '',
-                    },
-                    child: Column(
+          Obx(
+            () => Center(
+              child: Container(
+                width: 300,
+                child: Column(
+                  children: [
+                    Container(
+                        height: 180,
+                        child: _signInStatus == 0
+                            ? phoneNumberUI()
+                            : verificationCodeUI()),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FormBuilderTextField(
-                          name: 'phoneNumber',
-                          keyboardType: TextInputType.number,
-                          enabled: !authController.isLoading.value,
-                          onChanged: (value) {
-                            _canGetVerificationCode.value = _signInFormKey
-                                    .currentState!
-                                    .fields["phoneNumber"]
-                                    ?.value
-                                    .length >=
-                                9;
-                          },
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.phone_android_sharp),
-                              suffixIcon: TextButton(
-                                onPressed: _canGetVerificationCode.value
-                                    ? () => getVerificationCode()
-                                    : null,
-                                child: Text("取得驗證碼"),
-                              ),
-                              border: OutlineInputBorder(),
-                              labelText: "phone".tr),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        FormBuilderTextField(
-                          name: 'verificationCode',
-                          enabled: !authController.isLoading.value &&
-                              _canGetVerificationCode.value,
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            if (value!.length == 6) {
-                              checkVerificationCode();
-                              authController.isLoading.value = true;
-                            }
-                          },
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.password),
-                              // suffixIcon: TextButton.icon(
-                              //   onPressed: () => checkVerificationCode(),
-                              //   icon: Icon(Icons.login),
-                              //   label: Text("signIn".tr),
-                              // ),
-                              border: OutlineInputBorder(),
-                              labelText: "驗證碼"),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                              onPressed: authController.isLoading.value
-                                  ? null
-                                  : () => Get.toNamed("/sign.up.check.phone"),
-                              child: Text("signUp".tr),
-                            ),
-                          ],
+                        TextButton(
+                          onPressed: _authController.isLoading.value
+                              ? null
+                              : () => Get.toNamed("/sign.up"),
+                          child: Text("signUp".tr),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 
   void _showLanguageActionSheet(BuildContext context) {
@@ -168,35 +121,16 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  // Future<void> checkPhoneNumber() async {
-  //   try {
-  //     final usersCollection = FirebaseFirestore.instance.collection("users");
-  //     final phoneNumber =
-  //         _signInFormKey.currentState!.fields["phoneNumber"]!.value;
-  //     usersCollection
-  //         .where('phoneNumber', isEqualTo: phoneNumber)
-  //         .get()
-  //         .then((value) {
-  //       if (value.docs.length == 1) {
-  //         getVerificationCode();
-  //       } else {
-  //         Get.snackbar("登入失敗", "手機號碼尚未註冊！");
-  //       }
-  //     });
-  //   } catch (e) {
-  //     print('************* Failed~ checkPhoneNumber e:${e}');
-  //   }
-  // }
-
   Future<void> getVerificationCode() async {
-    String phoneNumber =
-        _signInFormKey.currentState!.fields["phoneNumber"]!.value;
+    if (!await checkNetwork()) {
+      return;
+    }
+
     //檢查手機號碼是否已註冊
     // 已註冊 則進行驗證
-    if (await checkPhoneNumber(phoneNumber)) {
-      await auth.verifyPhoneNumber(
-        phoneNumber:
-            '+886${_signInFormKey.currentState!.fields["phoneNumber"]?.value}',
+    if (await checkPhoneNumber(_phoneNumber.value)) {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: '+886${_phoneNumber.value}',
         verificationCompleted: ((PhoneAuthCredential credential) {
           print("** verificationCompleted");
         }),
@@ -205,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
         }),
         codeSent: ((String verificationId, int? forceResendingToken) async {
           print('** codeSent');
-
+          _signInStatus.value = 1;
           _verificationId = verificationId;
         }),
         codeAutoRetrievalTimeout: ((String verificationId) {
@@ -221,45 +155,95 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       // Create a PhoneAuthCredential with the code
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: _verificationId,
-          smsCode:
-              _signInFormKey.currentState!.fields["verificationCode"]?.value);
+          verificationId: _verificationId, smsCode: _verificationCode.value);
 
       // Sign the user in (or link) with the credential
-      await auth.signInWithCredential(credential);
-      authController.isLoading.value = false;
+      await _auth.signInWithCredential(credential);
+      _authController.isLoading.value = false;
       Get.offAndToNamed("/main");
     } catch (e) {
       Get.snackbar("無法登入", "請檢查驗證碼");
-      authController.isLoading.value = false;
+      _authController.isLoading.value = false;
     }
   }
 
-  Future<void> doSignIn() async {
-    // print("********** result : ${result.docs.length}");
-    // result.docs.forEach((e) => print("***data:${e.data()}"));
-    // final authController = Get.find<AuthController>();
-    authController.isLoading.value = true;
+  Widget phoneNumberUI() {
+    return Column(
+      children: [
+        TextField(
+          keyboardType: TextInputType.number,
+          enabled: !_authController.isLoading.value,
+          onChanged: (value) {
+            _phoneNumber.value = value;
+          },
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.phone_android_sharp),
+              border: OutlineInputBorder(),
+              labelText: "phone".tr),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: CupertinoButton.filled(
+              child: Text('登入'),
+              onPressed: _phoneNumber.value.length == 10
+                  ? () => getVerificationCode()
+                  : null),
+        ),
+      ],
+    );
+  }
 
-    if (!await checkNetwork()) {
-      return;
-    }
-
-    try {
-      final password = await encryptPassword("88");
-      final checkResult = await FirebaseFirestore.instance
-          .collection("user")
-          .where("phone", isEqualTo: "0912345678")
-          .where("password", isEqualTo: password)
-          .get();
-      if (checkResult.docs.length != 0) {
-        Get.offAndToNamed("/main");
-      } else {
-        Get.snackbar("無法登入", "手機號碼或密碼不正確！");
-      }
-      authController.isLoading.value = false;
-    } catch (e) {
-      print("*** Failed Sign in:$e");
-    }
+  Widget verificationCodeUI() {
+    return Column(
+      children: [
+        Text(
+          '請輸入驗證碼',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        PinCodeTextField(
+          keyboardType: TextInputType.number,
+          appContext: context,
+          length: 6,
+          onChanged: (value) {
+            _verificationCode.value = value;
+          },
+          pinTheme: PinTheme(
+            activeColor: KampoColors.primary,
+            inactiveColor: Colors.grey,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                  child: Text('認證'),
+                  onPressed: _verificationCode.value.length == 6
+                      ? () => checkVerificationCode()
+                      : null),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            TextButton(
+              child: Text('取消'),
+              onPressed: () {
+                _verificationCode.value = "";
+                _signInStatus.value = 0;
+              },
+            ),
+          ],
+        )
+      ],
+    );
   }
 }

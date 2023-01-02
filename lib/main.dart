@@ -2,6 +2,7 @@ import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/check_phone_number_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
+import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_steps_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/verify_code_screen.dart';
 import 'package:ai_kampo_app/screens/common/loading_screen.dart';
@@ -49,7 +50,7 @@ class AIKampoApp extends StatelessWidget {
           page: () => SplahScreen(),
         ),
         GetPage(name: "/sign.in", page: () => SignInScreen()),
-        GetPage(name: "/sign.up", page: () => SignUpScreen()),
+        GetPage(name: "/sign.up", page: () => SignUpStepsScreen()),
         GetPage(
             name: "/sign.up.check.phone", page: () => CheckPhoneNumberScreen()),
         GetPage(
@@ -76,13 +77,4 @@ class AIKampoApp extends StatelessWidget {
       //SplahScreen()
     );
   }
-
-  // static Stream<QuerySnapshot> readUser() {
-  //   CollectionReference notesItemCollection = _Collection;
-  //   return notesItemCollection.snapshots();
-  // }
 }
-
-//  get generate locales assets/locales
-
-//export PATH="$PATH":"$HOME/.pub-cache/bin"

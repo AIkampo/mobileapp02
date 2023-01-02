@@ -262,6 +262,10 @@ intl
 2.12
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib/
+intl_phone_field
+2.12
+file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl_phone_field-3.1.0/
+file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl_phone_field-3.1.0/lib/
 js
 2.16
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4/
@@ -298,6 +302,10 @@ petitparser
 2.18
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.1.0/
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.1.0/lib/
+pin_code_fields
+2.12
+file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/pin_code_fields-7.4.0/
+file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/pin_code_fields-7.4.0/lib/
 plugin_platform_interface
 2.12
 file:///D:/flutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.3/
