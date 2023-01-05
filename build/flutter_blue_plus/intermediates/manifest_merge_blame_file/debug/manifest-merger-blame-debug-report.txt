@@ -4,9 +4,9 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="19"
-6-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml
+6-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml
 7        android:targetSdkVersion="19" />
-7-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml
+7-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml
 8
 9    <!--
 10         New Bluetooth permissions in Android 12
@@ -17,30 +17,30 @@
 15           your app never derives physical location from Bluetooth scan results.
 16    -->
 17    <uses-permission
-17-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:9:5-120
+17-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:9:5-120
 18        android:name="android.permission.BLUETOOTH_SCAN"
-18-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:9:22-70
+18-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:9:22-70
 19        android:usesPermissionFlags="neverForLocation" />
-19-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:9:71-117
+19-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:9:71-117
 20    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-20-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:10:5-76
-20-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:10:22-73
+20-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:10:5-76
+20-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:10:22-73
 21
 22    <!-- Request legacy Bluetooth permissions on older devices. -->
 23    <uses-permission
-23-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:13:5-95
+23-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:13:5-95
 24        android:name="android.permission.BLUETOOTH"
-24-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:13:22-65
+24-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:13:22-65
 25        android:maxSdkVersion="30" />
-25-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:13:66-92
+25-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:13:66-92
 26    <uses-permission
-26-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:14:5-101
+26-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:14:5-101
 27        android:name="android.permission.BLUETOOTH_ADMIN"
-27-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:14:22-71
+27-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:14:22-71
 28        android:maxSdkVersion="30" />
-28-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:14:72-98
+28-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:14:72-98
 29    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-29-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:15:5-79
-29-->D:\flutterSDK\flutter\.pub-cache\hosted\pub.dartlang.org\flutter_blue_plus-1.3.1\android\src\main\AndroidManifest.xml:15:22-76
+29-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:15:5-79
+29-->/Applications/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_blue_plus-1.3.1/android/src/main/AndroidManifest.xml:15:22-76
 30
 31</manifest>

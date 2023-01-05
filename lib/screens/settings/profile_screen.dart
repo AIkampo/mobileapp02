@@ -1,7 +1,15 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,135 +20,211 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
+  final _profileFormKey = GlobalKey<FormBuilderState>();
+  final _userCollection = FirebaseFirestore.instance.collection("users");
+  File? _userAvater = null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("我的檔案")),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Container(
-            width: 320,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                CircleAvatar(
-                  child: Icon(
-                    Icons.person_pin_outlined,
-                  ),
-                  radius: 50,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    label: Text("名字"),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    label: Text("電話"),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FormBuilderDateTimePicker(
-                  name: 'date',
-                  initialEntryMode: DatePickerEntryMode.calendar,
-                  initialValue: DateTime.now(),
-                  inputType: InputType.date,
-                  decoration: InputDecoration(
-                    filled: true,
-                    labelText: '生日',
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        _formKey.currentState!.fields['date']?.didChange(null);
-                      },
-                    ),
-                  ),
-
-                  // locale: const Locale.fromSubtags(languageCode: 'fr'),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FormBuilderRadioGroup<String>(
-                  decoration: InputDecoration(
-                    labelText: '性別',
-                  ),
-                  initialValue: null,
-                  name: 'caseSex',
-                  options: ['男', '女']
-                      .map((sex) => FormBuilderFieldOption(
-                            value: sex,
-                            child: Text(sex),
-                          ))
-                      .toList(growable: false),
-                  controlAffinity: ControlAffinity.trailing,
-                ),
-                FormBuilderRadioGroup<String>(
-                  decoration: InputDecoration(
-                    labelText: '血型',
-                  ),
-                  initialValue: null,
-                  name: 'caseSex',
-                  options: [
-                    'A',
-                    'B',
-                    'O',
-                    'AB',
-                  ]
-                      .map((sex) => FormBuilderFieldOption(
-                            value: sex,
-                            child: Text(sex),
-                          ))
-                      .toList(growable: false),
-                  controlAffinity: ControlAffinity.trailing,
-                ),
-                FormBuilderRadioGroup<String>(
-                  decoration: InputDecoration(
-                    labelText: 'RH',
-                  ),
-                  initialValue: null,
-                  name: '',
-                  options: [
-                    '1',
-                    '2',
-                    '3',
-                    '?',
-                  ]
-                      .map((sex) => FormBuilderFieldOption(
-                            value: sex,
-                            child: Text(sex),
-                          ))
-                      .toList(growable: false),
-                  controlAffinity: ControlAffinity.trailing,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  width: double.infinity,
-                  child: CupertinoButton.filled(
-                    child: Text("儲存"),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ),
-              ],
+        appBar: AppBar(title: Text("我的檔案")),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              width: 330,
+              child: FormBuilder(
+                  key: _profileFormKey,
+                  initialValue: {
+                    "username": "",
+                    "birthday": "",
+                    "sex": "",
+                    "bloodType": "",
+                    "rh": ""
+                  },
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          getImageFromGallery();
+                        },
+                        child: _userAvater == null
+                            ? CircleAvatar(
+                                child: Icon(
+                                  CupertinoIcons.person,
+                                  size: 50,
+                                ),
+                                radius: 50,
+                              )
+                            : CircleAvatar(
+                                backgroundImage: FileImage(_userAvater!),
+                                radius: 50,
+                              ),
+                      ),
+                      SizedBox(
+                        height: 38,
+                      ),
+                      FormBuilderTextField(
+                        name: "username",
+                        validator: FormBuilderValidators.required(),
+                        decoration:
+                            InputDecoration(labelText: "name".tr, filled: true),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderDateTimePicker(
+                        name: 'birthday',
+                        initialEntryMode: DatePickerEntryMode.calendar,
+                        initialValue: DateTime.now(),
+                        inputType: InputType.date,
+                        decoration: InputDecoration(
+                          filled: true,
+                          labelText: 'birthday'.tr,
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              _profileFormKey.currentState!.fields['date']
+                                  ?.didChange(null);
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        validator: FormBuilderValidators.required(),
+                        decoration: InputDecoration(
+                          labelText: 'sex'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'sex',
+                        options: ['male', 'female']
+                            .map((sex) => FormBuilderFieldOption(
+                                  value: sex,
+                                  child: Text(
+                                      sex == 'male' ? 'male'.tr : 'female'.tr),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        decoration: InputDecoration(
+                          labelText: 'bloodType'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'bloodType',
+                        validator: FormBuilderValidators.required(),
+                        options: [
+                          'A',
+                          'B',
+                          'O',
+                          'AB',
+                        ]
+                            .map((type) => FormBuilderFieldOption(
+                                  value: type,
+                                  child: Text(type),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      FormBuilderRadioGroup<String>(
+                        decoration: InputDecoration(
+                          labelText: 'rh'.tr,
+                        ),
+                        initialValue: null,
+                        name: 'rh',
+                        validator: FormBuilderValidators.required(),
+                        options: [
+                          '1',
+                          '2',
+                          '3',
+                          '?',
+                        ]
+                            .map((rh) => FormBuilderFieldOption(
+                                  value: rh,
+                                  child: Text(rh),
+                                ))
+                            .toList(growable: false),
+                        controlAffinity: ControlAffinity.trailing,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        width: double.infinity,
+                        child: CupertinoButton.filled(
+                          child: Text("confirm".tr),
+                          onPressed: () {
+                            // Get.to(() => ServiceAgreementScreen());
+                            if (_profileFormKey.currentState?.validate() ??
+                                false) {
+                              updateProfile();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  )),
             ),
           ),
-        ),
-      ),
-    );
+        ));
+  }
+
+  Future getImageFromGallery() async {
+    final _img = await ImagePicker().pickImage(source: ImageSource.gallery);
+    try {
+      if (_img == null) return;
+      File? tempImg = File(_img.path);
+      tempImg = await CropImage(imgFile: tempImg);
+      setState(() {
+        _userAvater = tempImg;
+      });
+    } catch (e) {
+      print("********** Update Image:" + e.toString());
+    }
+  }
+
+  Future<File?> CropImage({required File imgFile}) async {
+    CroppedFile? _croppedImg =
+        await ImageCropper().cropImage(sourcePath: imgFile.path);
+    if (_croppedImg == null) return null;
+    return File(_croppedImg.path);
+  }
+
+  Future<void> getProfile() async {
+    final _prefs = await SharedPreferences.getInstance();
+
+    final userDocId = await _prefs.getString('userDocId');
+    final res = _userCollection.doc(userDocId);
+
+    print('***************** sex:$res');
+  }
+
+  Future updateProfile() async {
+    final phoneNumber = "";
+    final docId = "";
+    var userAvatarRef = "";
+
+    //使用者有上傳照片=> _userAvater.value != null 才需執行
+    if (_userAvater != null) {
+      userAvatarRef = "userAvatar/$phoneNumber.jpg";
+      final ref = FirebaseStorage.instance.ref(userAvatarRef).child("");
+      ref.putFile(_userAvater!);
+    }
+
+    await _userCollection.doc(docId).update({
+      "userAvatar": userAvatarRef,
+      "username": _profileFormKey.currentState!.fields['username']?.value,
+      "phoneNumber": phoneNumber,
+      "birthday": _profileFormKey.currentState!.fields['birthday']?.value,
+      "sex": _profileFormKey.currentState!.fields['sex']?.value,
+      "bloodType": _profileFormKey.currentState!.fields['bloodType']?.value,
+      "rh": _profileFormKey.currentState!.fields['rh']?.value,
+      "lastLoginDatetime": ""
+    }).then((value) {
+      print("updated");
+    });
   }
 }

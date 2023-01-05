@@ -1,6 +1,7 @@
 import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/check_phone_number_screen.dart';
+import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_steps_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
@@ -68,7 +69,9 @@ class AIKampoApp extends StatelessWidget {
           name: "/headset.connecting",
           page: () => HeadsetConnectingScreen(),
         ),
-        GetPage(name: "/verify.code", page: () => VerifyCodeScreen())
+        GetPage(name: "/verify.code", page: () => VerifyCodeScreen()),
+        GetPage(
+            name: "/service.agreement", page: () => ServiceAgreementScreen()),
       ],
       translationsKeys: AppTranslation.translations,
       locale: Locale('zh', 'TW'),

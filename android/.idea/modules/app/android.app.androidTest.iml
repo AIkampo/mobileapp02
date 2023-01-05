@@ -29,12 +29,11 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
-                <arg>$MODULE_DIR$/../../../../build/rich_clipboard_android/intermediates/compile_library_classes_jar/debug/classes.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/4e41bab433be813f0fbe316d41f0c8c6/transformed/jetified-armeabi_v7a_debug-1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/99fc2f117494c45badd2e7fb57911649/transformed/jetified-arm64_v8a_debug-1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/44c2e7826a5b81c4ee740cf4df09b341/transformed/jetified-x86_64_debug-1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/8cc2c7ab483cbc04e3c49004b93e61b9/transformed/jetified-x86_debug-1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/86e7e0e496216632c97ed858092324c3/transformed/jetified-flutter_embedding_debug-1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/c4fdcd7d0be865d49771284ee08f95f4/transformed/jetified-armeabi_v7a_debug-1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/221c3ade226b88ccee059631413f727c/transformed/jetified-arm64_v8a_debug-1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/4380331c612bfad30bc5fc7a2d60f262/transformed/jetified-x86_64_debug-1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/4dcc86c5114b85a0e4aa54672a055271/transformed/jetified-x86_debug-1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/15a6fcd7d34061f03244341055e3b20f/transformed/jetified-flutter_embedding_debug-1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/e20d28a734d1e4495acce83537e10e8f/transformed/jetified-window-java-1.0.0-beta04-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/b526a2008151ddde4e8bfe1bc64a726c/transformed/jetified-window-1.0.0-beta04-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/38799c6b0396adfa3b85ecf91a684bab/transformed/jetified-kotlinx-coroutines-android-1.5.2.jar</arg>
@@ -64,8 +63,8 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/78e23ce56998ae6e5367ec01357f75de/transformed/jetified-annotations-13.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/59bea6bd57b176eaa31f9f516a664cd0/transformed/jetified-kotlin-stdlib-common-1.6.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/8e6ff077b8baff5a9b5e29af63ea43e6/transformed/jetified-annotation-experimental-1.1.0-api.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Android/sdk/platforms/android-31/android.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Android/sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
+                <arg>$USER_HOME$/Library/Android/sdk/platforms/android-31/android.jar</arg>
+                <arg>$USER_HOME$/Library/Android/sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
               </args>
             </stringArg>
             <stringArg name="destination" arg="$MODULE_DIR$/../../../../build/app/tmp/kotlin-classes/debugAndroidTest" />
@@ -101,20 +100,20 @@
     <content url="file://$MODULE_DIR$/../../../../build/app/generated/source/buildConfig/androidTest/debug" />
     <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="android.firebase_core.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.flutter_blue_plus.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.flutter_plugin_android_lifecycle.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.image_gallery_saver.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.google_maps_flutter_android.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.cloud_firestore.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.connectivity_plus.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.image_cropper.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.firebase_auth.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.rich_clipboard_android.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.firebase_storage.main" scope="TEST" />
-    <orderEntry type="module" module-name="android.image_picker_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.firebase.core.android.firebase_core.main" scope="TEST" />
+    <orderEntry type="module" module-name="com.boskokg.flutter_blue_plus.android.flutter_blue_plus.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.flutter_plugin_android_lifecycle.android.flutter_plugin_android_lifecycle.main" scope="TEST" />
+    <orderEntry type="module" module-name="com.example.imagegallerysaver.android.image_gallery_saver.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.googlemaps.android.google_maps_flutter_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.firebase.cloudfirestore.android.cloud_firestore.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.connectivity.android.connectivity_plus.main" scope="TEST" />
+    <orderEntry type="module" module-name="vn.hunghd.flutter.plugins.imagecropper.android.image_cropper.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.firebase.auth.android.firebase_auth.main" scope="TEST" />
+    <orderEntry type="module" module-name="com.bringingfire.rich_clipboard.android.rich_clipboard_android.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.firebase.storage.android.firebase_storage.main" scope="TEST" />
+    <orderEntry type="module" module-name="io.flutter.plugins.imagepicker.android.image_picker_android.main" scope="TEST" />
     <orderEntry type="module" module-name="android.app.main" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:flutter_embedding_debug:1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common:2.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common-java8:2.2.0" level="project" />
@@ -127,11 +126,11 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_64_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_debug:1.0.0-3316dd8728419ad3534e3f6112aa6291f587078a" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:armeabi_v7a_debug:1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:arm64_v8a_debug:1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_64_debug:1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: io.flutter:x86_debug:1.0.0-3ad69d7be3a7231aab5525db322fc699f098315f" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/flutter/debug/libs.jar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.fragment:fragment:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.6.0@aar" level="project" />

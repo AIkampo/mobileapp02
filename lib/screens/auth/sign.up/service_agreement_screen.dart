@@ -82,7 +82,8 @@ class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
                 child: CupertinoButton.filled(
                   child: Text("確認"),
                   onPressed: () {
-                    _showAlertDialog(context);
+                    // _showAlertDialog(context);
+                    Get.offAndToNamed("/main");
                   },
                 ),
               ),
@@ -100,26 +101,27 @@ class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
         onStepTapped: _skipStep,
         steps: _steps,
         controlsBuilder: (context, details) {
-          return SizedBox.shrink();
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: ElevatedButton(
-          //         child: Text("上一步"),
-          //         onPressed: _prevStep,
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: 10,
-          //     ),
-          //     Expanded(
-          //       child: ElevatedButton(
-          //         child: Text("下一步"),
-          //         onPressed: _nextStep,
-          //       ),
-          //     )
-          //   ],
-          // );
+          return
+              //SizedBox.shrink();
+              Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  child: Text("上一步"),
+                  onPressed: _prevStep,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  child: Text("下一步"),
+                  onPressed: _nextStep,
+                ),
+              )
+            ],
+          );
         },
       ),
     );

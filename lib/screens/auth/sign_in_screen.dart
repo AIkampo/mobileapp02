@@ -1,12 +1,13 @@
 import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/controller/auth.controller.dart';
 import 'package:ai_kampo_app/utils/check.network.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -18,9 +19,13 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _authController = Get.find<AuthController>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _usersCollection = FirebaseFirestore.instance.collection("users");
+
   String _verificationId = '';
   final _phoneNumber = ''.obs;
   final _verificationCode = ''.obs;
+  final _userDocId = ''.obs;
+  final _isFirstTimeSignIn = false.obs;
 
   // 0 => 待使用者輸入手機號碼 （呈現輸入手機畫面）
   // 1 => 確認使用者輸入的手機號碼已註冊 （呈現輸入驗證碼畫面）
@@ -129,23 +134,24 @@ class _SignInScreenState extends State<SignInScreen> {
     //檢查手機號碼是否已註冊
     // 已註冊 則進行驗證
     if (await checkPhoneNumber(_phoneNumber.value)) {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: '+886${_phoneNumber.value}',
-        verificationCompleted: ((PhoneAuthCredential credential) {
-          print("** verificationCompleted");
-        }),
-        verificationFailed: ((FirebaseAuthException error) {
-          print("** verificationFailed");
-        }),
-        codeSent: ((String verificationId, int? forceResendingToken) async {
-          print('** codeSent');
-          _signInStatus.value = 1;
-          _verificationId = verificationId;
-        }),
-        codeAutoRetrievalTimeout: ((String verificationId) {
-          print("** codeAutoRetrievalTimeout");
-        }),
-      );
+      doSignIn();
+      // await _auth.verifyPhoneNumber(
+      //   phoneNumber: '+886${_phoneNumber.value}',
+      //   verificationCompleted: ((PhoneAuthCredential credential) {
+      //     print("** verificationCompleted");
+      //   }),
+      //   verificationFailed: ((FirebaseAuthException error) {
+      //     print("** verificationFailed  error: $error");
+      //   }),
+      //   codeSent: ((String verificationId, int? forceResendingToken) async {
+      //     print('** codeSent');
+      // _signInStatus.value = 1;
+      // _verificationId = verificationId;
+      // }),
+      // codeAutoRetrievalTimeout: ((String verificationId) {
+      //   print("** codeAutoRetrievalTimeout");
+      // }),
+      // );
     } else {
       Get.snackbar("登入失敗", "手機號碼尚未註冊！");
     }
@@ -158,9 +164,10 @@ class _SignInScreenState extends State<SignInScreen> {
           verificationId: _verificationId, smsCode: _verificationCode.value);
 
       // Sign the user in (or link) with the credential
-      await _auth.signInWithCredential(credential);
-      _authController.isLoading.value = false;
-      Get.offAndToNamed("/main");
+      await _auth
+          .signInWithCredential(credential)
+          .then((value) => doSignIn())
+          .catchError((error) => Get.snackbar("無法登入", "驗證失敗"));
     } catch (e) {
       Get.snackbar("無法登入", "請檢查驗證碼");
       _authController.isLoading.value = false;
@@ -245,5 +252,37 @@ class _SignInScreenState extends State<SignInScreen> {
         )
       ],
     );
+  }
+
+  Future<bool> checkPhoneNumber(String phoneNumber) async {
+    var res = await _usersCollection
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+
+    if (res.docs.length == 1) {
+      _userDocId.value = res.docs[0].id;
+      _isFirstTimeSignIn.value = res.docs[0]['lastSignInDatetime'] == null;
+    }
+
+    return res.docs.length == 1;
+  }
+
+  Future<void> doSignIn() async {
+    _authController.isLoading.value = false;
+
+    //Update SignIn datetime.
+    await _usersCollection
+        .doc(_userDocId.value)
+        .update({'lastSignInDatetime': DateTime.now()})
+        .then((value) => print('***** last SignIn Datetime updated'))
+        .catchError((error) => print("Failed to update lastSignInDatetime"));
+
+    //Store 'phoneNumber' & 'userDocId' in App
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('phoneNumber', _phoneNumber.value);
+    await prefs.setString('userDocId', _userDocId.value);
+
+    Get.offAndToNamed(
+        _isFirstTimeSignIn.value ? "/service.agreement" : "/main");
   }
 }

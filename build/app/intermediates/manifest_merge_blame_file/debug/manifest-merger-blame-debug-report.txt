@@ -13,29 +13,29 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:43:5-67
-15-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:43:22-64
+15-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:5-67
+15-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:22-64
 16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-16-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:45:5-79
-16-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:45:22-76
+16-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:45:5-79
+16-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:45:22-76
 17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:46:5-81
-17-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:46:22-78
+17-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:5-81
+17-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:22-78
 18    <uses-permission
-18-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:47:5-68
+18-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:47:5-68
 19        android:name="android.permission.BLUETOOTH"
-19-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:47:22-65
+19-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:47:22-65
 20        android:maxSdkVersion="30" />
-20-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:25:9-35
+20-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-35
 21    <uses-permission
-21-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:48:5-74
+21-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:48:5-74
 22        android:name="android.permission.BLUETOOTH_ADMIN"
-22-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:48:22-71
+22-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:48:22-71
 23        android:maxSdkVersion="30" />
-23-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:28:9-35
+23-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-35
 24    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-24-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:46:5-81
-24-->D:\Projects\AiKampo\ai_kampo_app-phase1\android\app\src\main\AndroidManifest.xml:46:22-78
+24-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:5-81
+24-->/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:22-78
 25    <!--
 26         New Bluetooth permissions in Android 12
 27           https://developer.android.com/about/versions/12/features/bluetooth-permissions
@@ -45,38 +45,38 @@
 31           your app never derives physical location from Bluetooth scan results.
 32    -->
 33    <uses-permission
-33-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:17:5-19:58
+33-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:5-19:58
 34        android:name="android.permission.BLUETOOTH_SCAN"
-34-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-57
+34-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-57
 35        android:usesPermissionFlags="neverForLocation" />
-35-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-55
+35-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-55
 36    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-36-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:20:5-76
-36-->[:flutter_blue_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\flutter_blue_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:20:22-73
+36-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:5-76
+36-->[:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:22-73
 37    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-37-->[:connectivity_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
-37-->[:connectivity_plus] D:\Projects\AiKampo\ai_kampo_app-phase1\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+37-->[:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
+37-->[:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
 38
 39    <uses-feature
-39-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:26:5-28:35
+39-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:26:5-28:35
 40        android:glEsVersion="0x00020000"
-40-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:27:9-41
+40-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:27:9-41
 41        android:required="true" />
-41-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:28:9-32
+41-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:28:9-32
 42
 43    <queries>
-43-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:30:5-34:15
+43-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:30:5-34:15
 44
 45        <!-- Needs to be explicitly declared on Android R+ -->
 46        <package android:name="com.google.android.apps.maps" />
-46-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:33:9-64
-46-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:33:18-61
+46-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:33:9-64
+46-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:33:18-61
 47    </queries>
 48
 49    <application
 50        android:name="io.flutter.app.FlutterMultiDexApplication"
 51        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-51-->[androidx.core:core:1.8.0] C:\Users\front\.gradle\caches\transforms-3\84186946fb369c4934529c2781e59d53\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+51-->[androidx.core:core:1.8.0] /Users/maverick/.gradle/caches/transforms-3/84186946fb369c4934529c2781e59d53/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 52        android:debuggable="true"
 53        android:icon="@mipmap/ic_launcher"
 54        android:label="ai_kampo_app"
@@ -124,205 +124,205 @@
 96            android:value="2" />
 97
 98        <service
-98-->[:cloud_firestore] D:\Projects\AiKampo\ai_kampo_app-phase1\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-14:19
+98-->[:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
 99            android:name="com.google.firebase.components.ComponentDiscoveryService"
-99-->[:cloud_firestore] D:\Projects\AiKampo\ai_kampo_app-phase1\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-89
+99-->[:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
 100            android:directBootAware="true"
-100-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:34:13-43
+100-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:34:13-43
 101            android:exported="false" >
-101-->[com.google.firebase:firebase-auth-ktx:21.1.0] C:\Users\front\.gradle\caches\transforms-3\2bdad75a2fe76f124bfae35bcaa989e9\transformed\jetified-firebase-auth-ktx-21.1.0\AndroidManifest.xml:10:13-37
+101-->[com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:10:13-37
 102            <meta-data
-102-->[:cloud_firestore] D:\Projects\AiKampo\ai_kampo_app-phase1\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+102-->[:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 103                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
-103-->[:cloud_firestore] D:\Projects\AiKampo\ai_kampo_app-phase1\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-134
+103-->[:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 104                android:value="com.google.firebase.components.ComponentRegistrar" />
-104-->[:cloud_firestore] D:\Projects\AiKampo\ai_kampo_app-phase1\build\cloud_firestore\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+104-->[:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 105            <meta-data
-105-->[:firebase_auth] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+105-->[:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 106                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-106-->[:firebase_auth] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
+106-->[:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 107                android:value="com.google.firebase.components.ComponentRegistrar" />
-107-->[:firebase_auth] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+107-->[:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 108            <meta-data
-108-->[:firebase_storage] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+108-->[:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 109                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-109-->[:firebase_storage] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-126
+109-->[:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
 110                android:value="com.google.firebase.components.ComponentRegistrar" />
-110-->[:firebase_storage] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_storage\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+110-->[:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 111            <meta-data
-111-->[:firebase_core] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-13:85
+111-->[:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 112                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-112-->[:firebase_core] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:12:17-124
+112-->[:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 113                android:value="com.google.firebase.components.ComponentRegistrar" />
-113-->[:firebase_core] D:\Projects\AiKampo\ai_kampo_app-phase1\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:13:17-82
+113-->[:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 114            <meta-data
-114-->[com.google.firebase:firebase-auth-ktx:21.1.0] C:\Users\front\.gradle\caches\transforms-3\2bdad75a2fe76f124bfae35bcaa989e9\transformed\jetified-firebase-auth-ktx-21.1.0\AndroidManifest.xml:11:13-13:85
+114-->[com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:11:13-13:85
 115                android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthKtxRegistrar"
-115-->[com.google.firebase:firebase-auth-ktx:21.1.0] C:\Users\front\.gradle\caches\transforms-3\2bdad75a2fe76f124bfae35bcaa989e9\transformed\jetified-firebase-auth-ktx-21.1.0\AndroidManifest.xml:12:17-116
+115-->[com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:12:17-116
 116                android:value="com.google.firebase.components.ComponentRegistrar" />
-116-->[com.google.firebase:firebase-auth-ktx:21.1.0] C:\Users\front\.gradle\caches\transforms-3\2bdad75a2fe76f124bfae35bcaa989e9\transformed\jetified-firebase-auth-ktx-21.1.0\AndroidManifest.xml:13:17-82
+116-->[com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:13:17-82
 117            <meta-data
-117-->[com.google.firebase:firebase-common-ktx:20.2.0] C:\Users\front\.gradle\caches\transforms-3\cfb3d3244f7dd1dd6d7707a63a7d9ccb\transformed\jetified-firebase-common-ktx-20.2.0\AndroidManifest.xml:14:13-16:85
+117-->[com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:14:13-16:85
 118                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar"
-118-->[com.google.firebase:firebase-common-ktx:20.2.0] C:\Users\front\.gradle\caches\transforms-3\cfb3d3244f7dd1dd6d7707a63a7d9ccb\transformed\jetified-firebase-common-ktx-20.2.0\AndroidManifest.xml:15:17-113
+118-->[com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:15:17-113
 119                android:value="com.google.firebase.components.ComponentRegistrar" />
-119-->[com.google.firebase:firebase-common-ktx:20.2.0] C:\Users\front\.gradle\caches\transforms-3\cfb3d3244f7dd1dd6d7707a63a7d9ccb\transformed\jetified-firebase-common-ktx-20.2.0\AndroidManifest.xml:16:17-82
+119-->[com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:16:17-82
 120            <meta-data
-120-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:67:13-69:85
+120-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:67:13-69:85
 121                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-121-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:68:17-109
+121-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:68:17-109
 122                android:value="com.google.firebase.components.ComponentRegistrar" />
-122-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:69:17-82
+122-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:69:17-82
 123            <meta-data
-123-->[com.google.firebase:firebase-firestore:24.4.0] C:\Users\front\.gradle\caches\transforms-3\3dd4135099ed819d888fa5d5947b1c1f\transformed\jetified-firebase-firestore-24.4.0\AndroidManifest.xml:19:13-21:85
+123-->[com.google.firebase:firebase-firestore:24.4.0] /Users/maverick/.gradle/caches/transforms-3/3dd4135099ed819d888fa5d5947b1c1f/transformed/jetified-firebase-firestore-24.4.0/AndroidManifest.xml:19:13-21:85
 124                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-124-->[com.google.firebase:firebase-firestore:24.4.0] C:\Users\front\.gradle\caches\transforms-3\3dd4135099ed819d888fa5d5947b1c1f\transformed\jetified-firebase-firestore-24.4.0\AndroidManifest.xml:20:17-111
+124-->[com.google.firebase:firebase-firestore:24.4.0] /Users/maverick/.gradle/caches/transforms-3/3dd4135099ed819d888fa5d5947b1c1f/transformed/jetified-firebase-firestore-24.4.0/AndroidManifest.xml:20:17-111
 125                android:value="com.google.firebase.components.ComponentRegistrar" />
-125-->[com.google.firebase:firebase-firestore:24.4.0] C:\Users\front\.gradle\caches\transforms-3\3dd4135099ed819d888fa5d5947b1c1f\transformed\jetified-firebase-firestore-24.4.0\AndroidManifest.xml:21:17-82
+125-->[com.google.firebase:firebase-firestore:24.4.0] /Users/maverick/.gradle/caches/transforms-3/3dd4135099ed819d888fa5d5947b1c1f/transformed/jetified-firebase-firestore-24.4.0/AndroidManifest.xml:21:17-82
 126            <meta-data
-126-->[com.google.firebase:firebase-storage:20.1.0] C:\Users\front\.gradle\caches\transforms-3\69c9ca63dcb7cdee78e98df3ddb6dbcb\transformed\jetified-firebase-storage-20.1.0\AndroidManifest.xml:32:13-34:85
+126-->[com.google.firebase:firebase-storage:20.1.0] /Users/maverick/.gradle/caches/transforms-3/69c9ca63dcb7cdee78e98df3ddb6dbcb/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:32:13-34:85
 127                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-127-->[com.google.firebase:firebase-storage:20.1.0] C:\Users\front\.gradle\caches\transforms-3\69c9ca63dcb7cdee78e98df3ddb6dbcb\transformed\jetified-firebase-storage-20.1.0\AndroidManifest.xml:33:17-107
+127-->[com.google.firebase:firebase-storage:20.1.0] /Users/maverick/.gradle/caches/transforms-3/69c9ca63dcb7cdee78e98df3ddb6dbcb/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:33:17-107
 128                android:value="com.google.firebase.components.ComponentRegistrar" />
-128-->[com.google.firebase:firebase-storage:20.1.0] C:\Users\front\.gradle\caches\transforms-3\69c9ca63dcb7cdee78e98df3ddb6dbcb\transformed\jetified-firebase-storage-20.1.0\AndroidManifest.xml:34:17-82
+128-->[com.google.firebase:firebase-storage:20.1.0] /Users/maverick/.gradle/caches/transforms-3/69c9ca63dcb7cdee78e98df3ddb6dbcb/transformed/jetified-firebase-storage-20.1.0/AndroidManifest.xml:34:17-82
 129        </service>
 130
 131        <provider
-131-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+131-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 132            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-132-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+132-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
 133            android:authorities="com.aikampo.app.flutter.image_provider"
-133-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+133-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 134            android:exported="false"
-134-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+134-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 135            android:grantUriPermissions="true" >
-135-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+135-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 136            <meta-data
-136-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+136-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
 137                android:name="android.support.FILE_PROVIDER_PATHS"
-137-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+137-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
 138                android:resource="@xml/flutter_image_picker_file_paths" />
-138-->[:image_picker_android] D:\Projects\AiKampo\ai_kampo_app-phase1\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+138-->[:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 139        </provider>
 140
 141        <uses-library
-141-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+141-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 142            android:name="androidx.window.extensions"
-142-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+142-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
 143            android:required="false" />
-143-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+143-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
 144        <uses-library
-144-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+144-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
 145            android:name="androidx.window.sidecar"
-145-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+145-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
 146            android:required="false" />
-146-->[androidx.window:window:1.0.0-beta04] C:\Users\front\.gradle\caches\transforms-3\aba942f4e10c9d0e75c80530f4dca865\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+146-->[androidx.window:window:1.0.0-beta04] /Users/maverick/.gradle/caches/transforms-3/aba942f4e10c9d0e75c80530f4dca865/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 147
 148        <activity
-148-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:27:9-44:20
+148-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:27:9-44:20
 149            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-149-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:28:13-80
+149-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:28:13-80
 150            android:excludeFromRecents="true"
-150-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:29:13-46
+150-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:29:13-46
 151            android:exported="true"
-151-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:30:13-36
+151-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:30:13-36
 152            android:launchMode="singleTask"
-152-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:31:13-44
+152-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:31:13-44
 153            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-153-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:32:13-72
+153-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:32:13-72
 154            <intent-filter>
-154-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:33:13-43:29
+154-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:33:13-43:29
 155                <action android:name="android.intent.action.VIEW" />
-155-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:17-69
-155-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:25-66
+155-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:34:17-69
+155-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:34:25-66
 156
 157                <category android:name="android.intent.category.DEFAULT" />
-157-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:17-76
-157-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:27-73
+157-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:36:17-76
+157-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:36:27-73
 158                <category android:name="android.intent.category.BROWSABLE" />
-158-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:17-78
-158-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:27-75
+158-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:17-78
+158-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:27-75
 159
 160                <data
-160-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:39:17-42:51
+160-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:39:17-42:51
 161                    android:host="firebase.auth"
-161-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:40:21-49
+161-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:40:21-49
 162                    android:path="/"
-162-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:41:21-37
+162-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:41:21-37
 163                    android:scheme="genericidp" />
-163-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:42:21-48
+163-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:42:21-48
 164            </intent-filter>
 165        </activity>
 166        <activity
-166-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:45:9-62:20
+166-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:45:9-62:20
 167            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-167-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:46:13-79
+167-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:46:13-79
 168            android:excludeFromRecents="true"
-168-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:47:13-46
+168-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:47:13-46
 169            android:exported="true"
-169-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:48:13-36
+169-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:48:13-36
 170            android:launchMode="singleTask"
-170-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:49:13-44
+170-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:49:13-44
 171            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-171-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:50:13-72
+171-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:50:13-72
 172            <intent-filter>
-172-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:51:13-61:29
+172-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:51:13-61:29
 173                <action android:name="android.intent.action.VIEW" />
-173-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:17-69
-173-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:34:25-66
+173-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:34:17-69
+173-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:34:25-66
 174
 175                <category android:name="android.intent.category.DEFAULT" />
-175-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:17-76
-175-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:36:27-73
+175-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:36:17-76
+175-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:36:27-73
 176                <category android:name="android.intent.category.BROWSABLE" />
-176-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:17-78
-176-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:37:27-75
+176-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:17-78
+176-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:37:27-75
 177
 178                <data
-178-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:39:17-42:51
+178-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:39:17-42:51
 179                    android:host="firebase.auth"
-179-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:40:21-49
+179-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:40:21-49
 180                    android:path="/"
-180-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:41:21-37
+180-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:41:21-37
 181                    android:scheme="recaptcha" />
-181-->[com.google.firebase:firebase-auth:21.1.0] C:\Users\front\.gradle\caches\transforms-3\005d689738d24ee1db3ab11fc37785d3\transformed\jetified-firebase-auth-21.1.0\AndroidManifest.xml:42:21-48
+181-->[com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:42:21-48
 182            </intent-filter>
 183        </activity>
 184
 185        <provider
-185-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:25:9-30:39
+185-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:25:9-30:39
 186            android:name="com.google.firebase.provider.FirebaseInitProvider"
-186-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:26:13-77
+186-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:26:13-77
 187            android:authorities="com.aikampo.app.firebaseinitprovider"
-187-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:27:13-72
+187-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:27:13-72
 188            android:directBootAware="true"
-188-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:28:13-43
+188-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:28:13-43
 189            android:exported="false"
-189-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:29:13-37
+189-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:29:13-37
 190            android:initOrder="100" /> <!-- Needs to be explicitly declared on P+ -->
-190-->[com.google.firebase:firebase-common:20.2.0] C:\Users\front\.gradle\caches\transforms-3\9f61346e2841232d2a55c92ee21f6102\transformed\jetified-firebase-common-20.2.0\AndroidManifest.xml:30:13-36
+190-->[com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:30:13-36
 191        <uses-library
-191-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:39:9-41:40
+191-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:39:9-41:40
 192            android:name="org.apache.http.legacy"
-192-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:40:13-50
+192-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:40:13-50
 193            android:required="false" />
-193-->[com.google.android.gms:play-services-maps:18.1.0] C:\Users\front\.gradle\caches\transforms-3\b27a9702806d9c8de273d4be49596a3a\transformed\jetified-play-services-maps-18.1.0\AndroidManifest.xml:41:13-37
+193-->[com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:41:13-37
 194
 195        <activity
-195-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\front\.gradle\caches\transforms-3\4ebb440f794ff9be181859085062223e\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+195-->[com.google.android.gms:play-services-base:18.0.1] /Users/maverick/.gradle/caches/transforms-3/4ebb440f794ff9be181859085062223e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
 196            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-196-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\front\.gradle\caches\transforms-3\4ebb440f794ff9be181859085062223e\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+196-->[com.google.android.gms:play-services-base:18.0.1] /Users/maverick/.gradle/caches/transforms-3/4ebb440f794ff9be181859085062223e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
 197            android:exported="false"
-197-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\front\.gradle\caches\transforms-3\4ebb440f794ff9be181859085062223e\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+197-->[com.google.android.gms:play-services-base:18.0.1] /Users/maverick/.gradle/caches/transforms-3/4ebb440f794ff9be181859085062223e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
 198            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-198-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\front\.gradle\caches\transforms-3\4ebb440f794ff9be181859085062223e\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+198-->[com.google.android.gms:play-services-base:18.0.1] /Users/maverick/.gradle/caches/transforms-3/4ebb440f794ff9be181859085062223e/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
 199
 200        <meta-data
-200-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\front\.gradle\caches\transforms-3\54bf35f08e5913614be1630f47f2b9d6\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+200-->[com.google.android.gms:play-services-basement:18.1.0] /Users/maverick/.gradle/caches/transforms-3/54bf35f08e5913614be1630f47f2b9d6/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
 201            android:name="com.google.android.gms.version"
-201-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\front\.gradle\caches\transforms-3\54bf35f08e5913614be1630f47f2b9d6\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+201-->[com.google.android.gms:play-services-basement:18.1.0] /Users/maverick/.gradle/caches/transforms-3/54bf35f08e5913614be1630f47f2b9d6/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
 202            android:value="@integer/google_play_services_version" />
-202-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\front\.gradle\caches\transforms-3\54bf35f08e5913614be1630f47f2b9d6\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+202-->[com.google.android.gms:play-services-basement:18.1.0] /Users/maverick/.gradle/caches/transforms-3/54bf35f08e5913614be1630f47f2b9d6/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
 203    </application>
 204
 205</manifest>

@@ -210,7 +210,7 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
       "sex": _signUpFormKey.currentState!.fields['sex']?.value,
       "bloodType": _signUpFormKey.currentState!.fields['bloodType']?.value,
       "rh": _signUpFormKey.currentState!.fields['rh']?.value,
-      "lastLoginDatetime": ""
+      "lastSignInDatetime": null
     }).then((value) {
       _authController.signUpCurrentStep.value = 2;
     });
