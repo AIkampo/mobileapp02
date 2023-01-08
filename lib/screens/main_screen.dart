@@ -44,6 +44,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   int _currentIndex = 0;
+  bool _isMainAccount = true;
 
   @override
   void initState() {
@@ -60,11 +61,13 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
-            Get.to(() =>
-                    // ConstitutionCardScreen()
-                    ConstitutionAssessmentScreen()
-                //TestingScreen() //SubscribeScreen(),
-                );
+            _isMainAccount
+                ? _showAccountMenu()
+                : Get.to(() => ConstitutionAssessmentScreen());
+
+            //      // ConstitutionCardScreen()
+            //     //TestingScreen() //SubscribeScreen(),
+            //     );
           },
           child: Image.asset(
             "assets/icons/detection.png",
@@ -98,6 +101,85 @@ class _MainScreenState extends State<MainScreen> {
             });
         },
       ),
+    );
+  }
+
+  void _showAccountMenu() {
+    showCupertinoModalPopup(
+      context: context,
+      builder: ((BuildContext context) => CupertinoActionSheet(
+            title: Text("請選擇檢測帳號"),
+            cancelButton: CupertinoActionSheetAction(
+              child: Text("Cancel"),
+              onPressed: () {
+                Get.back();
+              },
+              isDestructiveAction: true,
+            ),
+            actions: <CupertinoActionSheetAction>[
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  Get.to(() => ConstitutionAssessmentScreen());
+                },
+                child: Text("主帳號"),
+                isDefaultAction: true,
+              ),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Get.to(() => ConstitutionAssessmentScreen());
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.male_outlined,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("黃大明"),
+                      Expanded(child: Text('')),
+                      Text('0912345677')
+                    ],
+                  )),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Get.to(() => ConstitutionAssessmentScreen());
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.male,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("黃小明"),
+                      Expanded(child: Text('')),
+                      Text('0912345678')
+                    ],
+                  )),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Get.to(() => ConstitutionAssessmentScreen());
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.female,
+                        color: Colors.red,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("黃小媚"),
+                      Expanded(child: Text('')),
+                      Text('0912345679')
+                    ],
+                  )),
+            ],
+          )),
     );
   }
 }

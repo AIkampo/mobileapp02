@@ -1,8 +1,6 @@
 import 'package:ai_kampo_app/screens/sub.accounts/add_sub_account_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SubAccountsScreen extends StatefulWidget {

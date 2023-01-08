@@ -1,5 +1,6 @@
 import 'package:ai_kampo_app/screens/testing.report/testing_report_screen.dart';
 import 'package:ai_kampo_app/widgets/common/KampoTitle.dart';
+import 'package:ai_kampo_app/widgets/common/accounts_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +15,14 @@ class TestResultListScreen extends StatefulWidget {
 }
 
 class _TestResultListScreenState extends State<TestResultListScreen> {
+  bool _isMainAccount = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            _isMainAccount ? AccountsDropdown() : SizedBox.shrink(),
             InkWell(
               onTap: () {
                 Get.to(() => TestingReportScreen());

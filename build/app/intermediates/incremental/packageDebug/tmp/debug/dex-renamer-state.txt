@@ -1,4 +1,4 @@
-#Thu Jan 05 10:27:24 CST 2023
+#Sun Jan 08 10:09:47 CST 2023
 base.2=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
 path.2=classes3.dex
 base.1=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex

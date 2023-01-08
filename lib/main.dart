@@ -2,7 +2,6 @@ import 'package:ai_kampo_app/controller_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/check_phone_number_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
-import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_steps_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/auth/verify_code_screen.dart';
@@ -44,7 +43,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/sign.in",
+      initialRoute: "/main",
       getPages: [
         GetPage(
           name: "/splash",

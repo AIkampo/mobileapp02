@@ -36,3 +36,4 @@ com.aikampo.app-packaged_res-34 /Users/maverick/Documents/Projects/AiKampo/ai_ka
 com.aikampo.app-packaged_res-35 /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_gallery_saver/intermediates/packaged_res/debug
 com.aikampo.app-packaged_res-36 /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/packaged_res/debug
 com.aikampo.app-packaged_res-37 /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/rich_clipboard_android/intermediates/packaged_res/debug
+com.aikampo.app-packaged_res-38 /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/shared_preferences_android/intermediates/packaged_res/debug

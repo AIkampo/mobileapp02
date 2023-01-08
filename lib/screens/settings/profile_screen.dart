@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,12 +23,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   final _profileFormKey = GlobalKey<FormBuilderState>();
   final _userCollection = FirebaseFirestore.instance.collection("users");
+  var _userDocRef = null;
   File? _userAvater = null;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("我的檔案")),
+        appBar: AppBar(
+          title: Text("我的檔案"),
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -43,6 +55,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   child: Column(
                     children: [
+                      CupertinoContextMenu(
+                        child: Text("show menu"),
+                        actions: [
+                          CupertinoContextMenuAction(
+                            child: Text("1"),
+                            onPressed: () {
+                              Get.snackbar("yes", "");
+                            },
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      UserAvatar(
+                        phoneNumber: '0963517217',
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -83,13 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: InputDecoration(
                           filled: true,
                           labelText: 'birthday'.tr,
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: () {
-                              _profileFormKey.currentState!.fields['date']
-                                  ?.didChange(null);
-                            },
-                          ),
                         ),
                       ),
                       SizedBox(
@@ -98,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       FormBuilderRadioGroup<String>(
                         validator: FormBuilderValidators.required(),
                         decoration: InputDecoration(
-                          labelText: 'sex'.tr,
+                          labelText: '性別',
                         ),
                         initialValue: null,
                         name: 'sex',
@@ -155,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: EdgeInsets.symmetric(vertical: 20),
                         width: double.infinity,
                         child: CupertinoButton.filled(
-                          child: Text("confirm".tr),
+                          child: Text('更新'),
                           onPressed: () {
                             // Get.to(() => ServiceAgreementScreen());
                             if (_profileFormKey.currentState?.validate() ??
@@ -195,11 +217,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> getProfile() async {
     final _prefs = await SharedPreferences.getInstance();
+    final userDocId = _prefs.getString('userDocId');
 
-    final userDocId = await _prefs.getString('userDocId');
-    final res = _userCollection.doc(userDocId);
+    setState(() {
+      _userDocRef = _userCollection.doc(userDocId);
+    });
+    _userDocRef.get().then((DocumentSnapshot doc) {
+      final data = doc.data() as Map<String, dynamic>;
 
-    print('***************** sex:$res');
+      _profileFormKey.currentState!.fields['username']!
+          .didChange(data['username']);
+      _profileFormKey.currentState!.fields['birthday']!
+          .didChange(data['birthday'].toDate());
+      _profileFormKey.currentState!.fields['sex']!.didChange(data['sex']);
+      _profileFormKey.currentState!.fields['bloodType']!
+          .didChange(data['bloodType']);
+      _profileFormKey.currentState!.fields['rh']!.didChange(data['rh']);
+    });
+
+    // final storageRef = FirebaseStorage.instance.ref();
+    // final pathReference = storageRef.child('userAvatar/0963517217.jpg');
+    // final gsRef = FirebaseStorage.instance
+    //     .refFromURL('gs://aikampo-app.appspot.com/userAvatar/0963517217.jpg');
+    // print('*******************');
+    // print(await gsRef.getDownloadURL());
   }
 
   Future updateProfile() async {
@@ -214,7 +255,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ref.putFile(_userAvater!);
     }
 
-    await _userCollection.doc(docId).update({
+    await _userDocRef.update({
       "userAvatar": userAvatarRef,
       "username": _profileFormKey.currentState!.fields['username']?.value,
       "phoneNumber": phoneNumber,
@@ -224,7 +265,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       "rh": _profileFormKey.currentState!.fields['rh']?.value,
       "lastLoginDatetime": ""
     }).then((value) {
-      print("updated");
+      Get.snackbar("更新", "個人資料已更新");
     });
   }
 }
