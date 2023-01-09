@@ -18,6 +18,7 @@ class AccountsDropdown extends StatelessWidget {
     return Obx(() => DropdownButton(
           isExpanded: true,
           value: _selectingAccount.value,
+          itemHeight: 80,
           onChanged: (value) {
             _selectingAccount.value = value;
           },
@@ -32,19 +33,27 @@ class AccountsDropdown extends StatelessWidget {
                       ? Icon(
                           Icons.male_outlined,
                           color: Colors.blue,
+                          size: 30,
                         )
                       : Icon(
                           Icons.female,
                           color: Colors.red,
+                          size: 30,
                         ),
                   SizedBox(
                     width: 10,
                   ),
-                  Text(account['name']),
+                  Text(
+                    account['name'],
+                    style: TextStyle(fontSize: 20),
+                  ),
                   SizedBox(
                     width: 20,
                   ),
-                  Text(account['phoneNumber'])
+                  Text(
+                    account['phoneNumber'],
+                    style: TextStyle(fontSize: 20),
+                  )
                 ],
               ),
               value: account['phoneNumber'],

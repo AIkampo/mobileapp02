@@ -1,3 +1,4 @@
+import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,7 +25,7 @@ class _AddSubAccountScreenState extends State<AddSubAccountScreen> {
       ),
       body: Center(
         child: Container(
-          width: 300,
+          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: FormBuilder(
             key: _subAccountFormkey,
             initialValue: {
@@ -96,8 +97,15 @@ class _AddSubAccountScreenState extends State<AddSubAccountScreen> {
   }
 
   Future<void> handleAddSubAccount() async {
-    if (_subAccountFormkey.currentState?.validate() ?? true) {
+    if (_subAccountFormkey.currentState?.validate() ?? false) {
       Get.snackbar("新增子帳號", "成功");
+      FirebaseAPI.addUser({
+        'username': _subAccountFormkey.currentState!.fields['username']?.value,
+        'phoneNumber':
+            _subAccountFormkey.currentState!.fields['phoneNumber']?.value,
+        'sex': _subAccountFormkey.currentState!.fields['sex']?.value,
+        'mainAccountIndex': "0970483255"
+      });
     }
   }
 }

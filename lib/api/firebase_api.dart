@@ -1,27 +1,32 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseAPI {
-  static Future<List<String>> _getDownloadLinks(List<Reference> refs) =>
-      Future.wait(refs.map((ref) => ref.getDownloadURL()).toList());
-
-  static Future<void> listAll(String path) async {
-    final ref = FirebaseStorage.instance.ref(path);
-    final refResult = await ref.listAll();
-    final urls = await _getDownloadLinks(refResult.items);
-    print('*********** 1 **************');
-    print(refResult.items);
-    print('************ 2 *************');
-    print(ref.child("0963517217.jpg").getDownloadURL());
-    ref.child("0963517217.jpg").getDownloadURL().then((e) {
-      print('************ 3 *************');
-      print(e.toString());
-    });
-    print('************ 4 *************');
-    print(urls);
-  }
+  static final usersCollection =
+      FirebaseFirestore.instance.collection('/users');
+  static final storageUserAvatarRef =
+      FirebaseStorage.instance.ref('userAvatar/');
 
   static Future<String> getUserAvatarUrl(String phoneNumber) async {
-    final storageRef = FirebaseStorage.instance.ref('userAvatar/');
-    return await storageRef.child('$phoneNumber.jpg').getDownloadURL();
+    return await storageUserAvatarRef
+        .child('$phoneNumber.jpg')
+        .getDownloadURL();
+  }
+
+  static Future deleteUserAvatar(String phoneNumber) async {
+    return storageUserAvatarRef.child('$phoneNumber.jpg').delete();
+  }
+
+  static Future saveUserAvatar(
+      {required String phoneNumber, required File? imgFile}) async {
+    return await storageUserAvatarRef
+        .child('$phoneNumber.jpg')
+        .putFile(imgFile!);
+  }
+
+  static Future addUser(Map<String, String> userData) async {
+    await usersCollection.add(userData);
   }
 }
