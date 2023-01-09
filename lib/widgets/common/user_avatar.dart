@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/utils/get_image_from_gallery.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,26 +19,22 @@ class _UserAvatarState extends State<UserAvatar> {
 
   @override
   Widget build(BuildContext context) {
-    _userAvatarUrl = FirebaseAPI.getUserAvatarUrl(widget.phoneNumber);
+    // _userAvatarUrl = FirebaseAPI.getUserAvatarUrl(widget.phoneNumber);
     return _newUserImgFile != null
         ? imgAvatar(userAvatarFile: _newUserImgFile)
         : FutureBuilder<String>(
-            future: _userAvatarUrl,
+            future: FirebaseAPI.getUserAvatarUrl(widget.phoneNumber),
             builder: ((context, snapshot) {
-              if (snapshot.hasError) {
-                return defaultAvatar();
-              }
+              if (snapshot.hasError) return defaultAvatar();
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
                   return const CircleAvatar(
                     radius: 50,
                     child: CircularProgressIndicator(),
                   );
-
                 case ConnectionState.done:
                   String userAvatarUrl = snapshot.data!;
                   return imgAvatar(userAvatarUrl: userAvatarUrl);
-                case ConnectionState.none:
                 default:
                   return defaultAvatar();
               }
@@ -121,8 +116,6 @@ class _UserAvatarState extends State<UserAvatar> {
           _userAvatarUrl = Future<String>(() => '');
         });
       });
-
-      // Get.snackbar("提醒", "照片已刪除！");
     }).catchError((error) {
       Get.snackbar("提醒", "無法刪除照片！");
     });

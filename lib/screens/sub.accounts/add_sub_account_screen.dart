@@ -119,9 +119,8 @@ class _AddSubAccountScreenState extends State<AddSubAccountScreen> {
         'sex': _subAccountFormkey.currentState!.fields['sex']?.value,
         'mainAccount': userPhoneNumber
       }).then((value) {
-        Get.back();
+        Navigator.pop(context);
         Get.snackbar("新增子帳號", "成功");
-        setState(() {});
       });
     } else {
       Get.snackbar("失敗", "此帳號已註冊");

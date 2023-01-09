@@ -22,7 +22,9 @@ class _SubAccountsScreenState extends State<SubAccountsScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => AddSubAccountScreen());
+                Navigator.pushNamed(context, "/add.sub.account").then((value) {
+                  setState(() {});
+                });
               },
               icon: Icon(CupertinoIcons.person_add))
         ],
@@ -82,6 +84,7 @@ class _SubAccountsScreenState extends State<SubAccountsScreen> {
     await FirebaseAPI.deleteSubAccount(userPhoneNumber, subAccountPhoneNumber)
         .then((value) {
       Get.snackbar('Info', '子帳號已刪除！');
+      setState(() {});
     }).catchError((error) => Get.snackbar('Info', '無法刪除子帳號！'));
   }
 
@@ -97,7 +100,6 @@ class _SubAccountsScreenState extends State<SubAccountsScreen> {
             onPressed: () {
               Get.back();
               handleDeleteSubAccount(subAccountPhoneNumber);
-              setState(() {});
             },
           ),
           CupertinoDialogAction(

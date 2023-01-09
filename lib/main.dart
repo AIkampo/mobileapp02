@@ -11,6 +11,7 @@ import 'package:ai_kampo_app/screens/info.center/my.points/my_points_screen.dart
 import 'package:ai_kampo_app/screens/main_screen.dart';
 import 'package:ai_kampo_app/screens/physical.check/headset_connecting_screen.dart';
 import 'package:ai_kampo_app/screens/splash_screen.dart';
+import 'package:ai_kampo_app/screens/sub.accounts/add_sub_account_screen.dart';
 import 'package:ai_kampo_app/screens/subscribe/payment/payment_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,7 @@ class AIKampoApp extends StatelessWidget {
         GetPage(name: "/verify.code", page: () => VerifyCodeScreen()),
         GetPage(
             name: "/service.agreement", page: () => ServiceAgreementScreen()),
+        GetPage(name: "/add.sub.account", page: () => AddSubAccountScreen()),
       ],
       translationsKeys: AppTranslation.translations,
       locale: Locale('zh', 'TW'),
