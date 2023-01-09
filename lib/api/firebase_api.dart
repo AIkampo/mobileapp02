@@ -29,4 +29,28 @@ class FirebaseAPI {
   static Future addUser(Map<String, String> userData) async {
     await usersCollection.add(userData);
   }
+
+  static Future<bool> checkPhoneNumberStatus(String phoneNumber) async {
+    const int SUB_ACCOUNT = 1;
+    const int PREMIUM_USER = 2;
+    final res = await usersCollection
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+    return res.docs.isEmpty;
+  }
+
+  static Future getSubAccounts(String phoneNumber) async {
+    final res = await usersCollection
+        .where('mainAccount', isEqualTo: phoneNumber)
+        .get();
+    return res.docs.map((doc) => doc.data()).toList();
+  }
+
+  static Future deleteSubAccount(
+      String userPhoneNumber, String subAccountPhoneNumber) async {
+    final res = await usersCollection
+        .where('phoneNumber', isEqualTo: subAccountPhoneNumber)
+        .get();
+    return await res.docs[0].reference.delete();
+  }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddSubAccountScreen extends StatefulWidget {
   const AddSubAccountScreen({super.key});
@@ -97,15 +98,33 @@ class _AddSubAccountScreenState extends State<AddSubAccountScreen> {
   }
 
   Future<void> handleAddSubAccount() async {
-    if (_subAccountFormkey.currentState?.validate() ?? false) {
-      Get.snackbar("新增子帳號", "成功");
+    if (!(_subAccountFormkey.currentState?.validate() ?? false)) {
+      return;
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    final userPhoneNumber = prefs.getString('phoneNumber') ?? '0970483255';
+    final subAccountPhoneNumber =
+        _subAccountFormkey.currentState!.fields['phoneNumber']?.value;
+
+    if (userPhoneNumber == subAccountPhoneNumber) {
+      Get.snackbar("失敗", "不能將自己加入！");
+      return;
+    }
+
+    if (await FirebaseAPI.checkPhoneNumberStatus(subAccountPhoneNumber)) {
       FirebaseAPI.addUser({
         'username': _subAccountFormkey.currentState!.fields['username']?.value,
-        'phoneNumber':
-            _subAccountFormkey.currentState!.fields['phoneNumber']?.value,
+        'phoneNumber': subAccountPhoneNumber,
         'sex': _subAccountFormkey.currentState!.fields['sex']?.value,
-        'mainAccountIndex': "0970483255"
+        'mainAccount': userPhoneNumber
+      }).then((value) {
+        Get.back();
+        Get.snackbar("新增子帳號", "成功");
+        setState(() {});
       });
+    } else {
+      Get.snackbar("失敗", "此帳號已註冊");
     }
   }
 }
