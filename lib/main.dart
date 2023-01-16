@@ -9,7 +9,8 @@ import 'package:ai_kampo_app/screens/common/loading_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guide/healthy_guide_screen.dart';
 import 'package:ai_kampo_app/screens/info.center/my.points/my_points_screen.dart';
 import 'package:ai_kampo_app/screens/main_screen.dart';
-import 'package:ai_kampo_app/screens/physical.check/headset_connecting_screen.dart';
+import 'package:ai_kampo_app/screens/headset.connection/headset_connection_screen.dart';
+
 import 'package:ai_kampo_app/screens/splash_screen.dart';
 import 'package:ai_kampo_app/screens/sub.accounts/add_sub_account_screen.dart';
 import 'package:ai_kampo_app/screens/subscribe/payment/payment_screen.dart';
@@ -44,7 +45,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/main",
+      initialRoute: "/headset.connection",
       getPages: [
         GetPage(
           name: "/splash",
@@ -65,14 +66,16 @@ class AIKampoApp extends StatelessWidget {
         GetPage(name: "/payment", page: () => PaymentScreen()),
         GetPage(name: "/loading", page: () => LoadingScreen()),
         GetPage(name: "/healthy.guide", page: () => HealthyGuideScreen()),
-        GetPage(
-          name: "/headset.connecting",
-          page: () => HeadsetConnectingScreen(),
-        ),
+        // GetPage(
+        //   name: "/headset.connecting",
+        //   page: () => HeadsetConnectingScreen(),
+        // ),
         GetPage(name: "/verify.code", page: () => VerifyCodeScreen()),
         GetPage(
             name: "/service.agreement", page: () => ServiceAgreementScreen()),
         GetPage(name: "/add.sub.account", page: () => AddSubAccountScreen()),
+        GetPage(
+            name: "/headset.connection", page: () => HeadsetConnectionScreen())
       ],
       translationsKeys: AppTranslation.translations,
       locale: Locale('zh', 'TW'),
