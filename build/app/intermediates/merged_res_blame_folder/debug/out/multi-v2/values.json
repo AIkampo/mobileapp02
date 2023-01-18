@@ -40,20 +40,22 @@
                     }
                 },
                 {
-                    "source": "/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/generated/res/google-services/debug/values/values.xml",
+                    "source": "/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/res/values/styles.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,709",
-                        "endColumns": "143,81,103,108,119,94,71",
-                        "endOffsets": "194,276,380,489,609,704,776"
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,818",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "476,982"
                     },
                     "to": {
-                        "startLines": "394,398,399,400,401,402,403",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "26791,27150,27232,27336,27445,27565,27660",
-                        "endColumns": "143,81,103,108,119,94,71",
-                        "endOffsets": "26930,27227,27331,27440,27560,27655,27727"
+                        "startLines": "1501,1505",
+                        "startColumns": "4,4",
+                        "startOffsets": "97831,98012",
+                        "endLines": "1504,1507",
+                        "endColumns": "12,12",
+                        "endOffsets": "98007,98176"
                     }
                 },
                 {
@@ -112,22 +114,20 @@
                     }
                 },
                 {
-                    "source": "/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/app/generated/res/google-services/debug/values/values.xml",
                     "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,818",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "476,982"
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,709",
+                        "endColumns": "143,81,103,108,119,94,71",
+                        "endOffsets": "194,276,380,489,609,704,776"
                     },
                     "to": {
-                        "startLines": "1501,1505",
-                        "startColumns": "4,4",
-                        "startOffsets": "97831,98012",
-                        "endLines": "1504,1507",
-                        "endColumns": "12,12",
-                        "endOffsets": "98007,98176"
+                        "startLines": "394,398,399,400,401,402,403",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "26791,27150,27232,27336,27445,27565,27660",
+                        "endColumns": "143,81,103,108,119,94,71",
+                        "endOffsets": "26930,27227,27331,27440,27560,27655,27727"
                     }
                 },
                 {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_blue_plus/gen/flutterblueplus.pbjson.dart';
 import 'package:get/get.dart';
 
 class HeadsetList extends StatefulWidget {
@@ -13,6 +14,7 @@ class HeadsetList extends StatefulWidget {
 class _HeadsetListState extends State<HeadsetList> {
   List<BluetoothDevice> _oberonHeadsets = [];
   late BluetoothDevice? _selectedHeadset = null;
+
   @override
   Widget build(BuildContext context) {
     FlutterBluePlus.instance.startScan(timeout: Duration(seconds: 4));
@@ -86,14 +88,16 @@ class _HeadsetListState extends State<HeadsetList> {
                               trailing: TextButton(
                                 onPressed: () {
                                   if (_selectedHeadset?.id == headset.id) {
-                                    headset.disconnect().then((value) {
-                                      // setState(
-                                      //   () {
-                                      //     _selectedHeadset = null;
-                                      //   },
-                                      // );
-                                      Get.offAllNamed("/loading");
-                                    });
+                                    // headset.disconnect().then((value) {
+                                    // setState(
+                                    //   () {
+                                    //     _selectedHeadset = null;
+                                    //   },
+                                    // );
+                                    // Get.offAllNamed("/loading");
+
+                                    // });
+                                    getService();
                                   } else {
                                     headset.connect().then((value) {
                                       setState(
@@ -176,5 +180,61 @@ class _HeadsetListState extends State<HeadsetList> {
             })
       ],
     );
+  }
+
+  Future<void> getService() async {
+    List<BluetoothService> serviceList =
+        await _selectedHeadset!.discoverServices();
+    // serviceList.forEach((service) {
+    //   print(service);
+    // });
+    print("======= serviceList =======");
+    print(serviceList[1]);
+
+    print("======= characteristicList =======");
+    List<BluetoothCharacteristic> characteristicList =
+        serviceList[1].characteristics;
+    print(characteristicList);
+
+    print("======= descriptorList =======");
+    List<BluetoothDescriptor> descriptorList =
+        characteristicList[0].descriptors;
+    print(descriptorList);
+    print(descriptorList[1]);
+
+    try {
+      print("***** write ******");
+
+      await characteristicList[0].write([
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x00,
+        0x1D,
+        0x00,
+        0x0F,
+        0x00,
+        0x1D,
+        0x00,
+        0x0F
+      ]);
+      print("***** setNotify ******");
+
+      await characteristicList[0].setNotifyValue(true);
+      print("***** read ******");
+
+      await characteristicList[0].read().then((value) {
+        print(" res read:");
+        print(value);
+      });
+    } catch (e) {
+      print("error  \n");
+      print(e);
+    }
   }
 }

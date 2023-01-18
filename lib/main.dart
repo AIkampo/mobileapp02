@@ -45,7 +45,7 @@ class AIKampoApp extends StatelessWidget {
         ),
       ),
       initialBinding: ControllerBindings(),
-      initialRoute: "/headset.connection",
+      initialRoute: "/splash",
       getPages: [
         GetPage(
           name: "/splash",

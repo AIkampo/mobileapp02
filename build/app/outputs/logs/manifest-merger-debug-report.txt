@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:2:4-42:19
-MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
-MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
-MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:2:4-42:19
+MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
+MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-19:19
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:10:5-18:19
@@ -46,26 +46,26 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mave
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.8.0] /Users/maverick/.gradle/caches/transforms-3/84186946fb369c4934529c2781e59d53/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
 	android:name
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-31:12
-MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-21:12
-MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-25:12
+MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-21:12
+MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.multidex:multidex:2.0.1] /Users/maverick/.gradle/caches/transforms-3/c95cc1da6b2bee7b59528db889e5bb21/transformed/multidex-2.0.1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:2:1-17:12
 MERGED from [com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:2:1-20:12
@@ -115,27 +115,27 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/maverick/.gradle/c
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/maverick/.gradle/caches/transforms-3/48b79edaab357baf77fc41bb78de8829/transformed/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/maverick/.gradle/caches/transforms-3/26977ea49e49ea3466639b9494f4f024/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [io.grpc:grpc-android:1.48.1] /Users/maverick/.gradle/caches/transforms-3/87e5e2e50763461d156eda703b2585b2/transformed/jetified-grpc-android-1.48.1/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 	package
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:1-50:12
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:5-67
-MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:5-67
-MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:5-67
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:43:5-67
+MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:43:5-67
+MERGED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:43:5-67
 MERGED from [com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-firestore:24.4.0] /Users/maverick/.gradle/caches/transforms-3/3dd4135099ed819d888fa5d5947b1c1f/transformed/jetified-firebase-firestore-24.4.0/AndroidManifest.xml:13:5-67
@@ -145,63 +145,63 @@ MERGED from [com.google.firebase:firebase-storage:20.1.0] /Users/maverick/.gradl
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.gradle/caches/transforms-3/b27a9702806d9c8de273d4be49596a3a/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:43:22-64
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:43:22-64
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:45:5-79
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:5-79
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:29:5-79
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:45:5-79
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:23:5-79
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:45:22-76
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:45:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:5-81
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:46:5-81
 	android:name
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:46:22-78
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:46:22-78
 uses-permission#android.permission.BLUETOOTH
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:47:5-68
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:23:5-25:38
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:23:5-25:38
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:47:5-68
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:5-19:38
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:5-19:38
 	android:maxSdkVersion
-		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-35
+		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-35
 	android:name
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:47:22-65
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:47:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:48:5-74
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:26:5-28:38
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:26:5-28:38
+ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:48:5-74
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:5-22:38
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:5-22:38
 	android:maxSdkVersion
-		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-35
+		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:22:9-35
 	android:name
-		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml:48:22-71
+		ADDED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml:48:22-71
 uses-sdk
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:google_maps_flutter_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/google_maps_flutter_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:flutter_plugin_android_lifecycle] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_gallery_saver] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_gallery_saver/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:image_cropper] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_cropper/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:shared_preferences_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/shared_preferences_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:rich_clipboard_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/rich_clipboard_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.multidex:multidex:2.0.1] /Users/maverick/.gradle/caches/transforms-3/c95cc1da6b2bee7b59528db889e5bb21/transformed/multidex-2.0.1/AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.1] /Users/maverick/.gradle/caches/transforms-3/c95cc1da6b2bee7b59528db889e5bb21/transformed/multidex-2.0.1/AndroidManifest.xml:20:5-43
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:5:5-44
@@ -300,22 +300,22 @@ MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/maverick/
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/maverick/.gradle/caches/transforms-3/26977ea49e49ea3466639b9494f4f024/transformed/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [io.grpc:grpc-android:1.48.1] /Users/maverick/.gradle/caches/transforms-3/87e5e2e50763461d156eda703b2585b2/transformed/jetified-grpc-android-1.48.1/AndroidManifest.xml:5:5-7:41
 MERGED from [io.grpc:grpc-android:1.48.1] /Users/maverick/.gradle/caches/transforms-3/87e5e2e50763461d156eda703b2585b2/transformed/jetified-grpc-android-1.48.1/AndroidManifest.xml:5:5-7:41
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
-INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/android/app/src/debug/AndroidManifest.xml
 service#com.google.firebase.components.ComponentDiscoveryService
-ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+MERGED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:8:9-14:19
 MERGED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:8:9-14:19
 MERGED from [com.google.firebase:firebase-common-ktx:20.2.0] /Users/maverick/.gradle/caches/transforms-3/cfb3d3244f7dd1dd6d7707a63a7d9ccb/transformed/jetified-firebase-common-ktx-20.2.0/AndroidManifest.xml:11:9-17:19
@@ -335,59 +335,57 @@ MERGED from [com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle
 	android:directBootAware
 		ADDED from [com.google.firebase:firebase-common:20.2.0] /Users/maverick/.gradle/caches/transforms-3/9f61346e2841232d2a55c92ee21f6102/transformed/jetified-firebase-common-20.2.0/AndroidManifest.xml:34:13-43
 	android:name
-		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar
-ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 	android:value
-		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 	android:name
-		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
+		ADDED from [:cloud_firestore] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-134
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar
-ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 	android:value
-		ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+		ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 	android:name
-		ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+		ADDED from [:firebase_auth] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_auth/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar
-ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 	android:value
-		ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+		ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 	android:name
-		ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
+		ADDED from [:firebase_storage] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar
-ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
 	android:value
-		ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+		ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
 	android:name
-		ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+		ADDED from [:firebase_core] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
 uses-permission#android.permission.BLUETOOTH_SCAN
-ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:17:5-19:58
-	android:usesPermissionFlags
-		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:19:9-55
+ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:13:5-73
 	android:name
-		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-57
+		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:13:22-70
 uses-permission#android.permission.BLUETOOTH_CONNECT
-ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:5-76
+ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:14:5-76
 	android:name
-		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:20:22-73
+		ADDED from [:flutter_blue_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/flutter_blue_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:14:22-73
 provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
-ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 	android:grantUriPermissions
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 	android:authorities
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-74
 	android:exported
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 	android:name
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-82
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
+ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-17:75
 	android:resource
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:17:17-72
 	android:name
-		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
+		ADDED from [:image_picker_android] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/image_picker_android/intermediates/merged_manifest/debug/AndroidManifest.xml:16:17-67
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
+ADDED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
 MERGED from [com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-auth:21.1.0] /Users/maverick/.gradle/caches/transforms-3/005d689738d24ee1db3ab11fc37785d3/transformed/jetified-firebase-auth-21.1.0/AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-firestore:24.4.0] /Users/maverick/.gradle/caches/transforms-3/3dd4135099ed819d888fa5d5947b1c1f/transformed/jetified-firebase-firestore-24.4.0/AndroidManifest.xml:12:5-79
@@ -399,7 +397,7 @@ MERGED from [com.google.android.gms:play-services-maps:18.1.0] /Users/maverick/.
 MERGED from [io.grpc:grpc-android:1.48.1] /Users/maverick/.gradle/caches/transforms-3/87e5e2e50763461d156eda703b2585b2/transformed/jetified-grpc-android-1.48.1/AndroidManifest.xml:9:5-79
 MERGED from [io.grpc:grpc-android:1.48.1] /Users/maverick/.gradle/caches/transforms-3/87e5e2e50763461d156eda703b2585b2/transformed/jetified-grpc-android-1.48.1/AndroidManifest.xml:9:5-79
 	android:name
-		ADDED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
+		ADDED from [:connectivity_plus] /Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/connectivity_plus/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
 meta-data#com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthKtxRegistrar
 ADDED from [com.google.firebase:firebase-auth-ktx:21.1.0] /Users/maverick/.gradle/caches/transforms-3/2bdad75a2fe76f124bfae35bcaa989e9/transformed/jetified-firebase-auth-ktx-21.1.0/AndroidManifest.xml:11:13-13:85
 	android:value

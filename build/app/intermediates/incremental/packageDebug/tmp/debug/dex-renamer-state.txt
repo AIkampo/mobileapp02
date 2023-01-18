@@ -1,9 +1,9 @@
-#Sun Jan 08 13:45:24 CST 2023
-base.2=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
+#Wed Jan 18 12:27:34 CST 2023
+base.2=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
 path.2=classes3.dex
-base.1=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
+base.1=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex
-base.0=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app-phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+base.0=/Users/maverick/Documents/Projects/AiKampo/ai_kampo_app_phase1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
