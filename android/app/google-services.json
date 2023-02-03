@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "548555097194",
+    "project_id": "aikampo-app",
+    "storage_bucket": "aikampo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548555097194:android:9cbeebf2b76d54bfc47613",
+        "android_client_info": {
+          "package_name": "com.aikampo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "548555097194-8kf53mep6850eeerkvhstrmkbh5b2lce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9BtE8X3BUECNSrU6s3kwp203xfghICHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "548555097194-8kf53mep6850eeerkvhstrmkbh5b2lce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

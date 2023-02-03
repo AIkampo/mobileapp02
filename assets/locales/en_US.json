@@ -1,0 +1,41 @@
+{
+  "phone": "Phone Number",
+  "password": "Password",
+  "forgotPassword": "Forgot Password",
+  "forgotPasswordTitle": "Please enter phone number and reset password.",
+
+  "signUp": "Sign Up",
+  "signIn": "Sign In",
+  "signOut": "Sign Out",
+  "language": "Language",
+  "selectLanguage": "Select Language",
+  "getVerificationCode": "Get verification Code",
+  "verificationCode": "Verification code",
+  "verify": "Verify",
+  "resetPassword": "Reset password",
+  "resetPasswordTitle": "Please enter new password",
+  "newPasswordHelper": "char and number only",
+  "oldPassword": "Old Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "name": "Name",
+  "birthday": "Birthday",
+  "sex": "Sex",
+  "male": "male",
+  "female": "female",
+  "bloodType": "Blood type",
+  "rh": "RH",
+  "confirm": "Confirm",
+
+  "userProfile": "My Profile",
+  "faq": "FAQ",
+  "manual": "Manual",
+  "contactUs": "Contact us",
+  "chatCustomerService": "Customer Service",
+
+  "locale": {
+    "zhTW": "Traditional Chinese",
+    "zhCN": "Simplified Chinese",
+    "enUS": "English"
+  }
+}

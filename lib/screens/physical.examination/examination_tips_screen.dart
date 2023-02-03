@@ -1,0 +1,86 @@
+import 'package:ai_kampo_app/widgets/common/KampoTitle.dart';
+import 'package:ai_kampo_app/widgets/common/kampo_number_sign.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+
+class ExaminationTipsScreen extends StatelessWidget {
+  ExaminationTipsScreen({super.key});
+
+  final List checkList = [
+    "連線耳罩應佩戴於左耳",
+    "一米範圍內部沒有通話中的移動電話或磁干擾",
+    "一些特殊狀況會影響檢測結果的準確度"
+  ];
+  final List exampleList = [
+    {"title": "懷有身孕", "img": "assets/images/testing/pregnant.png"},
+    {"title": "吸烟或飲酒", "img": "assets/images/testing/drink.png"},
+    {"title": "運動", "img": "assets/images/testing/exercise.png"},
+    {"title": "24小時内\n重複檢測", "img": "assets/images/testing/retest.png"},
+    {"title": "金屬或其他\n配飾干擾", "img": "assets/images/testing/accessories.png"},
+    {"title": "吃東西", "img": "assets/images/testing/eat.png"},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("注意事項"),
+        centerTitle: true,
+      ),
+      body: CustomScrollView(
+        slivers: [
+          KampoSliverTitle(title: "檢測前，請注意是否有以下情況"),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return ListTile(
+                minVerticalPadding: 10,
+                leading: KampoNumberSign(number: index + 1),
+                title: Text(
+                  "${checkList[index]}",
+                  style: TextStyle(fontSize: 20),
+                ),
+              );
+            }, childCount: checkList.length),
+          ),
+          SliverPadding(
+            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return Card(
+                  child: Container(
+                      padding: EdgeInsets.all(3),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset("${exampleList[index]['img']}"),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text("${exampleList[index]['title']}"),
+                        ],
+                      )),
+                );
+              }, childCount: 6),
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 150,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 1,
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CupertinoButton.filled(
+          child: Text("檢測"),
+          onPressed: () => Get.toNamed("/headset.connection"),
+        ),
+      ),
+    );
+  }
+}
