@@ -21,8 +21,8 @@ class ExaminationButton extends StatelessWidget {
       () => _accountController.isLoading.value || _isChecking.value
           ? Center(
               child: Container(
-                width: 16,
-                height: 16,
+                width: 32,
+                height: 32,
                 child: const CircularProgressIndicator(
                   color: Colors.white,
                 ),
@@ -42,8 +42,12 @@ class ExaminationButton extends StatelessWidget {
                   Get.to(() => ExaminationTipsScreen());
                 }
               },
-              child: Image.asset(
-                "assets/icons/detection.png",
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/detection.png",
+                  width: 50,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
     );
@@ -76,10 +80,13 @@ class ExaminationButton extends StatelessWidget {
       builder: ((BuildContext context) => CupertinoActionSheet(
             title: Text(
               "請選擇檢測帳號",
-              style: TextStyle(fontSize: 20, letterSpacing: 2),
+              style: TextStyle(fontSize: 28, letterSpacing: 2),
             ),
             cancelButton: CupertinoActionSheetAction(
-              child: Text("取消"),
+              child: Text(
+                "取消",
+                style: TextStyle(fontSize: 24),
+              ),
               onPressed: () {
                 Get.back();
               },
@@ -98,9 +105,15 @@ class ExaminationButton extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("主帳號"),
+                    Text(
+                      "主帳號",
+                      style: TextStyle(fontSize: 24),
+                    ),
                     Expanded(child: Text('')),
-                    Text(_accountController.userPhoneNumber.value)
+                    Text(
+                      _accountController.userPhoneNumber.value,
+                      style: TextStyle(fontSize: 24),
+                    )
                   ],
                 ),
               ),
@@ -128,9 +141,15 @@ class ExaminationButton extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      Text(account['username']),
+                      Text(
+                        account['username'],
+                        style: TextStyle(fontSize: 24),
+                      ),
                       Expanded(child: Text('')),
-                      Text(account['phoneNumber'])
+                      Text(
+                        account['phoneNumber'],
+                        style: TextStyle(fontSize: 24),
+                      )
                     ],
                   ),
                 ),

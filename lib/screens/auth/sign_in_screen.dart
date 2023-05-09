@@ -68,14 +68,22 @@ class _SignInScreenState extends State<SignInScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset("assets/images/logo.png"),
+          Container(
+            width: 0.8 * MediaQuery.of(context).size.width,
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Image.asset(
+              "assets/images/logo.png",
+              fit: BoxFit.contain,
+            ),
+          ),
           SizedBox(
             height: 70,
           ),
           Obx(
             () => Center(
               child: Container(
-                width: 300,
+                constraints: BoxConstraints(maxWidth: 600),
+                width: 0.8 * MediaQuery.of(context).size.width,
                 child: _isLoading.value
                     ? Center(child: CircularProgressIndicator())
                     : Column(
@@ -93,7 +101,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 onPressed: _authController.isLoading.value
                                     ? null
                                     : () => Get.toNamed("/sign.up"),
-                                child: Text("signUp".tr),
+                                child: Text(
+                                    "signUp".tr,
+                                    style: const TextStyle(fontSize: 24),
+                                ),
                               ),
                             ],
                           ),
@@ -196,10 +207,14 @@ class _SignInScreenState extends State<SignInScreen> {
           onChanged: (value) {
             _phoneNumber.value = value;
           },
+          style: const TextStyle(fontSize: 24),
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.phone_android_sharp),
               border: OutlineInputBorder(),
-              labelText: "phone".tr),
+              labelText: "phone".tr,
+              labelStyle: const TextStyle(fontSize: 24),
+              hintStyle: const TextStyle(fontSize: 24),
+          ),
         ),
         SizedBox(
           height: 16,
@@ -207,8 +222,10 @@ class _SignInScreenState extends State<SignInScreen> {
         SizedBox(
           width: double.infinity,
           child: CupertinoButton.filled(
-              child: Text('登入'),
-              onPressed: _phoneNumber.value.length == 10 ? () => getVerificationCode() : null),
+            child: Text('登入'),
+            onPressed: _phoneNumber.value.length == 10?
+              () => getVerificationCode() : null
+          ),
         ),
       ],
     );

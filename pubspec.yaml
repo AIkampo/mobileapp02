@@ -66,6 +66,14 @@ dependencies:
   location: ^4.4.0
   webview_flutter: ^4.0.2
   pay: ^1.1.0
+  barcode_widget: ^2.0.3
+  path_provider: ^2.0.13
+  gallery_saver: ^2.3.2
+  share: ^2.0.4
+  url_launcher: ^6.1.10
+  printing: ^5.9.2
+  k2_printer: ^0.0.4
+  video_player: ^2.6.1
 
 dev_dependencies:
   flutter_test:
@@ -100,7 +108,9 @@ flutter:
     - assets/demo/loading/
     - assets/payment/
     - assets/payment/google_pay_config.json
-    - assets/google_pay_config.json
+#    - assets/google_pay_config.json
+    - assets/font/
+    - assets/videos/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

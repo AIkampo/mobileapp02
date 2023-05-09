@@ -38,7 +38,7 @@ class HistoryExaminationList extends StatelessWidget {
                     child: TabBar(
                       labelColor: Colors.blue,
                       tabs: _tabs,
-                      labelStyle: TextStyle(fontSize: 16),
+                      labelStyle: TextStyle(fontSize: 20),
                     ),
                   ),
                   Container(
@@ -80,7 +80,7 @@ class BuildHistoryListView extends StatelessWidget {
             child: ListTile(
               title: Text(
                 caseIdToDatetime(dataList[index]),
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 24),
               ),
               trailing: Icon(Icons.arrow_forward_ios),
               onTap: () {

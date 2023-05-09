@@ -3,6 +3,8 @@ import 'package:ai_kampo_app/screens/healthy.guidance/acupuncture_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guidance/color_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guidance/diet_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guidance/gem_screen.dart';
+import 'package:ai_kampo_app/screens/healthy.guidance/primary_report_link_screen.dart';
+import 'package:ai_kampo_app/screens/healthy.guidance/pro_report_link_screen.dart';
 import 'package:ai_kampo_app/screens/healthy.guidance/nutrients_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +39,16 @@ class HealthyGuidanceView extends StatelessWidget {
       "title": "能量寶石指引",
       "icon": "assets/icons/gem.png"
     },
+    {
+      "screen": () => PrimaryReportLinkScreen(),
+      "title": "基礎報告",
+      "icon": "assets/icons/info.png"
+    },
+    {
+      "screen": () => ProReportLinkScreen(),
+      "title": "專業報告",
+      "icon": "assets/icons/info.png"
+    },
   ];
   final _healthyGuidanceController = Get.find<HealthyGuidanceController>();
 
@@ -59,16 +71,23 @@ class HealthyGuidanceView extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Image.asset(dataList[index]['icon']),
+                            child: Image.asset(
+                                dataList[index]['icon'],
+                                width: 100,
+                                height: 100,
+                            ),
                           ),
-                          Text(dataList[index]['title'])
+                          Text(
+                            dataList[index]['title'],
+                            style: TextStyle(fontSize: 20),
+                          )
                         ],
                       ),
                     ),
                   );
                 }, childCount: dataList.length),
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 170,
+                    maxCrossAxisExtent: 220,
                     mainAxisSpacing: 6,
                     crossAxisSpacing: 6,
                     childAspectRatio: 1)))

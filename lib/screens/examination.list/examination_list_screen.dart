@@ -47,7 +47,7 @@ class ExaminationListScreen extends StatelessWidget {
                   child: const Center(
                       child: Text(
                     "尚無檢測資料",
-                    style: TextStyle(fontSize: 22),
+                    style: TextStyle(fontSize: 32),
                   )),
                 );
               } else {

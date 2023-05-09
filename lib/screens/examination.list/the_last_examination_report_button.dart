@@ -57,7 +57,9 @@ class TheLastExaminationReportButton extends StatelessWidget {
                       ),
                     ),
                     Text(
-                        "檢測日期：${caseIdToDatetime(_examinationListController.theLastCaseId.toString())}")
+                      "檢測日期：${caseIdToDatetime(_examinationListController.theLastCaseId.toString())}",
+                      style: TextStyle(fontSize: 18),
+                    )
                   ],
                 ),
                 Icon(Icons.arrow_forward_ios)

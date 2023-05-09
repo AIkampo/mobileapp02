@@ -68,14 +68,14 @@ class AccountsDropdown extends StatelessWidget {
           ),
           Text(
             account['username'],
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 28),
           ),
           SizedBox(
             width: 20,
           ),
           Text(
             account['phoneNumber'],
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 28),
           )
         ],
       ),

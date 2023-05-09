@@ -6,7 +6,17 @@ import 'package:ai_kampo_app/models/germs.dart';
 import 'package:ai_kampo_app/models/nine_system_model.dart';
 import 'package:ai_kampo_app/models/nine_system_trend_model.dart';
 import 'package:ai_kampo_app/models/score_model.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:share/share.dart';
+import 'package:k2_printer/k2_printer.dart';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
+import 'package:barcode/barcode.dart';
+
 
 class ExaminationReportController extends GetxController {
   final reportCaseId = "".obs;
@@ -33,9 +43,192 @@ class ExaminationReportController extends GetxController {
   final RxMap nineSystemTrendMap = {}.obs;
   final isNineSystemTrendLoading = true.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+  // QR Code link
+  final phoneNumber = "".obs;
+
+  // for POS printer
+  final _k2PrinterPlugin = K2Printer();
+  
+  // for print qr code
+  final Barcode _bc = Barcode.qrCode();
+
+  String get primaryReportLink =>
+      "https://api.aikserver01.com/api/Report/basic/$reportCaseId";
+  String get professionalReportLink =>
+      "https://api.aikserver01.com/api/Report/$reportCaseId/$phoneNumber";
+
+  setPhoneNumber(String number) {
+    phoneNumber.value = number;
+  }
+
+  Future<void> copyLinkToClipboard(String link) async {
+    Clipboard.setData(ClipboardData(text: link));
+  }
+
+  Future<void> sharePrimaryReportLink() async {
+    Share.share(primaryReportLink);
+  }
+
+  Future<void> shareProfessionalReportLink() async {
+    Share.share(professionalReportLink);
+  }
+
+  Future<Uint8List> generatePrimaryReportQrPdf() async {
+    final pdf = pw.Document(title:"基礎報告-${reportCaseId.value}");
+    final hwscTtf = pw.Font.ttf(
+      await rootBundle.load("assets/font/SourceHanSansHWSC-VF.ttf"));
+
+    pw.TextStyle titleTextStyle = pw.TextStyle(
+      fontSize: 16, font: hwscTtf, fontWeight: pw.FontWeight.bold
+    );
+
+    pw.Widget title = pw.Align(
+      alignment: pw.Alignment.center,
+      child: pw.Text("檢測編號：${reportCaseId.value}", style: titleTextStyle)
+    );
+    pw.Widget reportType = pw.Align(
+      alignment: pw.Alignment.center,
+      child: pw.Text("基礎報告", style: titleTextStyle)
+    );
+
+    final qrCode = pw.Barcode.qrCode();
+    final qrCodeImage = qrCode.toSvg(primaryReportLink);
+    pw.Widget qrCodeWidget = pw.SvgImage(svg: qrCodeImage);
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: const PdfPageFormat(
+          80 * PdfPageFormat.mm,
+          double.infinity,
+        ),
+        build: (context) => pw.Column(
+          children: [
+            title,
+            reportType,
+            pw.Divider(height: 15),
+            qrCodeWidget,
+            pw.Divider(height: 45),
+          ]
+        ),
+      )
+    );
+
+    return pdf.save();
+  }
+
+  Future<Uint8List> generateProReportQrPdf() async {
+    final pdf = pw.Document(title:"專業報告-${reportCaseId.value}");
+    final hwscTtf = pw.Font.ttf(
+      await rootBundle.load("assets/font/SourceHanSansHWSC-VF.ttf"));
+
+    pw.TextStyle titleTextStyle = pw.TextStyle(
+      fontSize: 16, font: hwscTtf, fontWeight: pw.FontWeight.bold
+    );
+
+    pw.Widget title = pw.Align(
+      alignment: pw.Alignment.center,
+      child: pw.Text("檢測編號：${reportCaseId.value}", style: titleTextStyle)
+    );
+    pw.Widget reportType = pw.Align(
+      alignment: pw.Alignment.center,
+      child: pw.Text("專業報告", style: titleTextStyle)
+    );
+
+    final qrCode = pw.Barcode.qrCode();
+    final qrCodeImage = qrCode.toSvg(professionalReportLink);
+    pw.Widget qrCodeWidget = pw.SvgImage(svg: qrCodeImage);
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: const PdfPageFormat(
+          80 * PdfPageFormat.mm,
+          double.infinity,
+        ),
+        build: (context) => pw.Column(
+          children: [
+            title,
+            reportType,
+            pw.Divider(height: 15),
+            qrCodeWidget,
+            pw.Divider(height: 45),
+          ]
+        ),
+      )
+    );
+
+    return pdf.save();
+  }
+
+  Future<void> previewPrimaryReportQrPdf() async {
+    await Printing.layoutPdf(
+      format: const PdfPageFormat(
+        80 * PdfPageFormat.mm,
+        double.infinity,
+      ),
+      onLayout: (PdfPageFormat format) async => generatePrimaryReportQrPdf()
+    );
+  }
+
+  Future<void> previewProReportQrPdf() async {
+    await Printing.layoutPdf(
+      format: const PdfPageFormat(
+        80 * PdfPageFormat.mm,
+        double.infinity,
+      ),
+      onLayout: (PdfPageFormat format) async => generateProReportQrPdf()
+    );
+  }
+
+  Future<String?> printPrimaryReportQr() async {
+    try {
+      String platformVersion = await _k2PrinterPlugin.getPlatformVersion()??
+        "Unknown platform version";
+      print("Platform Version: $platformVersion");
+    } on PlatformException {
+      return "無法查詢平台編號！";
+    }
+
+    final printerCommands = [
+      PrintText(text: "檢測編號：${reportCaseId.value}\n"),
+      PrintText(text: "基礎報告"),
+      LineWrap(n: 2),
+      PrintQrCode(data: primaryReportLink, moduleSize: 10, errorLevel: 1),
+      LineWrap(n: 2),
+      CutPaper(mode: CutPaperMode.fullCut, paperFeed: 15),
+    ];
+    Document document = Document(
+      id: "primaryReportQr",
+      printerCommands: printerCommands,
+    );
+    _k2PrinterPlugin.print(document);
+    
+    return null;
+  }
+
+  Future<String?> printProReportQr() async {
+    try {
+      String platformVersion = await _k2PrinterPlugin.getPlatformVersion()??
+        "Unknown platform version";
+      print("Platform Version: $platformVersion");
+    } on PlatformException {
+      return "無法查詢平台編號！";
+    }
+
+    final printerCommands = [
+      PrintText(text: "檢測編號：${reportCaseId.value}\n"),
+      PrintText(text: "專業報告"),
+      LineWrap(n: 2),
+      PrintQrCode(data: professionalReportLink, moduleSize: 10, errorLevel: 1),
+      LineWrap(n: 2),
+      CutPaper(mode: CutPaperMode.fullCut, paperFeed: 15),
+    ];
+    Document document = Document(
+      id: "proReportQr",
+      printerCommands: printerCommands,
+    );
+    _k2PrinterPlugin.print(document);
+
+    return null;
   }
 
   Future<void> fetchUserProfile(String phoneNumber) async {
@@ -54,11 +247,12 @@ class ExaminationReportController extends GetxController {
 
   Future<void> fetchNineSystemData(String caseId) async {
     isNineSystemDataLoading.value = true;
-    nineSystemList.clear();
-
     List tempList = await fetchNineSystemScore(caseId);
 
     if (tempList.isNotEmpty) {
+      // TODO: this function is called twice and might interfere nineSystemList in each call
+      // currently a hack method
+      nineSystemList.clear();
       //先將回傳的資料依索引順序取得值建立LIST、再依數值大小排序
       // [0 消化, 1 呼吸, 2 泌尿, 3循環, 4 淋巴, 5 內分泌, 6 神經, 7 感知, 8 骨骼]
       nineSystemList.add(

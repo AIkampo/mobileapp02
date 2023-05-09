@@ -25,10 +25,12 @@ class SubAccountsButton extends StatelessWidget {
           )
         : _accountController.isMainAccount.value
             ? IconButton(
+                padding: const EdgeInsets.all(15),
+                iconSize: 50,
                 onPressed: () {
                   Get.toNamed("/sub.accounts");
                 },
-                icon: Icon(
+                icon: const Icon(
                   CupertinoIcons.person_3_fill,
                   color: Colors.white,
                 ),

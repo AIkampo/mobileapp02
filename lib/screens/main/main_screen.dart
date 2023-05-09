@@ -18,10 +18,22 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.doc_text_search), label: "檢測報告"),
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.doc_richtext), label: "資訊中心"),
-    const BottomNavigationBarItem(icon: Icon(Icons.local_hospital_outlined), label: "聯盟診所"),
-    const BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: "設定"),
+    const BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.doc_text_search, size: 50),
+      label: "檢測報告",
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.doc_richtext, size: 50),
+      label: "資訊中心",
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.local_hospital_outlined, size: 50),
+      label: "聯盟診所",
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.settings_outlined, size: 50),
+      label: "設定",
+    ),
   ];
 
   final List<Widget> _screens = [
@@ -48,12 +60,13 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFF7890C8),
-          toolbarHeight: 82,
+          toolbarHeight: 120,
           centerTitle: true,
+          leadingWidth: 100,
           leading: ExaminationButton(),
           title: Image.asset(
             "assets/images/logo.png",
-            scale: 1.5,
+            scale: 1,
           ),
           actions: [SubAccountsButton()],
         ),
@@ -61,6 +74,8 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.grey[100],
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
+            selectedFontSize: 20,
+            unselectedFontSize: 20,
             items: _bottomNavigationBarItems,
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentIndex.value,

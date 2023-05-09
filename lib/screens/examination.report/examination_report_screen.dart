@@ -4,19 +4,39 @@ import 'package:ai_kampo_app/screens/examination.report/report_profile.dart';
 import 'package:ai_kampo_app/screens/examination.report/report_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ExaminationReportScreen extends StatelessWidget {
-  ExaminationReportScreen({super.key});
+class ExaminationReportScreen extends StatefulWidget {
+  const ExaminationReportScreen({Key? key}) : super(key: key);
 
-  final _examinationReportController = Get.find<ExaminationReportController>();
   @override
-  Widget build(BuildContext context) {
-    print(
-        "*******ExaminationReportScreen caseId:${Get.arguments['caseId']}*****");
+  State<ExaminationReportScreen> createState() => _ExaminationReportScreenState();
+}
 
+class _ExaminationReportScreenState extends State<ExaminationReportScreen> {
+  final _examinationReportController = Get.find<ExaminationReportController>();
+
+  @override
+  void initState() {
+    super.initState();
+    print(
+      "*******ExaminationReportScreen caseId:${Get.arguments['caseId']}*****");
     final String caseId = Get.arguments['caseId'];
     _examinationReportController.setCaseId(caseId);
+    _examinationReportController.fetchNineSystemData(caseId);
+    _examinationReportController.fetchGermsData(caseId);
+    _examinationReportController.fetchAllergenData(caseId);
+    handleGetPhoneNumber();
+  }
 
+  Future<void> handleGetPhoneNumber() async {
+    final prefs = await SharedPreferences.getInstance();
+    final phoneNumber = prefs.getString('phoneNumber');
+    _examinationReportController.setPhoneNumber(phoneNumber?? "");
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(

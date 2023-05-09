@@ -15,6 +15,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:video_player/video_player.dart';
 
 class PhysicalExaminationScreen extends StatefulWidget {
   const PhysicalExaminationScreen({super.key});
@@ -24,25 +25,28 @@ class PhysicalExaminationScreen extends StatefulWidget {
 }
 
 class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
-  final _currentCarouselIndex = 1.obs;
-  final CarouselController _carouselcontroller = CarouselController();
-  List tipsList = [
-    {
-      "title": "「健康指引」提供許多適合您體質的東西。",
-      "img": "assets/demo/loading/1.png",
-      "tips": "你知道嗎？ \n 您可以隨時到「報告中心」練習八段錦。"
-    },
-    {
-      "title": "「健康指引」提供許多適合您體質的東西。",
-      "img": "assets/demo/loading/2.png",
-      "tips": "你知道嗎？ \n 「健康指引」提供許多適合您體質的東西。"
-    },
-    {
-      "title": "「健康指引」提供許多適合您體質的東西。",
-      "img": "assets/demo/loading/3.png",
-      "tips": "你知道嗎？ \n 健康檢測可以讓您暸解您的身體狀況。"
-    }
-  ];
+  // final _currentCarouselIndex = 1.obs;
+  // final CarouselController _carouselcontroller = CarouselController();
+  // List tipsList = [
+  //   {
+  //     "title": "「健康指引」提供許多適合您體質的東西。",
+  //     "img": "assets/demo/loading/1.png",
+  //     "tips": "你知道嗎？ \n 您可以隨時到「報告中心」練習八段錦。"
+  //   },
+  //   {
+  //     "title": "「健康指引」提供許多適合您體質的東西。",
+  //     "img": "assets/demo/loading/2.png",
+  //     "tips": "你知道嗎？ \n 「健康指引」提供許多適合您體質的東西。"
+  //   },
+  //   {
+  //     "title": "「健康指引」提供許多適合您體質的東西。",
+  //     "img": "assets/demo/loading/3.png",
+  //     "tips": "你知道嗎？ \n 健康檢測可以讓您暸解您的身體狀況。"
+  //   }
+  // ];
+  final VideoPlayerController _controller = VideoPlayerController.asset(
+    'assets/videos/examination_loading.mp4',
+  );
   late BluetoothDevice _headset;
   String _headsetId = "";
 
@@ -54,12 +58,25 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _headset = Get.arguments['headset'];
     _headsetId = _headset.id.toString();
     getService();
     handleCountdown();
+
+    // for playing video
+    _controller.addListener(() {
+      setState(() {});
+    });
+    _controller.setLooping(true);
+    _controller.initialize().then((_) => setState(() {}));
+    _controller.play();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   late Timer _countdownTimer;
@@ -81,63 +98,71 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset("assets/images/logo.with.bg.png"),
-          CarouselSlider(
-            items: tipsList.map((tips) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(tips['img']),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Stack(
-                            children: [
-                              Image.asset("assets/images/tips.frame.png"),
-                              Positioned(
-                                child: Text(tips["tips"]),
-                                top: 38,
-                                left: 38,
-                              )
-                            ],
-                          )
-                        ],
-                      ));
-                },
-              );
-            }).toList(),
-            carouselController: _carouselcontroller,
-            options: CarouselOptions(
-                height: 410,
-                autoPlay: false,
-                enlargeCenterPage: true,
-                onPageChanged: (index, reason) {
-                  _currentCarouselIndex.value = index;
-                }),
+          Expanded(
+            child: _controller.value.isInitialized?
+              AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              ):
+              Container(),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: tipsList.asMap().entries.map((tip) {
-              return GestureDetector(
-                onTap: () => _carouselcontroller.animateToPage(tip.key),
-                child: Container(
-                  width: 12.0,
-                  height: 12.0,
-                  margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                          .withOpacity(_currentCarouselIndex.value == tip.key ? 0.9 : 0.4)),
-                ),
-              );
-            }).toList(),
-          ),
+          // CarouselSlider(
+          //   items: tipsList.map((tips) {
+          //     return Builder(
+          //       builder: (BuildContext context) {
+          //         return Container(
+          //             width: MediaQuery.of(context).size.width,
+          //             margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          //             child: Column(
+          //               mainAxisAlignment: MainAxisAlignment.center,
+          //               children: [
+          //                 Image.asset(tips['img']),
+          //                 const SizedBox(
+          //                   height: 20,
+          //                 ),
+          //                 Stack(
+          //                   children: [
+          //                     Image.asset("assets/images/tips.frame.png"),
+          //                     Positioned(
+          //                       child: Text(tips["tips"]),
+          //                       top: 38,
+          //                       left: 38,
+          //                     )
+          //                   ],
+          //                 )
+          //               ],
+          //             ));
+          //       },
+          //     );
+          //   }).toList(),
+          //   carouselController: _carouselcontroller,
+          //   options: CarouselOptions(
+          //       height: 410,
+          //       autoPlay: false,
+          //       enlargeCenterPage: true,
+          //       onPageChanged: (index, reason) {
+          //         _currentCarouselIndex.value = index;
+          //       }),
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: tipsList.asMap().entries.map((tip) {
+          //     return GestureDetector(
+          //       onTap: () => _carouselcontroller.animateToPage(tip.key),
+          //       child: Container(
+          //         width: 12.0,
+          //         height: 12.0,
+          //         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+          //         decoration: BoxDecoration(
+          //             shape: BoxShape.circle,
+          //             color: (Theme.of(context).brightness == Brightness.dark
+          //                     ? Colors.white
+          //                     : Colors.black)
+          //                 .withOpacity(_currentCarouselIndex.value == tip.key ? 0.9 : 0.4)),
+          //       ),
+          //     );
+          //   }).toList(),
+          // ),
           Container(
             padding: const EdgeInsets.all(20),
             child: Obx(
@@ -349,6 +374,7 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
             timer.cancel();
 
             // Get.offAllNamed("/main");
+            _controller.dispose();
             Get.toNamed("/examination.report", arguments: {"caseId": caseId});
           } else if (resJson.data == "R") {
             // _alertDialog("注意", "檢測資料未成功！");

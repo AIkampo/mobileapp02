@@ -17,7 +17,7 @@ class NineSystem extends StatelessWidget {
     return SliverPadding(
         padding: EdgeInsets.all(12),
         sliver: Obx(
-          () => SliverGrid(
+              () => SliverGrid(
             delegate: SliverChildBuilderDelegate((context, index) {
               return InkWell(
                   onTap: () {
@@ -25,14 +25,14 @@ class NineSystem extends StatelessWidget {
                         _examinationReportController.nineSystemList[index].indexName!,
                         _examinationReportController.reportCaseId.value);
                     Get.to(
-                      () => SystemReportScreen(),
+                          () => SystemReportScreen(),
                       arguments: {
                         "organData": _examinationReportController.nineSystemList[index] ?? ""
                       },
                     );
                   },
                   child: Container(
-                    padding: EdgeInsets.all(4),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -40,61 +40,75 @@ class NineSystem extends StatelessWidget {
                       color: KampoColors.getScoreColor(
                           _examinationReportController.nineSystemList[index].score!),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(12),
-                              margin: EdgeInsets.only(top: 2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Color.fromRGBO(255, 255, 255, 0.6),
-                              ),
-                              child: Image(
-                                  width: 42,
-                                  height: 42,
-                                  image: AssetImage(
-                                      _examinationReportController.nineSystemList[index].img!)),
-                            ),
-                            Column(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  "${_examinationReportController.nineSystemList[index].score}",
-                                  style: TextStyle(
-                                    color: getFontColor(
-                                        _examinationReportController.nineSystemList[index].score!),
-                                    fontSize: 26,
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        padding: EdgeInsets.all(12),
+                                        margin: EdgeInsets.only(top: 2),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Color.fromRGBO(255, 255, 255, 0.6),
+                                        ),
+                                        child: Image(
+                                            width: 42,
+                                            height: 42,
+                                            image: AssetImage(
+                                                _examinationReportController.nineSystemList[index].img!)),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  "分",
-                                  style: TextStyle(
-                                    color: getFontColor(
-                                        _examinationReportController.nineSystemList[index].score!),
-                                    fontSize: 18,
-                                  ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${_examinationReportController.nineSystemList[index].score}",
+                                      style: TextStyle(
+                                        color: getFontColor(
+                                            _examinationReportController.nineSystemList[index].score!),
+                                        fontSize: 48,
+                                      ),
+                                    ),
+                                    Text(
+                                      "分",
+                                      style: TextStyle(
+                                        color: getFontColor(
+                                            _examinationReportController.nineSystemList[index].score!),
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        Text(
-                          _examinationReportController.nineSystemList[index].name!,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1,
-                              color: Colors.white),
-                        )
-                      ],
+                          ),
+                          Text(
+                            _examinationReportController.nineSystemList[index].name!,
+                            style: TextStyle(
+                                fontSize: 26,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                                color: Colors.white),
+                          )
+                        ],
+                      ),
                     ),
                   ));
             }, childCount: _examinationReportController.nineSystemList.length),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 170.0,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
               mainAxisSpacing: 8.0,
               crossAxisSpacing: 8.0,
               childAspectRatio: 1.0,
