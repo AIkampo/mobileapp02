@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "982447607474",
+    "project_id": "tcmmobile01",
+    "storage_bucket": "tcmmobile01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982447607474:android:ad02710fffd004c85743ab",
+        "android_client_info": {
+          "package_name": "com.aikampo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQC7C4p1RJGvt3mszGu-Bpuc7YWeskn58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
