@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rich_clipboard/rich_clipboard.dart';
+import 'package:flutter/services.dart';
 
 class InvitationScreen extends StatefulWidget {
   const InvitationScreen({super.key});
@@ -51,7 +51,7 @@ class _InvitationScreenState extends State<InvitationScreen> {
                     ),
                     trailing: IconButton(
                       onPressed: () async {
-                        await RichClipboard.setData(RichClipboardData(text: "X15FSS95"));
+                        Clipboard.setData(ClipboardData(text: "X15FSS95"));
                       },
                       icon: Icon(Icons.copy),
                     ),

@@ -1,34 +1,233 @@
 {
   "project_info": {
-    "project_number": "982447607474",
-    "project_id": "tcmmobile01",
-    "storage_bucket": "tcmmobile01.appspot.com"
+    "project_number": "903677145089",
+    "project_id": "tcmv4-fea0b",
+    "storage_bucket": "tcmv4-fea0b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:982447607474:android:ad02710fffd004c85743ab",
+        "mobilesdk_app_id": "1:903677145089:android:63d5c7f5e1bfdf33275000",
         "android_client_info": {
-          "package_name": "com.aikampo.app"
+          "package_name": "com.aikampo.aihealer_a01"
         }
       },
       "oauth_client": [
         {
-          "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+          "client_id": "903677145089-3r3aunhnq44r6j7390fk9ip5l8t83cc3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aikampo.aihealer_a01",
+            "certificate_hash": "175b4cc7a4dc941bbadc947fb175a9012109a5e0"
+          }
+        },
+        {
+          "client_id": "903677145089-l67tmals7gs5vhkn19kpqilvgoodhpkt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aikampo.aihealer_a01",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBQC7C4p1RJGvt3mszGu-Bpuc7YWeskn58"
+          "current_key": "AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+              "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "903677145089-elu55ev6nphts18brm0nl4q4b3u2knvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903677145089:android:8caff767c0e3b513275000",
+        "android_client_info": {
+          "package_name": "com.aikampo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903677145089-elu55ev6nphts18brm0nl4q4b3u2knvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903677145089:android:3f609e07d07496da275000",
+        "android_client_info": {
+          "package_name": "com.mycompany.aihealer01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903677145089-bdpg6nq55aia14gbqvpspaubhgqd2oce.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.aihealer01",
+            "certificate_hash": "3d5074009f830f8af0b9f7052c5aabea28804ac8"
+          }
+        },
+        {
+          "client_id": "903677145089-gnhtcf28menl51q22va1nof46gk9o7n4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.aihealer01",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903677145089-elu55ev6nphts18brm0nl4q4b3u2knvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903677145089:android:49f1d4187b94c93c275000",
+        "android_client_info": {
+          "package_name": "com.nankuostudio.aihealer01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903677145089-0vl15msp1g2ljn50pguen6kj1p5eag2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nankuostudio.aihealer01",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903677145089-elu55ev6nphts18brm0nl4q4b3u2knvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903677145089:android:f0fd4221e27d4aa2275000",
+        "android_client_info": {
+          "package_name": "com.nankuostudioi.aihealer01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903677145089-3j7eji9t1tladn11jca0j9nnas9qcmgo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nankuostudioi.aihealer01",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903677145089-9is4g8afckoj564md1f2it5f24n0l909.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "903677145089-elu55ev6nphts18brm0nl4q4b3u2knvv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.app"
+              }
             }
           ]
         }
