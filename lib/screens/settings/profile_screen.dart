@@ -1,13 +1,16 @@
-import 'package:ai_kampo_app/api/firebase_api.dart';
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -17,20 +20,19 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final AccountController _accountController = Get.find<AccountController>();
   final _profileFormKey = GlobalKey<FormBuilderState>();
-  final _phoneNumber = "".obs;
-  final _userData = {}.obs;
-  final _mainAccountData = {}.obs;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getProfile();
   }
 
   @override
   Widget build(BuildContext context) {
+    UserData? holderData = _accountController.holderAccountData.value;
+    UserData? userData = _accountController.userData.value;
     return Scaffold(
         appBar: AppBar(
           title: Text("我的檔案"),
@@ -40,8 +42,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Center(
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 12),
-              child: Obx(
-                () => Column(
+              child: Obx(() {
+                if (_accountController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return Column(
                   children: [
                     FormBuilder(
                         key: _profileFormKey,
@@ -58,27 +63,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 38,
                             ),
                             UserAvatar(
-                              phoneNumber: _phoneNumber.value,
+                              phoneNumber: _accountController.userPhoneNumber
+                                  .value,
                             ),
                             SizedBox(
                               height: 38,
                             ),
-                            _mainAccountData['phoneNumber'] != null
-                                ? Card(
-                                    child: ListTile(
-                                      title: Text("主帳號資訊"),
-                                      subtitle: Text(
-                                          '${_mainAccountData["username"]}  ${_mainAccountData["phoneNumber"]}'),
-                                    ),
-                                  )
-                                : SizedBox.shrink(),
+                            if (holderData != null)
+                              Card(
+                                child: ListTile(
+                                  title: const Text("家庭主成員帳號"),
+                                  subtitle: Text(
+                                    '${holderData.username}  ${holderData
+                                        .phoneNumber}'),
+                                ),
+                              ),
+                            if (userData != null)
+                              Card(
+                                child: ListTile(
+                                  title: const Text("帳號綁定手機"),
+                                  subtitle: Text(userData.phoneNumber),
+                                ),
+                              ),
                             SizedBox(
                               height: 20,
                             ),
                             FormBuilderTextField(
                               name: "username",
                               validator: FormBuilderValidators.required(),
-                              decoration: InputDecoration(labelText: "name".tr, filled: true),
+                              decoration: InputDecoration(
+                                  labelText: "name".tr, filled: true),
                             ),
                             SizedBox(
                               height: 20,
@@ -104,10 +118,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               initialValue: null,
                               name: 'sex',
                               options: ['M', 'F']
-                                  .map((sex) => FormBuilderFieldOption(
-                                        value: sex,
-                                        child: Text(sex == 'M' ? 'male'.tr : 'female'.tr),
-                                      ))
+                                  .map((sex) =>
+                                  FormBuilderFieldOption(
+                                    value: sex,
+                                    child: Text(
+                                        sex == 'M' ? 'male'.tr : 'female'.tr),
+                                  ))
                                   .toList(growable: false),
                               controlAffinity: ControlAffinity.trailing,
                             ),
@@ -125,10 +141,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 "3",
                                 "4",
                               ]
-                                  .map((type) => FormBuilderFieldOption(
-                                        value: type,
-                                        child: Text(UserProfile.bloodTypeList[int.parse(type)]),
-                                      ))
+                                  .map((type) =>
+                                  FormBuilderFieldOption(
+                                    value: type,
+                                    child: Text(
+                                        UserProfile.bloodTypeList[int.parse(
+                                            type)]),
+                                  ))
                                   .toList(growable: false),
                               controlAffinity: ControlAffinity.trailing,
                             ),
@@ -144,10 +163,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 '1',
                                 '2',
                               ]
-                                  .map((rh) => FormBuilderFieldOption(
-                                        value: rh,
-                                        child: Text(UserProfile.rhList[int.parse(rh)]),
-                                      ))
+                                  .map((rh) =>
+                                  FormBuilderFieldOption(
+                                    value: rh,
+                                    child: Text(
+                                        UserProfile.rhList[int.parse(rh)]),
+                                  ))
                                   .toList(growable: false),
                               controlAffinity: ControlAffinity.trailing,
                             ),
@@ -157,7 +178,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: CupertinoButton.filled(
                                 child: Text('更新'),
                                 onPressed: () {
-                                  if (_profileFormKey.currentState?.validate() ?? false) {
+                                  if (_profileFormKey.currentState
+                                      ?.validate() ?? false) {
                                     updateProfile();
                                   }
                                 },
@@ -166,55 +188,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                         )),
                   ],
-                ),
-              ),
+                );
+              }),
             ),
           ),
         ));
   }
 
   Future<void> getProfile() async {
-    final prefs = await SharedPreferences.getInstance();
-    _phoneNumber.value = prefs.getString('phoneNumber')!;
-
-    await FirebaseAPI.getUserData(_phoneNumber.value).then((res) {
-      _userData.value = res as Map<String, dynamic>;
-
-      _profileFormKey.currentState!.fields['username']!.didChange(_userData['username']);
-      _profileFormKey.currentState!.fields['birthday']!
-          .didChange(DateTime.fromMillisecondsSinceEpoch(_userData['birthday']));
-      _profileFormKey.currentState!.fields['sex']!.didChange(_userData['sex']);
-      _profileFormKey.currentState!.fields['bloodType']!.didChange(_userData['bloodType']);
-      _profileFormKey.currentState!.fields['rh']!.didChange(_userData['rh']);
-      if (_userData['mainAccountPhoneNumber'] != null) {
-        getMainAccountData(_userData['mainAccountPhoneNumber']);
-      }
-    }).catchError((e) {
-      KampoDialog.confirmToPop(context, '', '無法取得用戶資料！');
-    });
-  }
-
-  Future getMainAccountData(String phoneNumber) async {
-    FirebaseAPI.getUserData(phoneNumber).then((res) {
-      _mainAccountData.value = res;
-    }).catchError((e) {
-      KampoDialog.confirmToPop(context, '', '無法取得主帳號資訊！');
-    });
+    await _accountController.refreshAllAccountsInfo();
+    UserData userData = _accountController.userData.value!;
+    _profileFormKey.currentState!.fields['username']!.didChange(userData.username);
+    _profileFormKey.currentState!.fields['birthday']!.didChange(userData.birthday);
+    _profileFormKey.currentState!.fields['sex']!.didChange(userData.sex);
+    _profileFormKey.currentState!.fields['bloodType']!.didChange(userData.bloodType);
+    _profileFormKey.currentState!.fields['rh']!.didChange(userData.rh);
   }
 
   Future updateProfile() async {
-    Map<String, dynamic> updatedUserData = {
-      'username': _profileFormKey.currentState!.fields['username']?.value,
-      'birthday': _profileFormKey.currentState!.fields['birthday']?.value.millisecondsSinceEpoch,
-      'sex': _profileFormKey.currentState!.fields['sex']?.value,
-      'rh': _profileFormKey.currentState!.fields['rh']?.value,
-      'bloodType': _profileFormKey.currentState!.fields['bloodType']?.value,
-    };
-    final prefs = await SharedPreferences.getInstance();
-    final userDocId = prefs.getString('userDocId')!;
-    prefs.setString('userSex', _profileFormKey.currentState!.fields['sex']?.value);
-    await FirebaseAPI.updateUserData(userDocId, updatedUserData).then((value) {
-      KampoDialog.confirmToPop(context, '', '個人資料已更新');
-    }).catchError((e) => KampoDialog.confirmToPop(context, '', '無法更新個人資料！'));
+    String? errMessage = await _accountController.updateUserData(
+      uid: _accountController.userId.value,
+      username: _profileFormKey.currentState!.fields['username']?.value,
+      birthday: _profileFormKey.currentState!.fields['birthday']?.value,
+      sex: _profileFormKey.currentState!.fields['sex']?.value,
+      rh: _profileFormKey.currentState!.fields['rh']?.value,
+      bloodType: _profileFormKey.currentState!.fields['bloodType']?.value,
+    );
+
+    if (errMessage == null) {
+      if (mounted) KampoDialog.confirmToPop(context, '', '個人資料已更新');
+    }
+    else {
+      if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
+    }
   }
 }

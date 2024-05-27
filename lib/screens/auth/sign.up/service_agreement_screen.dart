@@ -1,9 +1,12 @@
-import 'package:ai_kampo_app/api/firebase_api.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
+
+import '../../../widgets/kampo_dialog.dart';
+
 
 class ServiceAgreementScreen extends StatefulWidget {
   const ServiceAgreementScreen({super.key});
@@ -13,6 +16,7 @@ class ServiceAgreementScreen extends StatefulWidget {
 }
 
 class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
+  final AccountController _accountController = Get.find<AccountController>();
   int _index = 0;
   bool _agreeServiceAgreement = false;
 
@@ -119,12 +123,6 @@ class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
     );
   }
 
-  void _skipStep(int index) {
-    setState(() {
-      _index = index;
-    });
-  }
-
   void _nextStep() {
     if (_index >= 0) {
       setState(() {
@@ -142,11 +140,16 @@ class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
   }
 
   void confirmAgreement() async {
-    final prefs = await SharedPreferences.getInstance();
-    final userDocId = prefs.getString('userDocId');
-
-    FirebaseAPI.updateUserData(userDocId!, {'agreeServiceAgreement': true})
-        .then((value) => Get.offAndToNamed("/main"));
+    String? errMessage = await _accountController.updateUserData(
+      uid: _accountController.userId.value,
+      agreeServiceAgreement: true,
+    );
+    if (errMessage != null) {
+      if (mounted) await KampoDialog.confirmToPop(context, '', errMessage);
+    }
+    else {
+      Get.offAndToNamed("/main");
+    }
   }
 
   void _showAlertDialog() {

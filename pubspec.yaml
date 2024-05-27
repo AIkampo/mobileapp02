@@ -60,12 +60,13 @@ dependencies:
   firebase_auth: ^4.2.4
   intl_phone_field: ^3.1.0
   pin_code_fields: ^7.4.0
-  shared_preferences: ^2.0.15
   intl: ^0.18.0
   location: ^4.4.0
   webview_flutter: ^4.0.2
   pay: ^1.1.1
   uuid: ^3.0.7
+  cloud_functions: ^4.6.0
+  json_serializable: ^6.3.1
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +78,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  build_runner: ^2.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

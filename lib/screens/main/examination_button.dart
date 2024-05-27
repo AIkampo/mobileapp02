@@ -1,19 +1,24 @@
-import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:ai_kampo_app/models/user_model.dart';import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
 import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
 import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
 import 'package:ai_kampo_app/screens/physical.examination/examination_tips_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/utils.dart';
+
 
 class ExaminationButton extends StatelessWidget {
   ExaminationButton({super.key});
 
   final _accountController = Get.find<AccountController>();
+  final _tcmController = Get.find<TcmNineConstitutionsController>();
+  final _physicalExaminationController =
+    Get.find<PhysicalExaminationController>();
   final _isChecking = false.obs;
 
   @override
@@ -31,13 +36,12 @@ class ExaminationButton extends StatelessWidget {
             )
           : GestureDetector(
               onTap: () async {
-                if (_accountController.isMainAccount.value) {
+                if (_accountController.isFamilyHolder.value) {
                   _showAccountMenu(context);
                 } else {
-                  Get.find<PhysicalExaminationController>().phoneNumber.value =
-                      _accountController.userPhoneNumber.value;
-                
-                  handleGoToScreen(_accountController.userPhoneNumber.value);
+                  _physicalExaminationController.phoneNumber.value =
+                    _accountController.userPhoneNumber.value;
+                  handleGoToScreen(_accountController.userId.value);
                 }
               },
               child: Image.asset(
@@ -48,22 +52,22 @@ class ExaminationButton extends StatelessWidget {
   }
 
 //判別是否已超過一個月沒有進行 體質表 評估
-  Future<bool> shoudDoEvaluation(String phoneNumer) async {
-    return await FirebaseAPI.getUserData(phoneNumer).then((data) {
-      //尚未做過
-      if (data['lastPhysiqueRatingDateTime'] == null) {
+  Future<bool> shouldDoEvaluation(String uid) async {
+    UserData? userData = _accountController.uidToUserData(uid);
+    if (userData != null) {
+      if (userData.lastPhysiqueRatingDateTime == null) {
         return true;
       }
-      Timestamp lastPhysiqueRatingDateTimestamp = data['lastPhysiqueRatingDateTime'] as Timestamp;
-      DateTime lastPhysiqueRatingDateTime = DateTime.fromMillisecondsSinceEpoch(
-          lastPhysiqueRatingDateTimestamp.millisecondsSinceEpoch);
-
-      return DateTime.now().compareTo(lastPhysiqueRatingDateTime
-              .add(Duration(days: KampoConfig.doPhysiqueRatingEveryDays))) ==
-          1;
-    }).catchError((error) {
+      return DateTime.now()
+        .compareTo(
+          userData.lastPhysiqueRatingDateTime!.add(
+            Duration(days: KampoConfig.doPhysiqueRatingEveryDays)
+          )
+        ) == 1;
+    }
+    else {
       return false;
-    });
+    }
   }
 
   void _showAccountMenu(context) async {
@@ -85,17 +89,10 @@ class ExaminationButton extends StatelessWidget {
           // for main account
           CupertinoActionSheetAction(
             onPressed: () async {
-              Get.find<PhysicalExaminationController>().phoneNumber.value =
-                  _accountController.userPhoneNumber.value;
-
-              final prefs = await SharedPreferences.getInstance();
-              Get.find<TcmNineConstitutionsController>().currentUserPhoneNumber.value =
-                  _accountController.userPhoneNumber.value;
-
-              Get.find<TcmNineConstitutionsController>().currentUserSex.value =
-                  prefs.getString('userSex')!;
-              
-              handleGoToScreen(_accountController.userPhoneNumber.value);
+              _physicalExaminationController.phoneNumber.value =
+                _accountController.userPhoneNumber.value;
+              _tcmController.selectUser(_accountController.userData.value!);
+              handleGoToScreen(_accountController.userId.value);
             },
             child: Row(
               children: [
@@ -109,20 +106,17 @@ class ExaminationButton extends StatelessWidget {
             ),
           ),
           //for sub accounts
-          ..._accountController.subAccounts.map(
+          ..._accountController.subAccountsData.map(
             (account) => CupertinoActionSheetAction(
               onPressed: () async {
-                Get.find<PhysicalExaminationController>().phoneNumber.value =
-                    account['phoneNumber'];
-                Get.find<TcmNineConstitutionsController>().currentUserPhoneNumber.value =
-                    account['phoneNumber'];
-
-                Get.find<TcmNineConstitutionsController>().currentUserSex.value = account['sex'];
-                handleGoToScreen(account['phoneNumber']);
+                _physicalExaminationController.phoneNumber.value =
+                  account.phoneNumber;
+                _tcmController.selectUser(account);
+                handleGoToScreen(account.uid);
               },
               child: Row(
                 children: [
-                  account['sex'] == "M"
+                  account.sex == "M"
                       ? const Icon(
                           Icons.male,
                           color: Colors.blue,
@@ -136,9 +130,18 @@ class ExaminationButton extends StatelessWidget {
                  const  SizedBox(
                     width: 10,
                   ),
-                  Text(account['username']),
-                  const Expanded(child: Text('')),
-                  Text(account['phoneNumber'])
+                  Text(account.username),
+                  const Expanded(child: VerticalDivider(color: Colors.transparent)),
+                  if (false == account.noPhoneUser)
+                    Text(account.phoneNumber),
+                  if (account.noPhoneUser)
+                    Text(
+                      "${UserProfile.bloodTypeList[int.parse(account.bloodType)]}型  "
+                      "${account.birthday == null? "": dateTimeToYearUntilDay(account.birthday!)}  ",
+                      style: const TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                  if (account.noPhoneUser)
+                    const Icon(Icons.phonelink_erase),
                 ],
               ),
             ),
@@ -147,12 +150,11 @@ class ExaminationButton extends StatelessWidget {
       ),
     );
   }
-  Future handleGoToScreen(String phoneNumber) async{
-     if (await shoudDoEvaluation(phoneNumber)) {
+  Future handleGoToScreen(String uid) async{
+     if (await shouldDoEvaluation(uid)) {
         Get.toNamed("/tcm.nine.constitutions");
      } else {
         Get.to(() => ExaminationTipsScreen());
      }
-
   }
 }

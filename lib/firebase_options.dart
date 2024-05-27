@@ -44,42 +44,42 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCWYWz0Yaug-a3krsD71T2HZE2CWzSRusM',
-    appId: '1:903677145089:web:549d277005a4b684275000',
-    messagingSenderId: '903677145089',
-    projectId: 'tcmv4-fea0b',
-    authDomain: 'tcmv4-fea0b.firebaseapp.com',
-    storageBucket: 'tcmv4-fea0b.appspot.com',
-    measurementId: 'G-DXE72XH4MN',
+    apiKey: 'AIzaSyCXNYrmlKZh1fT92l2m39z6EjlBehZ1erg',
+    appId: '1:982447607474:web:1938fd3cbfc18d345743ab',
+    messagingSenderId: '982447607474',
+    projectId: 'tcmmobile01',
+    authDomain: 'tcmmobile01.firebaseapp.com',
+    storageBucket: 'tcmmobile01.appspot.com',
+    measurementId: 'G-58Z1NV12VT',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCkV_AY-zKOyZcAmA8Uu8p2K9HdMjL5pmw',
-    appId: '1:903677145089:android:8caff767c0e3b513275000',
-    messagingSenderId: '903677145089',
-    projectId: 'tcmv4-fea0b',
-    storageBucket: 'tcmv4-fea0b.appspot.com',
+    apiKey: 'AIzaSyBQC7C4p1RJGvt3mszGu-Bpuc7YWeskn58',
+    appId: '1:982447607474:android:ad02710fffd004c85743ab',
+    messagingSenderId: '982447607474',
+    projectId: 'tcmmobile01',
+    storageBucket: 'tcmmobile01.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCZhck7vnkpBKZaJwwqzYoww48qFfVTwwA',
-    appId: '1:903677145089:ios:74178f0436671bd9275000',
-    messagingSenderId: '903677145089',
-    projectId: 'tcmv4-fea0b',
-    storageBucket: 'tcmv4-fea0b.appspot.com',
-    androidClientId: '903677145089-0vl15msp1g2ljn50pguen6kj1p5eag2l.apps.googleusercontent.com',
-    iosClientId: '903677145089-srsr32ntmnt5oqvl8up7u619k738m0fn.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBY-kYduN7QwjeGwUBWiMN0RkaHaB8xaSY',
+    appId: '1:982447607474:ios:97df7c339aca5ba95743ab',
+    messagingSenderId: '982447607474',
+    projectId: 'tcmmobile01',
+    storageBucket: 'tcmmobile01.appspot.com',
+    androidClientId: '982447607474-q3fp9c31vb5b7vtnnlfr4u39fqvg9gif.apps.googleusercontent.com',
+    iosClientId: '982447607474-tohvc3uean54lr76cprirm6lo38ej1ln.apps.googleusercontent.com',
     iosBundleId: 'com.aikampo.app.ios',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCZhck7vnkpBKZaJwwqzYoww48qFfVTwwA',
-    appId: '1:903677145089:ios:2d9523db4a22dc9c275000',
-    messagingSenderId: '903677145089',
-    projectId: 'tcmv4-fea0b',
-    storageBucket: 'tcmv4-fea0b.appspot.com',
-    androidClientId: '903677145089-0vl15msp1g2ljn50pguen6kj1p5eag2l.apps.googleusercontent.com',
-    iosClientId: '903677145089-ll0k5a7etiucj81h7tj55ucu8orefnus.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBY-kYduN7QwjeGwUBWiMN0RkaHaB8xaSY',
+    appId: '1:982447607474:ios:6ffdd409ce2bdf8d5743ab',
+    messagingSenderId: '982447607474',
+    projectId: 'tcmmobile01',
+    storageBucket: 'tcmmobile01.appspot.com',
+    androidClientId: '982447607474-q3fp9c31vb5b7vtnnlfr4u39fqvg9gif.apps.googleusercontent.com',
+    iosClientId: '982447607474-rnqa068gkojftc4qr36d4ssmo1eh8gav.apps.googleusercontent.com',
     iosBundleId: 'com.aikampo.aiKampoAppPhase1',
   );
 }

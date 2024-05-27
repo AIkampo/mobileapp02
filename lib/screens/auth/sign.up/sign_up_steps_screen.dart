@@ -1,18 +1,33 @@
-import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/screens/auth/sign.up/step1_check_phone.dart';
-import 'package:ai_kampo_app/screens/auth/sign.up/step2_user_info.dart';
-import 'package:ai_kampo_app/screens/auth/sign.up/step3_done.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpStepsScreen extends StatelessWidget {
-  SignUpStepsScreen({super.key});
+import 'package:ai_kampo_app/screens/auth/sign.up/step1_check_phone.dart';
+import 'package:ai_kampo_app/screens/auth/sign.up/step2_user_info.dart';
+import 'package:ai_kampo_app/screens/auth/sign.up/step3_done.dart';
+import 'package:ai_kampo_app/controller/register_account_controller.dart';
 
-  final _authController = Get.find<AuthController>();
+
+class SignUpStepsScreen extends StatefulWidget {
+  const SignUpStepsScreen({super.key});
+
+  @override
+  State<SignUpStepsScreen> createState() => _SignUpStepsScreenState();
+}
+
+class _SignUpStepsScreenState extends State<SignUpStepsScreen> {
+  final RegisterAccountController registerController =
+    RegisterAccountController();
+
+  @override
+  void dispose() {
+    if (registerController.currentStep.value != SignUpSteps.done) {
+      registerController.logoutWhenUnregistered();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _authController.initData();
     return Scaffold(
       appBar: AppBar(
         title: Text("signUp".tr),
@@ -20,14 +35,12 @@ class SignUpStepsScreen extends StatelessWidget {
       ),
       body: Obx(
         () => Stepper(
-          currentStep: _authController.signUpCurrentStep.value,
+          currentStep: registerController.currentStep.value.index,
           type: StepperType.horizontal,
-          physics: ScrollPhysics(),
+          physics: const ScrollPhysics(),
           steps: _buildSteps,
           controlsBuilder: (context, details) {
-            return SizedBox(
-              width: 10,
-            );
+            return const SizedBox(width: 10);
           },
         ),
       ),
@@ -37,29 +50,28 @@ class SignUpStepsScreen extends StatelessWidget {
   List<Step> get _buildSteps {
     return <Step>[
       Step(
-        isActive: _authController.signUpCurrentStep.value > 0,
-        state: _authController.signUpCurrentStep.value > 0
-            ? StepState.complete
-            : StepState.disabled,
-        title: Text("手機認證"),
-        content: Step1CheckPhone(),
+        isActive: registerController.currentStep.value.index > 0,
+        state: registerController.currentStep.value.index > 0?
+          StepState.complete: StepState.disabled,
+        title: const Text("手機認證"),
+        content: Step1CheckPhone(registerController: registerController),
       ),
       Step(
-        isActive: _authController.signUpCurrentStep.value > 1,
-        state: _authController.signUpCurrentStep.value > 1
-            ? StepState.complete
-            : StepState.disabled,
-        title: Text("基本資料"),
-        content: _authController.signUpCurrentStep.value == 1
-            ? Step2UserInfo()
-            : Text("Step2"),
+        isActive: registerController.currentStep.value.index > 1,
+        state: registerController.currentStep.value.index > 1?
+          StepState.complete:
+          StepState.disabled,
+        title: const Text("基本資料"),
+        content: registerController.currentStep.value.index == 1?
+          Step2UserInfo(registerController: registerController):
+          const Text("Step2"),
       ),
       Step(
-        isActive: _authController.signUpCurrentStep.value == 2,
-        state: _authController.signUpCurrentStep.value == 2
-            ? StepState.complete
-            : StepState.disabled,
-        title: Text("完成"),
+        isActive: registerController.currentStep.value.index == 2,
+        state: registerController.currentStep.value.index == 2?
+          StepState.complete:
+          StepState.disabled,
+        title: const Text("完成"),
         content: Step3Done(),
       ),
     ];

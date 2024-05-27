@@ -33,18 +33,9 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   final _currentIndex = 0.obs;
-  final _accountController = Get.find<AccountController>();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    _accountController.initData();
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: KampoColors.primary,

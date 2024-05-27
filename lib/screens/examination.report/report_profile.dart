@@ -42,58 +42,59 @@ class ReportProfile extends StatelessWidget {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(4.0),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      _examinationReportController.userProfile['sex'] == "M"
-                          ? Icon(
-                              Icons.man,
-                              color: Colors.blue,
-                            )
-                          : Icon(
-                              Icons.woman,
-                              color: Colors.red,
-                            ),
-                      SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        _examinationReportController.userProfile['username'],
-                        style: TextStyle(fontSize: 22),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Icon(
-                        Icons.bloodtype,
-                        color: Colors.red,
-                      ),
-                      Text(
-                        '${UserProfile.bloodTypeList[int.parse(_examinationReportController.userProfile['bloodType'])]}型',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(
-                        Icons.cake,
-                        color: Colors.pink,
-                      ),
-                      Text(
-                        DateFormat("yyyy/MM/dd").format(DateTime.fromMillisecondsSinceEpoch(
-                            _examinationReportController.userProfile['birthday'])),
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+              child: _examinationReportController.userProfile.value == null?
+                SizedBox.shrink():
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        _examinationReportController.userProfile.value!.sex == "M"
+                            ? Icon(
+                                Icons.man,
+                                color: Colors.blue,
+                              )
+                            : Icon(
+                                Icons.woman,
+                                color: Colors.red,
+                              ),
+                        SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          _examinationReportController.userProfile.value!.username,
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.bloodtype,
+                          color: Colors.red,
+                        ),
+                        Text(
+                          '${UserProfile.bloodTypeList[int.parse(_examinationReportController.userProfile.value!.bloodType)]}型',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(
+                          Icons.cake,
+                          color: Colors.pink,
+                        ),
+                        Text(
+                          DateFormat("yyyy/MM/dd").format(_examinationReportController.userProfile.value!.birthday!),
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
             ),
           ),
         ),

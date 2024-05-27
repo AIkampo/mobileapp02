@@ -1,20 +1,24 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:ai_kampo_app/api/firebase_api.dart';
-import 'package:ai_kampo_app/api/oberon_api.dart';
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/controller/examination_report_controller.dart';
-import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
-import 'package:ai_kampo_app/models/examination_model.dart';
-import 'package:ai_kampo_app/models/examination_status_model.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+
+import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/api/oberon_api.dart';
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
+import 'package:ai_kampo_app/controller/examination_report_controller.dart';
+import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
+import 'package:ai_kampo_app/models/examination_model.dart';
+import 'package:ai_kampo_app/models/examination_status_model.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+import 'package:ai_kampo_app/models/user_model.dart';
+
 
 class PhysicalExaminationScreen extends StatefulWidget {
   const PhysicalExaminationScreen({super.key});
@@ -26,6 +30,7 @@ class PhysicalExaminationScreen extends StatefulWidget {
 class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
   final _currentCarouselIndex = 1.obs;
   final CarouselController _carouselcontroller = CarouselController();
+  final _accountController = Get.find<AccountController>();
   List tipsList = [
     {
       "title": "「健康指引」提供許多適合您體質的東西。",
@@ -54,7 +59,6 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _headset = Get.arguments['headset'];
     _headsetId = _headset.id.toString();
@@ -253,31 +257,36 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
         throw Exception("Can't get caseId!");
       }
 
-
-      await FirebaseAPI.getUserData(Get.find<PhysicalExaminationController>().phoneNumber.value)
-          .then((userProfile) {
-        Get.find<ExaminationReportController>().setUserProfile(userProfile);
-
-        doSendExaminationData(caseId, userProfile, examinationData);
-      }).catchError((e) {
+      if (_accountController.selectedUser.value == null) {
         KampoDialog.confirmAndOffAllNamed(context, "無法取得使用者資訊！", "", "main");
-      });
+      }
+      await _accountController.refreshAllAccountsInfo();
+      Get.find<ExaminationReportController>().setUserProfile(
+        _accountController.selectedUser.value!);
+      doSendExaminationData(
+        caseId,
+        _accountController.selectedUser.value!,
+        examinationData,
+      );
     }).catchError((e) {
       KampoDialog.confirmAndOffAllNamed(context, "無法取得CaseId", "", "main");
     });
   }
 
-  Future<void> doSendExaminationData(String caseId, userProfile, examinationData) async {
+  Future<void> doSendExaminationData(
+    String caseId,
+    UserData userProfile,
+    String examinationData,
+  ) async {
 
     await OberonAPI.sendExaminationData({
       "CaseId": caseId,
-      "Name": userProfile['username'],
-      "Birthday": DateFormat("yyyyMMdd")
-          .format(DateTime.fromMillisecondsSinceEpoch(userProfile['birthday'])),
-      "Phone": userProfile['phoneNumber'],
-      "Sex": userProfile['sex'],
-      "BloodGroup": userProfile['bloodType'],
-      "Rhesus": userProfile['rh'],
+      "Name": userProfile.username,
+      "Birthday": DateFormat("yyyyMMdd").format(userProfile.birthday!),
+      "Phone": userProfile.phoneNumber,
+      "Sex": userProfile.sex,
+      "BloodGroup": userProfile.bloodType,
+      "Rhesus": userProfile.rh,
       "Reseller": "tw-00026",
       "oberonSerial": _headsetId,
       "oberonData": examinationData,

@@ -1,15 +1,13 @@
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/common/function.dart';
-import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/utils/check.network.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
+import 'package:ai_kampo_app/utils/check.network.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -19,15 +17,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _authController = Get.find<AuthController>();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final _usersCollection = FirebaseFirestore.instance.collection("users");
+  final _accountController = Get.find<AccountController>();
 
-  String _verificationId = '';
   final _phoneNumber = ''.obs;
   final _verificationCode = ''.obs;
-  final _userDocId = ''.obs;
-  Map<String, dynamic> userData = {};
 
   // 0 => 待使用者輸入手機號碼 （呈現輸入手機畫面）
   // 1 => 確認使用者輸入的手機號碼已註冊 （呈現輸入驗證碼畫面）
@@ -72,36 +65,36 @@ class _SignInScreenState extends State<SignInScreen> {
           SizedBox(
             height: 70,
           ),
-          Obx(
-            () => Center(
-              child: Container(
-                width: 300,
-                child: _isLoading.value
-                    ? Center(child: CircularProgressIndicator())
-                    : Column(
+          Center(
+            child: Container(
+              width: 300,
+              child: Obx(() {
+                if (_isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                else {
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 180,
+                        child: _signInStatus.value == 0?
+                          phoneNumberUI(): verificationCodeUI()
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                              height: 180,
-                              child: _signInStatus.value == 0
-                                  ? phoneNumberUI()
-                                  : verificationCodeUI()),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: _authController.isLoading.value
-                                    ? null
-                                    : () => Get.toNamed("/sign.up"),
-                                child: Text("signUp".tr),
-                              ),
-                            ],
+                          TextButton(
+                            onPressed: _isLoading.value? null:
+                                () => Get.toNamed("/sign.up"),
+                            child: Text("signUp".tr),
                           ),
                         ],
                       ),
-              ),
+                    ],
+                  );
+                }
+              })
             ),
           ),
         ],
@@ -115,18 +108,16 @@ class _SignInScreenState extends State<SignInScreen> {
       builder: ((context) {
         return CupertinoActionSheet(
           title: Text("selectLanguage".tr),
-          actions: KampoConfig.localeList
-              .map(
-                (e) => CupertinoActionSheetAction(
-                  isDefaultAction: e['key'] == Get.locale.toString(),
-                  onPressed: () {
-                    Get.updateLocale(e['locale']);
-                    Get.back();
-                  },
-                  child: Text("${e['name']}".tr),
-                ),
-              )
-              .toList(),
+          actions: KampoConfig.localeList.map(
+            (e) => CupertinoActionSheetAction(
+              isDefaultAction: e['key'] == Get.locale.toString(),
+              onPressed: () {
+                Get.updateLocale(e['locale']);
+                Get.back();
+              },
+              child: Text("${e['name']}".tr),
+            ),
+          ).toList(),
         );
       }),
     );
@@ -138,88 +129,74 @@ class _SignInScreenState extends State<SignInScreen> {
       return;
     }
 
-    //檢查手機號碼是否已註冊
-    // 已註冊 則進行驗證
-    if (await checkPhoneNumber(_phoneNumber.value)) {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: '+886${_phoneNumber.value}',
-        verificationCompleted: ((PhoneAuthCredential credential) {}),
-        verificationFailed: ((FirebaseAuthException error) {
-          _isLoading.value = false;
-          KampoDialog.confirmToPop(context, '', '此手機無法進行驗證！');
-        }),
-        codeSent: ((String verificationId, int? forceResendingToken) async {
-          _isLoading.value = false;
-          _signInStatus.value = 1;
-          _verificationId = verificationId;
-        }),
-        codeAutoRetrievalTimeout: ((String verificationId) {
-          print("** codeAutoRetrievalTimeout");
-        }),
-      );
-    } else {
-      _isLoading.value = false;
-      KampoDialog.confirmToPop(context, '', '手機號碼尚未註冊！');
+    String? errMessage = await _accountController.getVerificationCode(
+      phoneNumber: _phoneNumber.value,
+      onError: (errMessage) {
+        if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
+      }
+    );
+    if (errMessage != null) {
+      if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
     }
+    else {
+      _signInStatus.value = 1;
+    }
+    _isLoading.value = false;
   }
 
   Future<void> checkVerificationCode() async {
     _isLoading.value = true;
 
-    try {
-      // Create a PhoneAuthCredential with the code
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: _verificationId, smsCode: _verificationCode.value);
-
-      // Sign the user in (or link) with the credential
-      await _auth
-          .signInWithCredential(credential)
-          .then((value) => handleSignIn())
-          .catchError((error) => KampoDialog.confirmToPop(context, '', '驗證失敗'));
-    } catch (e) {
-      KampoDialog.confirmToPop(context, '', '請檢查驗證碼');
-      _authController.isLoading.value = false;
+    String? errMessage = await _accountController.checkVerificationCode(
+      verificationCode: _verificationCode.value,
+    );
+    if (errMessage == null) {
+      await _accountController.refreshAll();
+      bool agreeServiceAgreement = _accountController.userData.value != null?
+        _accountController.userData.value!.agreeServiceAgreement: false;
+      Get.offAndToNamed(agreeServiceAgreement? "/main": "/service.agreement");
+    }
+    else {
+      if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
     }
     _isLoading.value = false;
   }
 
   Widget phoneNumberUI() {
-    return Column(
-      children: [
-        TextField(
-          keyboardType: TextInputType.number,
-          enabled: !_authController.isLoading.value,
-          onChanged: (value) {
-            _phoneNumber.value = value;
-          },
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.phone_android_sharp),
-              border: OutlineInputBorder(),
-              labelText: "phone".tr),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: CupertinoButton.filled(
-              child: Text('登入'),
-              onPressed: _phoneNumber.value.length == 10 ? () => getVerificationCode() : null),
-        ),
-      ],
-    );
+    return Obx(() {
+      return Column(
+        children: [
+          TextField(
+            keyboardType: TextInputType.number,
+            enabled: _isLoading.value == false,
+            onChanged: (value) {
+              _phoneNumber.value = value;
+            },
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.phone_android_sharp),
+              border: const OutlineInputBorder(),
+              labelText: "phone".tr,
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: CupertinoButton.filled(
+              onPressed: _phoneNumber.value.length >= 7?
+                getVerificationCode: null,
+              child: const Text('登入')
+            ),
+          ),
+        ],
+      );
+    });
   }
 
   Widget verificationCodeUI() {
     return Column(
       children: [
-        Text(
-          '請輸入驗證碼',
-          style: TextStyle(fontSize: 20),
-        ),
-        SizedBox(
-          height: 12,
-        ),
+        const Text('請輸入驗證碼', style: TextStyle(fontSize: 20)),
+        const SizedBox(height: 12),
         PinCodeTextField(
           keyboardType: TextInputType.number,
           appContext: context,
@@ -232,9 +209,7 @@ class _SignInScreenState extends State<SignInScreen> {
             inactiveColor: Colors.grey,
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -242,23 +217,14 @@ class _SignInScreenState extends State<SignInScreen> {
               width: 210,
               height: 50,
               child: ElevatedButton(
-                  child: Text(
-                    '認證',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-                  onPressed:
-                      _verificationCode.value.length == 6 ? () => checkVerificationCode() : null),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            TextButton(
-              child: Text(
-                '取消',
-                style: TextStyle(fontSize: 22),
+                onPressed: _verificationCode.value.length == 6?
+                  checkVerificationCode: null,
+                child: const Text('認證', style: TextStyle(fontSize: 22)),
               ),
+            ),
+            const SizedBox(width: 20),
+            TextButton(
+              child: const Text('取消', style: TextStyle(fontSize: 22)),
               onPressed: () {
                 _verificationCode.value = "";
                 _signInStatus.value = 0;
@@ -268,36 +234,5 @@ class _SignInScreenState extends State<SignInScreen> {
         )
       ],
     );
-  }
-
-  Future<bool> checkPhoneNumber(String phoneNumber) async {
-    await _usersCollection.where('phoneNumber', isEqualTo: phoneNumber).get().then((res) {
-      if (res.docs.length == 1) {
-        userData = res.docs[0].data();
-        _userDocId.value = res.docs[0].id;
-      }
-    }).catchError((e) {
-      throw Exception("無法取得註冊資料！");
-    });
-    return userData.isNotEmpty;
-  }
-
-  Future<Map> getUserData(String phoneNumber) async {
-    return await _usersCollection.where('phoneNumber', isEqualTo: phoneNumber).get().then((res) {
-      if (res.docs.length == 1) {
-        return res.docs[0].data();
-      } else {
-        return {};
-      }
-    }).catchError((e) {
-      // throw Exception("無法取得註冊資料！");
-      return {};
-    });
-  }
-
-  handleSignIn() {
-    doSignIn(userData['agreeServiceAgreement'], _phoneNumber.value, _userDocId.value,
-        userData['isMainAccount'], userData['sex']);
-    _authController.isLoading.value = false;
   }
 }

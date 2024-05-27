@@ -1,27 +1,36 @@
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/models/user_model.dart';
-import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+import 'package:ai_kampo_app/controller/register_account_controller.dart';
+
+
 class Step2UserInfo extends StatefulWidget {
-  const Step2UserInfo({super.key});
+  final RegisterAccountController registerController;
+  const Step2UserInfo({
+    super.key,
+    required this.registerController,
+  });
 
   @override
   State<Step2UserInfo> createState() => _Step2UserInfoState();
 }
 
 class _Step2UserInfoState extends State<Step2UserInfo> {
-  final _authController = Get.find<AuthController>();
-
+  late RegisterAccountController registerController;
   final _signUpFormKey = GlobalKey<FormBuilderState>();
-  final _fs = FirebaseFirestore.instance;
+  final isLoading = false.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    registerController = widget.registerController;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,7 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
                   const SizedBox(
                     height: 20,
                   ),
-                  UserAvatar(phoneNumber: _authController.signUpPhoneNumber.value),
+                  UserAvatar(phoneNumber: registerController.signUpPhone),
                   const SizedBox(
                     height: 38,
                   ),
@@ -135,9 +144,7 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
                     child: CupertinoButton.filled(
                       child: Text("confirm".tr),
                       onPressed: () {
-                        if (_signUpFormKey.currentState?.validate() ?? false) {
-                          registerUser();
-                        }
+                        registerUser();
                       },
                     ),
                   ),
@@ -149,23 +156,20 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
   }
 
   Future registerUser() async {
-    UserModel newUser = UserModel(
-        username: _signUpFormKey.currentState!.fields['username']?.value,
-        phoneNumber: _authController.signUpPhoneNumber.value,
-        birthday: _signUpFormKey.currentState!.fields['birthday']?.value,
-        sex: _signUpFormKey.currentState!.fields['sex']?.value,
-        rh: _signUpFormKey.currentState!.fields['rh']?.value,
-        bloodType: _signUpFormKey.currentState!.fields['bloodType']?.value,
-        agreeServiceAgreement: false,
-        isPremium: false,
-        isMainAccount: true);
-
-    await _fs.collection("users").add(newUser.toMap()).then((ref) {
-      _authController.sex.value = _signUpFormKey.currentState!.fields['sex']?.value;
-      _authController.docId.value = ref.id;
-      _authController.signUpCurrentStep.value = 2;
-    }).catchError((e) {
-      KampoDialog.confirmToPop(context, '', '無法建立個人資料！');
-    });
+    if (!(_signUpFormKey.currentState?.validate()?? false)) {
+      return;
+    }
+    isLoading.value = true;
+    String? errMessage = await registerController.registerAccount(
+      username: _signUpFormKey.currentState!.fields["username"]?.value,
+      birthday: _signUpFormKey.currentState!.fields["birthday"]?.value,
+      sex: _signUpFormKey.currentState!.fields["sex"]?.value,
+      rh: _signUpFormKey.currentState!.fields["rh"]?.value,
+      bloodType: _signUpFormKey.currentState!.fields["bloodType"]?.value,
+    );
+    if (errMessage != null) {
+      if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
+    }
+    isLoading.value = false;
   }
 }

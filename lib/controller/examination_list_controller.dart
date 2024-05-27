@@ -34,7 +34,7 @@ class ExaminationListController extends GetxController {
       if (res.data['success']) {
         List templist = res.data['data'];
 
-        sortExaminationList(templist);
+        _sortExaminationList(templist);
       } else {
         Get.snackbar("注意", "無法取得檢測列表！");
       }
@@ -44,12 +44,8 @@ class ExaminationListController extends GetxController {
     });
   }
 
-  // Future fetchUserProfile(String phoneNumber) async {
-  //   FirebaseAPI.getUserData(phoneNumber).then((res) => userProfile.value = res);
-  // }
-
 //依時間排序、分類 檢測清單
-  Future<void> sortExaminationList(List examinationList) async {
+  Future<void> _sortExaminationList(List examinationList) async {
     if (examinationList.isEmpty) {
       isExaminationDataLoading.value = false;
       return;

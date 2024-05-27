@@ -1,78 +1,125 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserModel {
+import 'package:ai_kampo_app/utils/utils.dart';
+part 'user_model.g.dart';
+
+
+@JsonSerializable()
+class UserData {
+  String uid;
+  bool noPhoneUser;
   String username;
+  String countryCode;
   String phoneNumber;
-  DateTime birthday;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  DateTime? birthday;
   String sex;
   String rh;
   String bloodType;
   bool agreeServiceAgreement;
-  bool isPremium;
+  bool isVip;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  DateTime? registerDate;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  DateTime? membershipExpiredDate;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? lastSignInDatetime;
-  String? mainAccountPhoneNumber;
+  String? familyHolder;
+  List<String>? familyMembers;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
   DateTime? lastPhysiqueRatingDateTime;
-  bool isMainAccount;
-//待加欄位
-// 會員效期
-// DateTime? premiumExpiration
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  bool get isMainAccount => familyHolder == uid;
 
-  UserModel({
+  UserData({
+    required this.uid,
+    required this.noPhoneUser,
     required this.username,
+    required this.countryCode,
     required this.phoneNumber,
     required this.birthday,
     required this.sex,
     required this.rh,
     required this.bloodType,
     required this.agreeServiceAgreement,
-    required this.isPremium,
-    this.lastSignInDatetime,
-    this.mainAccountPhoneNumber,
-    this.lastPhysiqueRatingDateTime,
-    required this.isMainAccount,
+    required this.isVip,
+    required this.registerDate,
+    required this.membershipExpiredDate,
+    required this.lastSignInDatetime,
+    required this.familyHolder,
+    required this.familyMembers,
+    required this.lastPhysiqueRatingDateTime,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'username': username,
-      'phoneNumber': phoneNumber,
-      'birthday': birthday.millisecondsSinceEpoch,
-      'sex': sex,
-      'rh': rh,
-      'bloodType': bloodType,
-      'agreeServiceAgreement': agreeServiceAgreement,
-      'isPremium': isPremium,
-      'lastSignInDatetime': lastSignInDatetime?.millisecondsSinceEpoch,
-      'mainAccountPhoneNumber': mainAccountPhoneNumber,
-      'lastPhysiqueRatingDateTime': lastPhysiqueRatingDateTime?.millisecondsSinceEpoch,
-      'isMainAccount': isMainAccount,
-    };
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+    _$UserDataFromJson(json);
+  Map<String, dynamic> toJson() => _$UserDataToJson(this);
+
+  Future<String?> updateUserData({
+    bool? newAgreeServiceAgreement,
+    String? newUsername,
+    DateTime? newBirthday,
+    String? newSex,
+    String? newRh,
+    String? newBloodType,
+    DateTime? newLastPhysiqueRatingDateTime,
+  }) async {
+    Map<String, dynamic> dataToUpdate = {};
+    if (newAgreeServiceAgreement != null) {
+      dataToUpdate["agreeServiceAgreement"] = newAgreeServiceAgreement;
+    }
+    if (newUsername != null) {
+      dataToUpdate["username"] = newUsername;
+    }
+    if (newBirthday != null) {
+      dataToUpdate["birthday"] = dateTimeToJson(newBirthday);
+    }
+    if (newSex != null) {
+      dataToUpdate["sex"] = newSex;
+    }
+    if (newRh != null) {
+      dataToUpdate["rh"] = newRh;
+    }
+    if (newBloodType != null) {
+      dataToUpdate["bloodType"] = newBloodType;
+    }
+    if (newLastPhysiqueRatingDateTime != null) {
+      dataToUpdate["lastPhysiqueRatingDateTime"] =
+        dateTimeToJson(newLastPhysiqueRatingDateTime);
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection('/users')
+      .doc(uid)
+      .update(dataToUpdate)
+      .then((value) {
+        if (newAgreeServiceAgreement != null) {
+          agreeServiceAgreement = newAgreeServiceAgreement;
+        }
+        if (newUsername != null) {
+          username = newUsername;
+        }
+        if (newBirthday != null) {
+          birthday = newBirthday;
+        }
+        if (newSex != null) {
+          sex = newSex;
+        }
+        if (newRh != null) {
+          rh = newRh;
+        }
+        if (newBloodType != null) {
+          bloodType = newBloodType;
+        }
+        if (newLastPhysiqueRatingDateTime != null) {
+          lastPhysiqueRatingDateTime = newLastPhysiqueRatingDateTime;
+        }
+      });
+    }
+    catch(err) {
+      return err.toString();
+    }
+    return null;
   }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      username: map['username'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      birthday: DateTime.fromMillisecondsSinceEpoch(map['birthday'] as int),
-      sex: map['sex'] as String,
-      rh: map['rh'] as String,
-      bloodType: map['bloodType'] as String,
-      agreeServiceAgreement: map['agreeServiceAgreement'] as bool,
-      isPremium: map['isPremium'] as bool,
-      lastSignInDatetime: map['lastSignInDatetime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['lastSignInDatetime'] as int)
-          : null,
-      mainAccountPhoneNumber:
-          map['mainAccountPhoneNumber'] != null ? map['mainAccountPhoneNumber'] as String : null,
-      lastPhysiqueRatingDateTime: map['lastPhysiqueRatingDateTime'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['lastPhysiqueRatingDateTime'] as int)
-          : null,
-      isMainAccount: map['isPremium'] as bool,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -9,7 +9,7 @@ import 'package:ai_kampo_app/screens/settings/user_guide_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -19,6 +19,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final ExaminationListController _examinationListController =
+    Get.find<ExaminationListController>();
+  final AccountController _accountController = Get.find<AccountController>();
   List menuList = [
     {
       "title": "userProfile",
@@ -54,13 +57,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: Text("${menuList[index]['title']}".tr),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () async {
-                    if (menuList[index]["screen"] is String) {
-                      final prefs = await SharedPreferences.getInstance();
-                      await prefs.clear();
-
-                      Get.offAllNamed("/splash");
-                      Get.find<ExaminationListController>().removeData();
-                      Get.find<AccountController>().removeData();
+                    if (menuList[index]["title"] == "signOut") {
+                      await _examinationListController.removeData();
+                      await _accountController.logout();
+                      Get.offAllNamed("/sign.in");
                     } else {
                       Get.to(menuList[index]["screen"]);
                     }

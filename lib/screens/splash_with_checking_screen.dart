@@ -1,27 +1,37 @@
 import 'dart:async';
-
-import 'package:ai_kampo_app/api/firebase_api.dart';
-import 'package:ai_kampo_app/utils/utils.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashWithCheckingScreen extends StatelessWidget {
-  SplashWithCheckingScreen({super.key});
+import 'package:ai_kampo_app/utils/utils.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
 
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+class SplashWithCheckingScreen extends StatefulWidget {
+  const SplashWithCheckingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<SplashWithCheckingScreen> createState() => _SplashWithCheckingScreenState();
+}
+
+class _SplashWithCheckingScreenState extends State<SplashWithCheckingScreen> {
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  final _accountController = Get.find<AccountController>();
+
+  @override
+  void initState() {
+    super.initState();
     //1.Check Network
     //1-1. If network is available, then check whether  user has signed in or not.
     // 1-1-1. if user did't signed in yet → go to SignIn Screen.
     // 1-1-2. if user has sigined in → go to main screen.
     //1-2. If network is not available, then start to monitor network uitil connecting to the internet
+    handleCheck();
+  }
 
-    handleCheck(context);
+  @override
+  Widget build(BuildContext context) {
     return const Image(
       fit: BoxFit.cover,
       image: AssetImage(
@@ -30,7 +40,7 @@ class SplashWithCheckingScreen extends StatelessWidget {
     );
   }
 
-  Future handleCheck(BuildContext context) async {
+  Future handleCheck() async {
     await Utils.isNetworkAvailable().then((res) {
       if (res) {
         // Network is available
@@ -43,24 +53,12 @@ class SplashWithCheckingScreen extends StatelessWidget {
   }
 
   Future checkAuth() async {
-    //Check sign in
-    await SharedPreferences.getInstance().then((prefs) async {
-      if (prefs.getString("phoneNumber") == null || prefs.getString("userDocId") == null) {
-        Get.toNamed("/sign.in");
-      }
-      await FirebaseAPI.getUserData(prefs.getString("phoneNumber")!).then((res) {
-        Get.offAllNamed("/main");
-      }).catchError((e) {
-        prefs.clear();
-        Get.offAllNamed("/sign.in");
-        throw e;
-      });
-    }).catchError((e) {
-      Get.offAllNamed("/sign.in");
-      throw e;
-    }).catchError((e) {
-      Get.offAllNamed("/sign.in");
-    });
+    if (_accountController.userLoggedIn.value) {
+      Get.offAllNamed("/main");
+    }
+    else {
+      Get.toNamed("/sign.in");
+    }
   }
 
   Future monitorNetwork() async {

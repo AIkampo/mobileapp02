@@ -1,16 +1,20 @@
-import 'package:ai_kampo_app/api/firebase_api.dart';
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/common/nbc.in.tcm.dart';
-import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
-import 'package:ai_kampo_app/screens/physical.examination/examination_tips_screen.dart';
-import 'package:ai_kampo_app/tcm.nine.constitutions/body_constitution_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
+import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/common/nbc.in.tcm.dart';
+import 'package:ai_kampo_app/controller/account_controller.dart';
+import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
+import 'package:ai_kampo_app/screens/physical.examination/examination_tips_screen.dart';
+import 'package:ai_kampo_app/tcm.nine.constitutions/body_constitution_card.dart';
+
+
 class EvaluationScreen extends StatelessWidget {
   EvaluationScreen({super.key});
+  final _accountController = Get.find<AccountController>();
   final _tncController = Get.find<TcmNineConstitutionsController>();
 
   @override
@@ -225,7 +229,9 @@ class EvaluationScreen extends StatelessWidget {
         _tncController.scoreList,
         DateTime.now(),
         NBCinTCM.types[NBCinTCM.getType(_tncController.scoreList)]);
-    final userDocId = await FirebaseAPI.getUserDocId(_tncController.currentUserPhoneNumber.value);
-    FirebaseAPI.updateUserData(userDocId, {'lastPhysiqueRatingDateTime': DateTime.now()});
+    _accountController.updateUserData(
+      uid: _tncController.currentUserUid.value,
+      lastPhysiqueRatingDateTime: DateTime.now(),
+    );
   }
 }

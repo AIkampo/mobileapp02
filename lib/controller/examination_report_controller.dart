@@ -1,17 +1,19 @@
 import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/api/oberon_api.dart';
+import 'package:ai_kampo_app/api/user.dart';
 import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/models/allergen_model.dart';
 import 'package:ai_kampo_app/models/germs.dart';
 import 'package:ai_kampo_app/models/nine_system_model.dart';
 import 'package:ai_kampo_app/models/nine_system_trend_model.dart';
 import 'package:ai_kampo_app/models/score_model.dart';
+import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:get/get.dart';
 
 class ExaminationReportController extends GetxController {
   final reportCaseId = "".obs;
 
-  final RxMap<dynamic, dynamic> userProfile = {}.obs;
+  final userProfile = Rx<UserData?>(null);
   final isUserProfileLoading = true.obs;
 
   //九大組織系統檢測資料
@@ -38,14 +40,21 @@ class ExaminationReportController extends GetxController {
     super.onInit();
   }
 
-  Future<void> fetchUserProfile(String phoneNumber) async {
+  Future<void> fetchUserProfileUid(String uid) async {
     isUserProfileLoading.value = true;
-    await FirebaseAPI.getUserData(phoneNumber).then((res) {
+    await getUserDataByUid(uid).then((res) {
       userProfile.value = res;
     }).whenComplete(() => isUserProfileLoading.value = false);
   }
 
-  setUserProfile(Map<dynamic, dynamic> userData) {
+  Future<void> fetchUserProfilePhone(String phoneNumber) async {
+    isUserProfileLoading.value = true;
+    await getUserDataByPhone(phoneNumber).then((res) {
+      userProfile.value = res;
+    }).whenComplete(() => isUserProfileLoading.value = false);
+  }
+
+  setUserProfile(UserData userData) {
     userProfile.value = userData;
   }
 

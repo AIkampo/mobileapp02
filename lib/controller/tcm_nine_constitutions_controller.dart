@@ -1,7 +1,9 @@
 import 'package:ai_kampo_app/common/nbc.in.tcm.dart';
+import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:get/get.dart';
 
 class TcmNineConstitutionsController extends GetxController {
+  final currentUserUid = ''.obs;
   final currentUserPhoneNumber = ''.obs;
   final currentUserSex = 'F'.obs;
   final currentEvaluationType = 0.obs;
@@ -38,5 +40,11 @@ class TcmNineConstitutionsController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 777));
 
     isLoading.value = false;
+  }
+
+  void selectUser(UserData userData) {
+    currentUserUid.value = userData.uid;
+    currentUserPhoneNumber.value = userData.phoneNumber;
+    currentUserSex.value = userData.sex;
   }
 }

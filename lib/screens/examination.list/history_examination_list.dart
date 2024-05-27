@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:ai_kampo_app/common/function.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
 import 'package:ai_kampo_app/controller/examination_list_controller.dart';
 import 'package:ai_kampo_app/screens/examination.report/examination_report_screen.dart';
 import 'package:ai_kampo_app/widgets/common/KampoTitle.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:ai_kampo_app/controller/examination_report_controller.dart';
 
 class HistoryExaminationList extends StatelessWidget {
   HistoryExaminationList({
@@ -15,9 +17,7 @@ class HistoryExaminationList extends StatelessWidget {
     Tab(text: "全部"),
     Tab(text: "七日"),
     Tab(text: "一個月"),
-    Tab(
-      text: "三個月",
-    )
+    Tab(text: "三個月"),
   ];
   final _controller = Get.find<ExaminationListController>();
   @override
@@ -42,15 +42,16 @@ class HistoryExaminationList extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12),
-                      height: MediaQuery.of(context).size.height -
-                          (Get.find<AccountController>().isMainAccount.value ? 490 : 410),
-                      child: TabBarView(children: [
-                        BuildHistoryListView(dataList: _controller.caseIdList),
-                        BuildHistoryListView(dataList: _controller.weeklyCaseIdList),
-                        BuildHistoryListView(dataList: _controller.monthlyCaseIdList),
-                        BuildHistoryListView(dataList: _controller.threeMonthCaseIdList),
-                      ])),
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
+                    height: MediaQuery.of(context).size.height -
+                      (Get.find<AccountController>().isFamilyHolder.value ? 490 : 410),
+                    child: TabBarView(children: [
+                      BuildHistoryListView(dataList: _controller.caseIdList),
+                      BuildHistoryListView(dataList: _controller.weeklyCaseIdList),
+                      BuildHistoryListView(dataList: _controller.monthlyCaseIdList),
+                      BuildHistoryListView(dataList: _controller.threeMonthCaseIdList),
+                    ])
+                  ),
                 ],
               ),
             ),
@@ -59,30 +60,45 @@ class HistoryExaminationList extends StatelessWidget {
 }
 
 class BuildHistoryListView extends StatelessWidget {
-  const BuildHistoryListView({
+  BuildHistoryListView({
     Key? key,
     required this.dataList,
   }) : super(key: key);
 
   final List dataList;
+  final _examinationListController = Get.find<ExaminationListController>();
+  final _examinationReportController = Get.find<ExaminationReportController>();
+  final _accountController = Get.find<AccountController>();
+
+  Future<void> handleGetData() async {
+    String targetPhone = _accountController.selectedUser.value != null?
+    _accountController.selectedUser.value!.phoneNumber:
+    _accountController.userPhoneNumber.value;
+    print("targetPhone: $targetPhone");
+    await _examinationReportController.fetchUserProfilePhone(targetPhone);
+    await _examinationListController.fetchExaminationList(targetPhone);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: dataList.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              title: Text(
-                caseIdToDatetime(dataList[index]),
-                style: TextStyle(fontSize: 20),
+    return RefreshIndicator(
+      onRefresh: handleGetData,
+      child: ListView.builder(
+          itemCount: dataList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                title: Text(
+                  caseIdToDatetime(dataList[index]),
+                  style: TextStyle(fontSize: 20),
+                ),
+                trailing: Icon(Icons.arrow_forward_ios),
+                onTap: () {
+                  Get.to(() => ExaminationReportScreen(), arguments: {"caseId": dataList[index]});
+                },
               ),
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                Get.to(() => ExaminationReportScreen(), arguments: {"caseId": dataList[index]});
-              },
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

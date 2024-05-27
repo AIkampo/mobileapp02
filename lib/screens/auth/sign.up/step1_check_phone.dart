@@ -1,218 +1,146 @@
 import 'dart:async';
-
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/common/function.dart';
-import 'package:ai_kampo_app/controller/auth.controller.dart';
-import 'package:ai_kampo_app/utils/check.network.dart';
-import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ai_kampo_app/controller/register_account_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class Step1CheckPhone extends StatelessWidget {
-  Step1CheckPhone({super.key});
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/utils/check.network.dart';
+import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 
-  final _authController = Get.find<AuthController>();
+
+enum Step1Stage{
+  inputPhone, // 待使用者輸入手機號碼 （呈現輸入手機畫面）
+  codeVerification, // 確認使用者輸入的手機號碼尚未註冊 （呈現輸入驗證碼畫面）
+}
+
+class PhoneNumberInput extends StatefulWidget {
+  final RegisterAccountController registerController;
+  final Function() onPhoneLock;
+  const PhoneNumberInput({
+    super.key,
+    required this.registerController,
+    required this.onPhoneLock,
+  });
+
+  @override
+  State<PhoneNumberInput> createState() => _PhoneNumberInputState();
+}
+
+class _PhoneNumberInputState extends State<PhoneNumberInput> {
+  late RegisterAccountController registerController;
+  final _lockPhone = false.obs;
   final _phoneNumber = ''.obs;
-  final _isCheckingPhoneNumber = false.obs;
-  final _verificationCode = ''.obs;
 
-  // 0 => 待使用者輸入手機號碼 （呈現輸入手機畫面）
-  // 1 => 確認使用者輸入的手機號碼尚未註冊 （呈現輸入驗證碼畫面）
-  final _checkStatus = 0.obs;
+  @override
+  void initState() {
+    super.initState();
+    registerController = widget.registerController;
+  }
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final _verificationId = ''.obs;
-  final _hasSentCode = false.obs;
-  //可重新發送驗證碼的時間
-  final int _verificationTimeout = 60;
-  final _countDownVal = 60.obs;
+  Future<void> lockPhone() async {
+    registerController.setPhoneNumber(_phoneNumber.value);
+    // check phone exist
+    bool exist = await registerController.checkPhone();
+    if (exist) {
+      if (mounted) KampoDialog.confirmToPop(context, '', '手機號碼已註冊！');
+    }
+    else {
+      _lockPhone.value = true;
+      widget.onPhoneLock();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
-        margin: EdgeInsets.all(20),
-        child: _checkStatus.value == 0 ? phoneNumberUI(context) : verificationCodeUI(context),
-      ),
-    );
-  }
-
-  Widget phoneNumberUI(context) {
-    return _isCheckingPhoneNumber.value
-        ? Container(height: 120, child: Center(child: CircularProgressIndicator()))
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                keyboardType: TextInputType.phone,
-                onChanged: (value) {
-                  _phoneNumber.value = value;
-                },
-                decoration: InputDecoration(
-                  filled: true,
-                  labelText: "phone".tr,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: CupertinoButton.filled(
-                  onPressed:
-                      _phoneNumber.value.length == 10 ? () => getVerificationCode(context) : null,
-                  child: Text("confirm".tr),
-                ),
-              )
-            ],
-          );
-  }
-
-  Widget verificationCodeUI(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          '請輸入驗證碼',
-          style: TextStyle(fontSize: 28),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        PinCodeTextField(
-          keyboardType: TextInputType.number,
-          appContext: context,
-          length: 6,
-          onChanged: (value) {
-            _verificationCode.value = value;
-          },
-          pinTheme: PinTheme(
-            activeColor: KampoColors.primary,
-            inactiveColor: Colors.grey,
+    return _lockPhone.value?
+      Container(height: 120, child: Center(child: CircularProgressIndicator())):
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            keyboardType: TextInputType.phone,
+            onChanged: (value) {
+              _phoneNumber.value = value;
+            },
+            decoration: InputDecoration(
+              filled: true,
+              labelText: "phone".tr,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 22,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 210,
-              height: 50,
-              child: ElevatedButton(
-                  child: Text(
-                    '認證',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-                  onPressed: _verificationCode.value.length == 6
-                      ? () => checkVerificationCode(context)
-                      : null),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            TextButton(
-              child: Text(
-                '取消',
-                style: TextStyle(fontSize: 22),
-              ),
-              onPressed: () {
-                _verificationCode.value = "";
-                _checkStatus.value = 0;
-                _hasSentCode.value = false;
-              },
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 38,
-        ),
-        _hasSentCode.value
-            ? _countDownVal.value == 0
-                ? TextButton(
-                    onPressed: () {
-                      getVerificationCode(context);
-                    },
-                    child: Text(
-                      "重新發送",
-                      style: TextStyle(fontSize: 22, color: Colors.red),
-                    ),
-                  )
-                : Text(
-                    '${_countDownVal.value}秒後可重新傳送',
-                    style: TextStyle(fontSize: 18),
-                  )
-            : SizedBox(
-                height: 20,
-              ),
-      ],
-    );
+          const SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: Obx(() {
+              return CupertinoButton.filled(
+                onPressed: _phoneNumber.value.length >= 7? lockPhone: null,
+                child: Text("confirm".tr),
+              );
+            }),
+          )
+        ],
+      );
+  }
+}
+
+
+class StepCheckVerification extends StatefulWidget {
+  final RegisterAccountController registerController;
+  final Function() onCancel;
+  const StepCheckVerification({
+    super.key,
+    required this.registerController,
+    required this.onCancel,
+  });
+
+  @override
+  State<StepCheckVerification> createState() => _StepCheckVerificationState();
+}
+
+class _StepCheckVerificationState extends State<StepCheckVerification> {
+  late RegisterAccountController registerController;
+  final _verificationCode = ''.obs;
+  final isLoading = true.obs;
+  final int _verificationTimeout = 60;
+  final _countDownVal = 60.obs;
+  Timer? _countDownTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    registerController = widget.registerController;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getVerificationCode(context);
+    });
   }
 
   Future<void> getVerificationCode(context) async {
-    _isCheckingPhoneNumber.value = true;
+    isLoading.value = true;
     if (!await checkNetwork(context)) {
-      _isCheckingPhoneNumber.value = false;
+      isLoading.value = false;
       return;
     }
 
-    //檢查手機號碼是否已註冊
-    // 尚未註冊 則進行驗證
-    if (await checkPhoneNumber(_phoneNumber.value)) {
-      KampoDialog.confirmToPop(context, '', '手機號碼已註冊！');
-      _isCheckingPhoneNumber.value = false;
-    } else {
-      await _auth
-          .verifyPhoneNumber(
-        phoneNumber: '+886${_phoneNumber.value}',
-        verificationCompleted: ((PhoneAuthCredential credential) {
-          print("** verificationCompleted");
-        }),
-        verificationFailed: ((FirebaseAuthException error) {
-          KampoDialog.confirmToPop(context, "", '此設備目前無法取得驗證碼');
-          _isCheckingPhoneNumber.value = false;
-        }),
-        codeSent: ((String verificationId, int? forceResendingToken) async {
-          goToCheckCodeView(verificationId);
-        }),
-        codeAutoRetrievalTimeout: ((String verificationId) {
-          goToCheckCodeView(verificationId);
-        }),
-      )
-          .catchError((e) {
-        KampoDialog.confirmToPop(context, '', '取得驗證碼失敗');
-        _isCheckingPhoneNumber.value = false;
-      });
-    }
-  }
-
-  goToCheckCodeView(String verificationId) {
-    _checkStatus.value = 1;
-    _verificationId.value = verificationId;
-    _hasSentCode.value = true;
+    await registerController.getVerificationCode(
+      onError: (errMessage) {
+        if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
+      }
+    );
     doCountdown();
-    _isCheckingPhoneNumber.value = false;
+    isLoading.value = false;
   }
 
-  Future<void> checkVerificationCode(BuildContext context) async {
-    try {
-      // Create a PhoneAuthCredential with the code
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: _verificationId.value, smsCode: _verificationCode.value);
-
-      // Sign the user in (or link) with the credential
-      await _auth.signInWithCredential(credential);
-      _authController.signUpPhoneNumber.value = _phoneNumber.value;
-      _authController.signUpCurrentStep.value = 1;
-    } catch (e) {
-      KampoDialog.confirmToPop(context, '', '請檢查驗證碼是否正確');
-      _authController.isLoading.value = false;
+  Future<void> checkVerificationCode() async {
+    isLoading.value = true;
+    String? errMessage = await registerController.checkVerificationCode(
+      verificationCode: _verificationCode.value);
+    if (errMessage != null) {
+      if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
+      isLoading.value = false;
+      return;
     }
+    isLoading.value = false;
   }
 
   //到數可重新發送的時間
@@ -220,7 +148,8 @@ class Step1CheckPhone extends StatelessWidget {
     //先設定值 才開始到數
     _countDownVal.value = _verificationTimeout;
 
-    final countdownTimer = Timer.periodic(
+    if (_countDownTimer != null) _countDownTimer!.cancel();
+    _countDownTimer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
         if (_countDownVal > 0) {
@@ -229,6 +158,111 @@ class Step1CheckPhone extends StatelessWidget {
           timer.cancel();
         }
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      return Column(
+        children: [
+          const Text('請輸入驗證碼', style: TextStyle(fontSize: 28)),
+          const SizedBox(height: 20),
+          PinCodeTextField(
+            keyboardType: TextInputType.number,
+            appContext: context,
+            length: 6,
+            onChanged: (value) {
+              _verificationCode.value = value;
+            },
+            pinTheme: PinTheme(
+              activeColor: KampoColors.primary,
+              inactiveColor: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 22),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 210,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _verificationCode.value.length == 6?
+                    checkVerificationCode: null,
+                  child: const Text('認證', style: TextStyle(fontSize: 22)),
+                ),
+              ),
+              const SizedBox(width: 20),
+              TextButton(
+                onPressed: widget.onCancel,
+                child: const Text('取消', style: TextStyle(fontSize: 22)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 38),
+          if (_countDownVal.value <= 0)
+            TextButton(
+              onPressed: () {
+                getVerificationCode(context);
+              },
+              child: const Text(
+                "重新發送",
+                style: TextStyle(fontSize: 22, color: Colors.red),
+              ),
+            )
+          else
+            Text(
+              '${_countDownVal.value}秒後可重新傳送',
+              style: const TextStyle(fontSize: 18),
+            ),
+        ],
+      );
+    });
+  }
+}
+
+
+class Step1CheckPhone extends StatefulWidget {
+  final RegisterAccountController registerController;
+  const Step1CheckPhone({
+    super.key,
+    required this.registerController
+  });
+
+  @override
+  State<Step1CheckPhone> createState() => _Step1CheckPhoneState();
+}
+
+class _Step1CheckPhoneState extends State<Step1CheckPhone> {
+  late RegisterAccountController registerController;
+  final stage = Step1Stage.inputPhone.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    registerController = widget.registerController;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Container(
+        margin: const EdgeInsets.all(20),
+        child: stage.value == Step1Stage.inputPhone?
+          PhoneNumberInput(
+            registerController: registerController,
+            onPhoneLock: () => stage.value = Step1Stage.codeVerification,
+          ):
+          StepCheckVerification(
+            registerController: registerController,
+            onCancel: () => stage.value = Step1Stage.inputPhone,
+          ),
+      ),
     );
   }
 }
