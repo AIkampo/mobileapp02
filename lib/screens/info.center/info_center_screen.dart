@@ -20,6 +20,9 @@ class _InfoCenterScreenState extends State<InfoCenterScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    return const Center(child: Text("建置中...", style: TextStyle(fontSize: 25)));
+
+    // TODO
     return Center(
       child: ListView.builder(
           padding: EdgeInsets.all(10),

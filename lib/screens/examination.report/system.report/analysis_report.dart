@@ -1,7 +1,13 @@
-import 'package:ai_kampo_app/common/config.dart';
-import 'package:ai_kampo_app/controller/examination_report_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:ai_kampo_app/models/nine_system_model.dart';
+import 'package:ai_kampo_app/common/config.dart';
+import 'package:ai_kampo_app/controller/examination_report_controller.dart';
+import 'package:ai_kampo_app/models/link_metadata.dart';
+
 
 class AnalysisReport extends StatefulWidget {
   const AnalysisReport({super.key});
@@ -12,36 +18,45 @@ class AnalysisReport extends StatefulWidget {
 
 class _AnalysisReportState extends State<AnalysisReport> {
   final _examinationReportController = Get.find<ExaminationReportController>();
+  late NineSystemModel organData;
+
+  @override
+  void initState() {
+    super.initState();
+    organData = Get.arguments['organData'];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(((context, index) {
-          return Card(
-            child: ListTile(
-              title: Text("${_examinationReportController.organSystemList[index].name}"),
-              trailing: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: KampoColors.getOrganSystemScoreColor(
-                      _examinationReportController.organSystemList[index].d!),
-                ),
-                width: 30,
-                height: 30,
-                child: Text(
-                  Examination.getScoreText(_examinationReportController.organSystemList[index].d!),
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Examination.getScoreTextColor(
-                          _examinationReportController.organSystemList[index].d!)),
+    return Obx(() {
+      List<LinkMetaData> linkData =
+        _examinationReportController.linkListState[organData.indexName]!.data;
+      return SliverPadding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        sliver: SliverList(
+          delegate: SliverChildBuilderDelegate(((context, index) {
+            return Card(
+              child: ListTile(
+                title: TextButton(
+                  onPressed: () async {
+                    final Uri url = Uri.parse(linkData[index].link);
+                    if (!await launchUrl(url)) {
+                      Get.snackbar("失敗", "無法開啟網址連結");
+                      throw Exception(
+                        "Could not launch ${linkData[index].link}");
+                    }
+                  },
+                  child: Obx(() {
+                    return Text(
+                      linkData[index].title, style: const TextStyle(fontSize: 20),
+                    );
+                  }),
                 ),
               ),
-            ),
-          );
-        }), childCount: _examinationReportController.organSystemList.length),
-      ),
-    );
+            );
+          }), childCount: linkData.length),
+        ),
+      );
+    });
   }
 }

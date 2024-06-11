@@ -7,10 +7,15 @@ import 'package:ai_kampo_app/screens/healthy.guidance/nutrients_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HealthyGuidanceView extends StatelessWidget {
-  HealthyGuidanceView({
-    Key? key,
-  }) : super(key: key);
+
+class HealthyGuidanceView extends StatefulWidget {
+  const HealthyGuidanceView({super.key});
+
+  @override
+  State<HealthyGuidanceView> createState() => _HealthyGuidanceViewState();
+}
+
+class _HealthyGuidanceViewState extends State<HealthyGuidanceView> {
   final List dataList = [
     {
       "screen": () => DietScreen(),
@@ -41,8 +46,15 @@ class HealthyGuidanceView extends StatelessWidget {
   final _healthyGuidanceController = Get.find<HealthyGuidanceController>();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _healthyGuidanceController.initHealthyGuidanceData(Get.arguments['caseId']);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _healthyGuidanceController.initHealthyGuidanceData(Get.arguments['caseId']);
 
     return CustomScrollView(
       slivers: [

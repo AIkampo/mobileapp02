@@ -1,13 +1,13 @@
+import 'package:ai_kampo_app/screens/physical.examination/confirm_points.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:ai_kampo_app/models/user_model.dart';import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
 import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
 import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
-import 'package:ai_kampo_app/screens/physical.examination/examination_tips_screen.dart';
 
 import '../../utils/utils.dart';
 
@@ -39,8 +39,8 @@ class ExaminationButton extends StatelessWidget {
                 if (_accountController.isFamilyHolder.value) {
                   _showAccountMenu(context);
                 } else {
-                  _physicalExaminationController.phoneNumber.value =
-                    _accountController.userPhoneNumber.value;
+                  _physicalExaminationController.selectedUser.value =
+                    _accountController.userData.value;
                   handleGoToScreen(_accountController.userId.value);
                 }
               },
@@ -53,6 +53,9 @@ class ExaminationButton extends StatelessWidget {
 
 //判別是否已超過一個月沒有進行 體質表 評估
   Future<bool> shouldDoEvaluation(String uid) async {
+    // TODO: currently by pass, add rating form later
+    return false;
+
     UserData? userData = _accountController.uidToUserData(uid);
     if (userData != null) {
       if (userData.lastPhysiqueRatingDateTime == null) {
@@ -89,8 +92,10 @@ class ExaminationButton extends StatelessWidget {
           // for main account
           CupertinoActionSheetAction(
             onPressed: () async {
-              _physicalExaminationController.phoneNumber.value =
-                _accountController.userPhoneNumber.value;
+              _physicalExaminationController.selectedUser.value =
+                _accountController.userData.value!;
+              _accountController.selectedUser.value =
+                _accountController.userData.value!;
               _tcmController.selectUser(_accountController.userData.value!);
               handleGoToScreen(_accountController.userId.value);
             },
@@ -109,8 +114,8 @@ class ExaminationButton extends StatelessWidget {
           ..._accountController.subAccountsData.map(
             (account) => CupertinoActionSheetAction(
               onPressed: () async {
-                _physicalExaminationController.phoneNumber.value =
-                  account.phoneNumber;
+                _physicalExaminationController.selectedUser.value = account;
+                _accountController.selectedUser.value = account;
                 _tcmController.selectUser(account);
                 handleGoToScreen(account.uid);
               },
@@ -154,7 +159,7 @@ class ExaminationButton extends StatelessWidget {
      if (await shouldDoEvaluation(uid)) {
         Get.toNamed("/tcm.nine.constitutions");
      } else {
-        Get.to(() => ExaminationTipsScreen());
+        Get.toNamed("/confirm.points");
      }
   }
 }

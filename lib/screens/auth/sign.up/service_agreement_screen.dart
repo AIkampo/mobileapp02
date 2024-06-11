@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../widgets/kampo_dialog.dart';
 
@@ -17,133 +18,76 @@ class ServiceAgreementScreen extends StatefulWidget {
 
 class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
   final AccountController _accountController = Get.find<AccountController>();
-  int _index = 0;
   bool _agreeServiceAgreement = false;
+
+  Future<void> redirectServiceTerm() async {
+    String urlLink = "https://www.aikampo.com/home/%e3%80%90%e9%97%9c%e6%96%bc%e6%88%91%e5%80%91%e3%80%91/%e9%9a%b1%e7%a7%81%e6%ac%8a/";
+    Uri url = Uri.parse(urlLink);
+    if (!await launchUrl(url)) {
+      if (mounted) {
+        KampoDialog.confirmToPop(context, "無法開啟連結", "無法開啟連結");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var steps = [
-      Step(
-        isActive: _index > 0,
-        title: Text("服務條款協議"),
-        content: Column(
-          children: [
-            Text(
-                "    本公司服務條款包括所列規範，《隱私權政策》、《商業條款》、《使用者準則》、《智慧財產權法規》所載的條文。如您註冊或使用AIKAMPO APP，即視為您已確認接受有關條款並同意使用AIKAMPO APP。"),
-            Text("    本系統需連接網路來獲取您的資訊，使用過程中會使用您的手機數據，所以建議您在有Wifi的情況下進行檢測。"),
-            Text("    爲了可以提供更完善的服務，本系統會收集您的個人資訊和檢測結果，我們會將其資料保密，妥善保護您的隱私。"),
-            Text("    本系統為非臨床醫學診斷，您當下的狀況、生活環境、心理情緒、用藥等都會影響您的檢測結果，請確保自身狀況再進行檢測。"),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child:
-                  CupertinoButton.filled(child: Text('confirm'.tr), onPressed: () => _nextStep()),
-            )
-          ],
-        ),
-      ),
-      Step(
-        isActive: _index > 1,
-        title: Text("個資法"),
-        content: Column(children: [
-          Text("個資法"),
-          SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: CupertinoButton.filled(child: Text('confirm'.tr), onPressed: () => _nextStep()),
-          ),
-        ]),
-      ),
-      Step(
-        isActive: _index > 2,
-        title: Text("免責聲明"),
-        content: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          width: double.infinity,
-          child: Column(
-            children: [
-              Text("免責聲明"),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _agreeServiceAgreement = !_agreeServiceAgreement;
-                      });
-                    },
-                    icon: Icon(_agreeServiceAgreement
-                        ? Icons.check_circle_outline
-                        : Icons.circle_outlined),
-                  ),
-                  Text("同意AI Kampo服務協議"),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: CupertinoButton.filled(
-                  child: Text("確認"),
-                  onPressed: () {
-                    if (!_agreeServiceAgreement) {
-                      _showAlertDialog();
-                    } else {
-                      confirmAgreement();
-                    }
-                  },
-                ),
-              )
-            ],
-          ),
-        ),
-      )
-    ];
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
       ),
-      body: Stepper(
-        currentStep: _index,
-        onStepCancel: _prevStep,
-        onStepContinue: _nextStep,
-        onStepTapped: null, //_skipStep,
-        steps: steps,
-        controlsBuilder: (context, details) {
-          return SizedBox.shrink();
-        },
+      body: Column(
+        children: [
+          const Expanded(child: Divider(color: Colors.transparent)),
+          TextButton(
+            onPressed: redirectServiceTerm,
+            child: const Text("服務條款連結", style: TextStyle(fontSize: 20)),
+          ),
+          const Expanded(child: Divider(color: Colors.transparent)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _agreeServiceAgreement = !_agreeServiceAgreement;
+                  });
+                },
+                icon: Icon(
+                  _agreeServiceAgreement?
+                    Icons.check_circle_outline: Icons.circle_outlined
+                ),
+              ),
+              const Text("同意AI Kampo服務協議"),
+            ],
+          ),
+          const Divider(color: Colors.transparent, height: 15),
+          Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: CupertinoButton.filled(
+              child: Text("確認"),
+              onPressed: () {
+                if (!_agreeServiceAgreement) {
+                  _showAlertDialog();
+                } else {
+                  confirmAgreement();
+                }
+              },
+            ),
+          )
+        ],
       ),
     );
   }
 
-  void _nextStep() {
-    if (_index >= 0) {
-      setState(() {
-        _index += 1;
-      });
-    }
-  }
-
-  void _prevStep() {
-    if (_index > 0) {
-      setState(() {
-        _index -= 1;
-      });
-    }
-  }
-
   void confirmAgreement() async {
-    String? errMessage = await _accountController.updateUserData(
+    Future updateTask = _accountController.updateUserData(
       uid: _accountController.userId.value,
       agreeServiceAgreement: true,
     );
+    await Get.toNamed("/progress.loading", arguments: {"task": updateTask});
+    String? errMessage = await updateTask;
     if (errMessage != null) {
       if (mounted) await KampoDialog.confirmToPop(context, '', errMessage);
     }

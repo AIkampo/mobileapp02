@@ -34,10 +34,14 @@ class KampoConfig {
 class KampoColors {
   static const primary = Color(0xFF7890C8);
   static const secondary = Color(0xFFB6ADDE);
-  static const scoreGreen = Color(0xFF9ECE6D);
-  static const scoreYellow = Color(0xFFEDDA80);
-  static const scoreOrange = Color(0xFFFCCD9B);
-  static const scoreRed = Color(0xFFF28A8A);
+  static const scoreGreen = Color(0xFF669933);
+  static const scoreLightGreen = Color(0xFF9ECE6D);
+  static const scoreYellow = Color(0xFFE2C636);
+  static const scoreLightYellow = Color(0xFFEDDA80);
+  static const scoreOrange = Color(0xFFF99C39);
+  static const scoreLightOrange = Color(0xFFFCCD9B);
+  static const scoreRed = Color(0xFFED5E5E);
+  static const scoreLightRed = Color(0xFFF28A8A);
   static Color getScoreColor(int score) {
     Color scoreColor;
     if (score >= 70) {
@@ -48,6 +52,19 @@ class KampoColors {
       scoreColor = KampoColors.scoreOrange;
     } else {
       scoreColor = KampoColors.scoreRed;
+    }
+    return scoreColor;
+  }
+  static Color getLightModeScoreColor(int score) {
+    Color scoreColor;
+    if (score >= 70) {
+      scoreColor = KampoColors.scoreLightGreen;
+    } else if (score >= 50) {
+      scoreColor = KampoColors.scoreLightYellow;
+    } else if (score >= 20) {
+      scoreColor = KampoColors.scoreLightOrange;
+    } else {
+      scoreColor = KampoColors.scoreLightRed;
     }
     return scoreColor;
   }

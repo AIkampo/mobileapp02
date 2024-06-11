@@ -32,7 +32,7 @@ Color getTestFontColor(int score) {
 }
 
 String caseIdToDatetime(String caseId) {
-  return DateFormat('yyyy/MM/dd').format(
+  return DateFormat('yyyy/MM/dd HH:mm').format(
     DateTime.fromMillisecondsSinceEpoch(
       int.parse(caseId),
     ),

@@ -67,16 +67,17 @@ class BuildHistoryListView extends StatelessWidget {
 
   final List dataList;
   final _examinationListController = Get.find<ExaminationListController>();
-  final _examinationReportController = Get.find<ExaminationReportController>();
   final _accountController = Get.find<AccountController>();
 
   Future<void> handleGetData() async {
     String targetPhone = _accountController.selectedUser.value != null?
-    _accountController.selectedUser.value!.phoneNumber:
-    _accountController.userPhoneNumber.value;
-    print("targetPhone: $targetPhone");
-    await _examinationReportController.fetchUserProfilePhone(targetPhone);
-    await _examinationListController.fetchExaminationList(targetPhone);
+      _accountController.selectedUser.value!.phoneNumber:
+      _accountController.userPhoneNumber.value;
+    String? targetName = _accountController.selectedUser.value == null?
+      null: _accountController.selectedUser.value!.noPhoneUser?
+      _accountController.selectedUser.value!.username: null;
+    await _examinationListController.fetchExaminationList(
+      phoneNumber: targetPhone, name: targetName);
   }
 
   @override

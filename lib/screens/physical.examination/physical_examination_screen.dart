@@ -31,6 +31,8 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
   final _currentCarouselIndex = 1.obs;
   final CarouselController _carouselcontroller = CarouselController();
   final _accountController = Get.find<AccountController>();
+  final _physicalExaminationController =
+    Get.find<PhysicalExaminationController>();
   List tipsList = [
     {
       "title": "「健康指引」提供許多適合您體質的東西。",
@@ -257,15 +259,12 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
         throw Exception("Can't get caseId!");
       }
 
-      if (_accountController.selectedUser.value == null) {
+      if (_physicalExaminationController.selectedUser.value == null) {
         KampoDialog.confirmAndOffAllNamed(context, "無法取得使用者資訊！", "", "main");
       }
-      await _accountController.refreshAllAccountsInfo();
-      Get.find<ExaminationReportController>().setUserProfile(
-        _accountController.selectedUser.value!);
       doSendExaminationData(
         caseId,
-        _accountController.selectedUser.value!,
+        _physicalExaminationController.selectedUser.value!,
         examinationData,
       );
     }).catchError((e) {
@@ -288,12 +287,15 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
       "BloodGroup": userProfile.bloodType,
       "Rhesus": userProfile.rh,
       "Reseller": "tw-00026",
+      "oberonType": "BT",
       "oberonSerial": _headsetId,
       "oberonData": examinationData,
-      "oberMac": _headsetId
+      "oberMac": _headsetId,
+      "devicePlatform": "MOBILE",
     }).then((res) {
       final ExaminationModel examinationData =
           ExaminationModel.fromJson(jsonDecode(res.toString()));
+      _physicalExaminationController.consumeQuota();
 
       if (examinationData.success!) {
         _isAnalysing.value = true;

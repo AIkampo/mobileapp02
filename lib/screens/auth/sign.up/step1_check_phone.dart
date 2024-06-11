@@ -110,9 +110,6 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
   void initState() {
     super.initState();
     registerController = widget.registerController;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      getVerificationCode(context);
-    });
   }
 
   Future<void> getVerificationCode(context) async {

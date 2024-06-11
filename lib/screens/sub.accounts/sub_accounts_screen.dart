@@ -538,15 +538,22 @@ class _FamilyMemberContentState extends State<FamilyMemberContent> {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            ElevatedButton(
+              onPressed: confirmToCreateDialog,
+              child: const Text("建立家庭", style: TextStyle(fontSize: 20)),
+            ),
+            const Divider(color: Colors.transparent),
             const Text(
               "您的帳號類別目前為個人用戶",
               style: TextStyle(fontSize: 22),
             ),
             const Divider(color: Colors.transparent),
-            ElevatedButton(
-              onPressed: confirmToCreateDialog,
-              child: const Text("建立家庭", style: TextStyle(fontSize: 20)),
-            )
+            TextButton(
+              onPressed: refreshMemberList,
+              child: const Text(
+                "重新整理", style: TextStyle(fontSize: 20),
+              ),
+            ),
           ],
         );
       }

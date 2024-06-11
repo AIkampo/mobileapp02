@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:ai_kampo_app/models/user_report_list.dart';
 import 'package:dio/dio.dart';
+
 
 class OberonAPI {
   static const apiUrl =
@@ -25,6 +28,51 @@ class OberonAPI {
     );
   }
 
+  static Future<UserReportListData?> getUserDataFromCaseId(
+    String caseId,
+  ) async {
+    Response response = await Dio().post(
+      "$apiUrl/User/UserReportList",
+      options: Options(headers: headers),
+      data: jsonEncode({
+        "reseller_no": "tw-00026",
+        "reseller_tel1": "0277552030",
+      }),
+    );
+    for (Map<String, dynamic> data in response.data) {
+      // check testing time and keep latest data
+      UserReportListData iterateData = UserReportListData.fromJson(data);
+      if (iterateData.id == caseId) {
+        return iterateData;
+      }
+    }
+    return null;
+  }
+
+  static Future<List<String>> getExaminationListByName({
+    required String phoneNumber,
+    required String name,
+  }) async {
+    Response response = await Dio().post(
+      "$apiUrl/User/UserReportList",
+      options: Options(headers: headers),
+      data: jsonEncode({
+        "reseller_no": "tw-00026",
+        "reseller_tel1": "0277552030",
+      }),
+    );
+    // TODO: currently only store case ID
+    List<String> caseId = [];
+    for (Map<String, dynamic> data in response.data) {
+      // check testing time and keep latest data
+      UserReportListData iterateData = UserReportListData.fromJson(data);
+      if (iterateData.name == name && iterateData.tel1 == phoneNumber) {
+        caseId.add(iterateData.id?? "");
+      }
+    }
+    return caseId;
+  }
+
   static Future getGermsData(String caseId) {
     return Dio().get(
       "$apiUrl/Score/8/$caseId",
@@ -41,7 +89,7 @@ class OberonAPI {
 
   static Future getOrganSystemData(String organ, String caseId) {
     return Dio().get(
-      "$apiUrl/Score/$organ/7/$caseId",
+      "https://api.aikampo.com/api/Score/$organ/7/$caseId",
       options: Options(headers: headers),
     );
   }

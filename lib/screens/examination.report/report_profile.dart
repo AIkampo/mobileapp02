@@ -14,41 +14,51 @@ class ReportProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Card(
+    return Obx(() {
+      if (_examinationReportController.isUserProfileLoading.value) {
+        return const Card(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "檢測日期",
-                  style: TextStyle(color: Colors.red, fontSize: 22),
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  caseIdToDatetime(_examinationReportController.reportCaseId.value),
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text("載入個人資料中...")
+            )
+          ),
+        );
+      }
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "檢測日期",
+                    style: TextStyle(color: Colors.red, fontSize: 22),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    caseIdToDatetime(_examinationReportController.reportCaseId.value),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: _examinationReportController.userProfile.value == null?
-                SizedBox.shrink():
-                Column(
+          Expanded(
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
                   children: [
                     Row(
                       children: [
-                        _examinationReportController.userProfile.value!.sex == "M"
+                        _examinationReportController.sex.value == "M"
                             ? Icon(
                                 Icons.man,
                                 color: Colors.blue,
@@ -61,7 +71,7 @@ class ReportProfile extends StatelessWidget {
                           width: 2,
                         ),
                         Text(
-                          _examinationReportController.userProfile.value!.username,
+                          _examinationReportController.name.value,
                           style: TextStyle(fontSize: 22),
                         ),
                       ],
@@ -77,7 +87,7 @@ class ReportProfile extends StatelessWidget {
                           color: Colors.red,
                         ),
                         Text(
-                          '${UserProfile.bloodTypeList[int.parse(_examinationReportController.userProfile.value!.bloodType)]}型',
+                          '${_examinationReportController.bloodGroup.value}型',
                           style: TextStyle(fontSize: 18),
                         ),
                         SizedBox(
@@ -88,17 +98,18 @@ class ReportProfile extends StatelessWidget {
                           color: Colors.pink,
                         ),
                         Text(
-                          DateFormat("yyyy/MM/dd").format(_examinationReportController.userProfile.value!.birthday!),
+                          _examinationReportController.birth.value,
                           style: TextStyle(fontSize: 18),
                         ),
                       ],
                     )
                   ],
                 ),
+              ),
             ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

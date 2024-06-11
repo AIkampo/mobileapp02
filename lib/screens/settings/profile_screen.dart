@@ -101,6 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               name: 'birthday',
                               initialEntryMode: DatePickerEntryMode.calendar,
                               initialValue: DateTime.now(),
+                              lastDate: DateTime.now(),
                               inputType: InputType.date,
                               decoration: InputDecoration(
                                 filled: true,

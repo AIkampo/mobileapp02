@@ -28,15 +28,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       "icon": CupertinoIcons.person_crop_circle,
       "screen": () => ProfileScreen()
     },
-    {"title": "faq", "icon": CupertinoIcons.question_circle, "screen": () => FAQ_SCREEN()},
-    {"title": "manual", "icon": Icons.auto_stories_outlined, "screen": () => UserGuideScreen()},
-    {"title": "contactUs", "icon": Icons.phone_in_talk_outlined, "screen": () => ContactUsScreen()},
+    // {"title": "faq", "icon": CupertinoIcons.question_circle, "screen": () => FAQ_SCREEN()},
+    // {"title": "manual", "icon": Icons.auto_stories_outlined, "screen": () => UserGuideScreen()},
+    // {"title": "contactUs", "icon": Icons.phone_in_talk_outlined, "screen": () => ContactUsScreen()},
     {
       "title": "chatCustomerService",
       "icon": Icons.forum_outlined,
       "screen": () => IntelligentCustomerServiceScreen()
     },
-    {"title": "language", "icon": Icons.g_translate, "screen": () => LanguageScreen()},
+    // {"title": "language", "icon": Icons.g_translate, "screen": () => LanguageScreen()},
     {"title": "signOut", "icon": Icons.logout, "screen": "/sign.in"},
   ];
 

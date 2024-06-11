@@ -166,8 +166,10 @@ class _Step2SubAccountPhoneState extends State<Step2SubAccountPhone> {
 
   Future<void> onConfirm() async {
     FocusManager.instance.primaryFocus?.unfocus();
-    String? errMessage = await subAccountController
+    Future addTask = subAccountController
       .addExistedSubAccount(_phoneNumber.value);
+    await Get.toNamed("/progress.loading", arguments: {"task": addTask});
+    String? errMessage = await addTask;
     if (errMessage == null) {
       widget.onNext();
     }
@@ -252,19 +254,21 @@ class _Step2SubAccountProfileState extends State<Step2SubAccountProfile> {
       return;
     }
     FocusManager.instance.primaryFocus?.unfocus();
-    String? errMessage = await subAccountController.addNoPhoneAccount(
+    Future addTask = subAccountController.addNoPhoneAccount(
       username: _subAccountFormkey.currentState!.fields["username"]?.value,
       birthday: _subAccountFormkey.currentState!.fields["birthday"]?.value,
       sex: _subAccountFormkey.currentState!.fields["sex"]?.value,
       rh: _subAccountFormkey.currentState!.fields["rh"]?.value,
       bloodType: _subAccountFormkey.currentState!.fields["bloodType"]?.value,
     );
+    await Get.toNamed("/progress.loading", arguments: {"task": addTask});
+    String? errMessage = await addTask;
     if (errMessage == null) {
       widget.onNext();
     }
     else {
       if (mounted) {
-        KampoDialog.confirmToPop(context, "無法建立家庭", errMessage);
+        KampoDialog.confirmToPop(context, "無法送出家庭邀請", errMessage);
       }
     }
   }

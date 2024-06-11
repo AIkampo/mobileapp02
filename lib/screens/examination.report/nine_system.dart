@@ -2,6 +2,7 @@
 
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/controller/examination_report_controller.dart';
+import 'package:ai_kampo_app/models/nine_system_model.dart';
 import 'package:ai_kampo_app/screens/examination.report/system.report/system_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,93 +13,92 @@ class NineSystem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-        padding: const EdgeInsets.all(12),
-        sliver: Obx(
-          () => SliverGrid(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return InkWell(
-                  onTap: () {
-                    _examinationReportController.fetchOrganSystemData(
-                        _examinationReportController.nineSystemList[index].indexName!,
-                        _examinationReportController.reportCaseId.value);
-                    Get.to(
-                      () => const SystemReportScreen(),
-                      arguments: {
-                        "organData": _examinationReportController.nineSystemList[index]
-                      },
-                    );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                      color: KampoColors.getScoreColor(
-                          _examinationReportController.nineSystemList[index].score!),
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Obx(() {
+        List<NineSystemModel> nineSystemData =
+          _examinationReportController.nineSystemList;
+        return GridView.count(
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(10),
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          crossAxisCount: 3,
+          children: nineSystemData.map(
+            (data) => InkWell(
+              onTap: () {
+                Get.to(
+                  () => const SystemReportScreen(),
+                  arguments: {"organData": data},
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      KampoColors.getScoreColor(data.score!),
+                      KampoColors.getLightModeScoreColor(data.score!)
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade400,
+                      blurRadius: 3,
+                      offset: const Offset(6, 6),
                     ),
-                    child: Column(
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              margin: const EdgeInsets.only(top: 2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: const Color.fromRGBO(255, 255, 255, 0.6),
-                              ),
-                              child: Image(
-                                  width: 42,
-                                  height: 42,
-                                  image: AssetImage(
-                                      _examinationReportController.nineSystemList[index].img!)),
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "${_examinationReportController.nineSystemList[index].score}",
-                                  style: TextStyle(
-                                    color: getFontColor(
-                                        _examinationReportController.nineSystemList[index].score!),
-                                    fontSize: 26,
-                                  ),
-                                ),
-                                Text(
-                                  "分",
-                                  style: TextStyle(
-                                    color: getFontColor(
-                                        _examinationReportController.nineSystemList[index].score!),
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                        Expanded(
+                          child: Image(
+                            fit: BoxFit.fitHeight,
+                            image: AssetImage(data.img?? ""),
+                          ),
                         ),
-                        Text(
-                          _examinationReportController.nineSystemList[index].name!,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1,
-                              color: Colors.white),
-                        )
+                        const VerticalDivider(color: Colors.transparent),
+                        Center(
+                            child: Text(
+                              "${data.score}",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 26,
+                              ),
+                            )
+                        ),
+                        const VerticalDivider(color: Colors.transparent),
                       ],
                     ),
-                  ));
-            }, childCount: _examinationReportController.nineSystemList.length),
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 170.0,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-              childAspectRatio: 1.0,
+                    Positioned(
+                      bottom: 10,
+                      right: 10,
+                      child: Text(
+                        data.meridianName?? "",
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ));
+          ).toList(),
+        );
+      }),
+    );
   }
 
   Color getBackgroundColor(int score) {

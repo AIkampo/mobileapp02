@@ -17,13 +17,15 @@ class ExaminationListScreen extends StatefulWidget {
 
 class _ExaminationListScreenState extends State<ExaminationListScreen> {
   final _examinationListController = Get.find<ExaminationListController>();
-  final _examinationReportController = Get.find<ExaminationReportController>();
   final _accountController = Get.find<AccountController>();
 
   @override
   void initState() {
     super.initState();
-    handleGetData();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      handleGetData();
+    });
+    print("isFamilyHolder: ${_accountController.isFamilyHolder.value}");
   }
 
   @override
@@ -72,8 +74,7 @@ class _ExaminationListScreenState extends State<ExaminationListScreen> {
                 return Column(
                   children: [
                     TheLastExaminationReportButton(),
-                    _examinationListController.caseIdList.length > 1?
-                      HistoryExaminationList(): const SizedBox.shrink(),
+                    HistoryExaminationList(),
                   ],
                 );
               }
@@ -88,8 +89,10 @@ class _ExaminationListScreenState extends State<ExaminationListScreen> {
     String targetPhone = _accountController.selectedUser.value != null?
       _accountController.selectedUser.value!.phoneNumber:
       _accountController.userPhoneNumber.value;
-    print("targetPhone: $targetPhone");
-    await _examinationReportController.fetchUserProfilePhone(targetPhone);
-    await _examinationListController.fetchExaminationList(targetPhone);
+    String? targetName = _accountController.selectedUser.value == null?
+      null: _accountController.selectedUser.value!.noPhoneUser?
+        _accountController.selectedUser.value!.username: null;
+    await _examinationListController.fetchExaminationList(
+      phoneNumber: targetPhone, name: targetName);
   }
 }

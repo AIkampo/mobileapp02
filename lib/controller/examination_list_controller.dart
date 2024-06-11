@@ -1,4 +1,7 @@
 import 'package:ai_kampo_app/api/oberon_api.dart';
+import 'package:ai_kampo_app/api/user.dart';
+import 'package:ai_kampo_app/models/user_report_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class ExaminationListController extends GetxController {
@@ -24,28 +27,46 @@ class ExaminationListController extends GetxController {
     theLastCaseId.value = "";
   }
 
-  Future<void> fetchExaminationList(String phoneNumber) async {
+  Future<void> fetchExaminationList({
+    required String phoneNumber,
+    String? name,
+  }) async {
     isExaminationDataLoading.value = true;
     caseIdList.clear();
     weeklyCaseIdList.clear();
     monthlyCaseIdList.clear();
     threeMonthCaseIdList.clear();
-    await OberonAPI.getExaminationList(phoneNumber).then((res) {
-      if (res.data['success']) {
-        List templist = res.data['data'];
+    if (name == null) {
+      await OberonAPI.getExaminationList(phoneNumber).then((res) {
+        if (res.data['success']) {
+          List<String> templist = res.data['data'].cast<String>();
 
-        _sortExaminationList(templist);
-      } else {
+          _updateExaminationList(templist);
+        } else {
+          Get.snackbar("注意", "無法取得檢測列表！");
+        }
+      }).catchError((e) {
+        print(e);
+        isExaminationDataLoading.value = false;
         Get.snackbar("注意", "無法取得檢測列表！");
-      }
-    }).catchError((e) {
-      isExaminationDataLoading.value = false;
-      Get.snackbar("注意", "無法取得檢測列表！");
-    });
+      });
+    }
+    else {
+      await OberonAPI.getExaminationListByName(
+        phoneNumber: phoneNumber,
+        name: name,
+      ).then((res) {
+        _updateExaminationList(res);
+      }).catchError((e) {
+        print(e);
+        isExaminationDataLoading.value = false;
+        Get.snackbar("注意", "無法取得檢測列表！");
+      });
+    }
   }
 
 //依時間排序、分類 檢測清單
-  Future<void> _sortExaminationList(List examinationList) async {
+  Future<void> _updateExaminationList(List<String> examinationList) async {
     if (examinationList.isEmpty) {
       isExaminationDataLoading.value = false;
       return;

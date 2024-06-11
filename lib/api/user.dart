@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
-import 'package:ai_kampo_app/models/family_request.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
+import 'package:ai_kampo_app/models/family_request.dart';
 import 'package:ai_kampo_app/utils/utils.dart';
 import 'package:ai_kampo_app/models/user_model.dart';
-
 import 'family_request.dart';
 
 
@@ -50,6 +48,8 @@ const Map<String, String> joinFamilyErrorTranslate = {
   "family_holder_unset": "請先完成組建家庭的步驟",
   "family_member_max_limit": "家庭成員數量過多（請刪減家庭成員後再嘗試）",
   "member_already_vip": "家庭成員不能為VIP會員",
+  "duplicated_names": "不能使用與家庭主成員或其他無電話成員相同的姓名",
+  "failed_checking_name": "檢查姓名是否可以使用失敗",
 };
 const Map<String, String> leaveFamilyErrorTranslate = {
   "invalid_arguments": "資料不齊全",
@@ -66,6 +66,7 @@ Future<AccountStatus> checkPhoneNumberStatus(String phoneNumber) async {
   await FirebaseFirestore.instance
   .collection("users")
   .where('phoneNumber', isEqualTo: phoneNumber)
+  .where('noPhoneUser', isEqualTo: false)
   .get()
   .then((res) {
     if (res.docs.isNotEmpty) {
@@ -95,6 +96,7 @@ Future<bool> checkPhoneExist(String phoneNumber) async {
   await FirebaseFirestore.instance
   .collection("users")
   .where('phoneNumber', isEqualTo: phoneNumber)
+  .where('noPhoneUser', isEqualTo: false)
   .get()
   .then((res) {
     valid = res.docs.isNotEmpty;
@@ -108,6 +110,7 @@ Future<UserData?> getUserDataByPhone(String phoneNumber) async {
   await FirebaseFirestore.instance
   .collection("users")
   .where('phoneNumber', isEqualTo: phoneNumber)
+  .where('noPhoneUser', isEqualTo: false)
   .get()
   .then((res) {
     if (res.docs.isNotEmpty) {
@@ -168,7 +171,7 @@ Future<void> registerMobileUser({
   }
   catch(e) {
     print(e.toString());
-    throw Exception("HTTP 請求失敗！");
+    rethrow;
   }
 }
 
@@ -507,7 +510,9 @@ class MobileUser {
         .timeout(const Duration(seconds: 15));
         print("joinFamily Result: ${result.data}");
         if (false == result.data["success"]) {
-          throw Exception(result.data["status"]);
+          throw Exception(
+            joinFamilyErrorTranslate[result.data["status"]]?? ""
+          );
         }
         else {
           String memberUid = result.data["memberUid"];

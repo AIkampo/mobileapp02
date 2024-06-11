@@ -50,14 +50,14 @@ class _SignUpStepsScreenState extends State<SignUpStepsScreen> {
   List<Step> get _buildSteps {
     return <Step>[
       Step(
-        isActive: registerController.currentStep.value.index > 0,
+        isActive: registerController.currentStep.value.index >= 0,
         state: registerController.currentStep.value.index > 0?
           StepState.complete: StepState.disabled,
         title: const Text("手機認證"),
         content: Step1CheckPhone(registerController: registerController),
       ),
       Step(
-        isActive: registerController.currentStep.value.index > 1,
+        isActive: registerController.currentStep.value.index >= 1,
         state: registerController.currentStep.value.index > 1?
           StepState.complete:
           StepState.disabled,

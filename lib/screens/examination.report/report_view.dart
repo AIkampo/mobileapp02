@@ -18,30 +18,23 @@ class ReportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => CustomScrollView(
-        slivers: [
-          KampoSliverTitle(title: "您的九大組織系統檢測結果"),
-          const SliverToBoxAdapter(
-            child: Center(
+      () => SingleChildScrollView(
+        child: Column(
+          children: [
+            const KampoTitle(title: "您的九大系統檢測結果"),
+            const Center(
               child: Text(
-                "請點選下方器官圖片擦看深入分析",
+                "請點選下方圖片查看深入分析",
                 style: TextStyle(fontSize: 20),
               ),
             ),
-          ),
-          _examinationReportController.isNineSystemDataLoading.value
-              ? const SliverLoading()
-              : NineSystem(),
-          StatusTips(),
-          KampoSliverTitle(title: "細菌與微生物評估"),
-          _examinationReportController.isGermsDataLoading.value
-              ? const SliverLoading()
-              : GermsAndMicroorganism(),
-          KampoSliverTitle(title: "過敏原評估"),
-          _examinationReportController.isAllergenDataLoading.value
-              ? const SliverLoading()
-              : Allergen()
-        ],
+            _examinationReportController.isNineSystemDataLoading.value?
+              const Center(child: CircularProgressIndicator()): NineSystem(),
+            const Divider(color: Colors.transparent),
+            const StatusTips(),
+            const SizedBox(height: 100),
+          ],
+        ),
       ),
     );
   }

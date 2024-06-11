@@ -187,7 +187,6 @@ class SubAccountController extends GetxController {
         bloodType: bloodType,
       );
       if (memberData != null) {
-        // TODO: error
         Get.find<AccountController>().familyMember.insert(0, memberData.uid);
         Get.find<AccountController>().subAccountsData.insert(0, memberData);
       }
@@ -206,6 +205,21 @@ class SubAccountController extends GetxController {
       await updateFamilyRequest(requestId: requestId, newState: state);
       familyRequests[targetId].state = state;
       familyRequests.refresh();
+      if (state == RegisterState.accepted) {
+        // family member accepts family invitation
+        AccountController accountController = Get.find<AccountController>();
+        await accountController.refreshAllAccountsInfo();
+        // some fields does not change instantly
+        accountController.familyHolder.value =
+          familyRequests[targetId].familyHolder;
+        accountController.familyMember.value =
+          accountController.holderAccountData.value == null? []:
+            accountController.holderAccountData.value!.familyMembers?? [];
+        accountController.membership.value =
+          accountController.holderAccountData.value == null?
+            accountController.membership.value:
+            accountController.holderAccountData.value!.isVip? "": "";
+      }
     }
     catch (e) {
       print(e);

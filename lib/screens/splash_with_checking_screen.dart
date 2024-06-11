@@ -53,6 +53,7 @@ class _SplashWithCheckingScreenState extends State<SplashWithCheckingScreen> {
   }
 
   Future checkAuth() async {
+    await _accountController.refreshAll();
     if (_accountController.userLoggedIn.value) {
       Get.offAllNamed("/main");
     }

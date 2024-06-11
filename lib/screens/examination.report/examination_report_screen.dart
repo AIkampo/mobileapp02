@@ -5,15 +5,28 @@ import 'package:ai_kampo_app/screens/examination.report/report_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ExaminationReportScreen extends StatelessWidget {
-  ExaminationReportScreen({super.key});
 
+class ExaminationReportScreen extends StatefulWidget {
+  const ExaminationReportScreen({super.key});
+
+  @override
+  State<ExaminationReportScreen> createState() => _ExaminationReportScreenState();
+}
+
+class _ExaminationReportScreenState extends State<ExaminationReportScreen> {
   final _examinationReportController = Get.find<ExaminationReportController>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final String caseId = Get.arguments['caseId'];
+      _examinationReportController.setCaseId(caseId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String caseId = Get.arguments['caseId'];
-    _examinationReportController.setCaseId(caseId);
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(

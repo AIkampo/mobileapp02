@@ -1,4 +1,4 @@
-import 'package:ai_kampo_app/screens/sub.accounts/add.sub.account.temp/add_sub_account.dart';
+import 'package:ai_kampo_app/widgets/common/progress_loading.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
-import 'firebase_options.dart';
 
+import 'firebase_options.dart';
 import 'package:ai_kampo_app/controller/initial_bindings.dart';
 import 'package:ai_kampo_app/generated/locales.g.dart';
 import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart';
@@ -26,7 +26,8 @@ import 'package:ai_kampo_app/screens/splash_with_checking_screen.dart';
 import 'package:ai_kampo_app/screens/sub.accounts/sub_accounts_screen.dart';
 import 'package:ai_kampo_app/screens/examination.report/examination_report_screen.dart';
 import 'package:ai_kampo_app/screens/subscribe/subscribe_screen.dart';
-import 'package:ai_kampo_app/tcm.nine.constitutions/tcm_nine_constitutions_screen.dart';
+import 'package:ai_kampo_app/tcm.nine.constitutions/tcm_nine_constitutions_screen.dart';import 'package:ai_kampo_app/screens/physical.examination/confirm_points.dart';
+import 'package:ai_kampo_app/screens/sub.accounts/add.sub.account.temp/add_sub_account.dart';
 
 
 Future main() async {
@@ -38,16 +39,16 @@ Future main() async {
   );
 
   // for emulators
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-  String host = defaultTargetPlatform == TargetPlatform.android?
-  '10.0.2.2' : 'localhost'; // Switch host based on platform.
-  FirebaseFirestore.instance.settings = Settings(
-    host: '$host:8080', sslEnabled: false, persistenceEnabled: false
-  );
-  FirebaseFunctions.instanceFor(region: 'asia-east1')
-    .useFunctionsEmulator(host, 5001);
-  await FirebaseStorage.instance.useStorageEmulator(host, 9199);
+  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  // FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+  // String host = defaultTargetPlatform == TargetPlatform.android?
+  // '10.0.2.2' : 'localhost'; // Switch host based on platform.
+  // FirebaseFirestore.instance.settings = Settings(
+  //   host: '$host:8080', sslEnabled: false, persistenceEnabled: false
+  // );
+  // FirebaseFunctions.instanceFor(region: 'asia-east1')
+  //   .useFunctionsEmulator(host, 5001);
+  // await FirebaseStorage.instance.useStorageEmulator(host, 9199);
 
   runApp(const AIKampoApp());
 }
@@ -93,7 +94,14 @@ class AIKampoApp extends StatelessWidget {
         GetPage(name: "/headset.connection", page: () => const HeadsetConnectionScreen()),
         GetPage(name: "/examination.report", page: () => ExaminationReportScreen()),
         GetPage(name: "/examination.tips", page: () => ExaminationTipsScreen()),
-        GetPage(name: "/tcm.nine.constitutions", page: () => const TcmNineConstitutionsScreen())
+        GetPage(name: "/confirm.points", page: () => ConfirmPointScreen()),
+        GetPage(name: "/tcm.nine.constitutions", page: () => const TcmNineConstitutionsScreen()),
+        GetPage(
+          name: "/progress.loading",
+          page: () => const ProgressLoadingPage(),
+          transitionDuration: Duration.zero,
+          opaque: false,
+        )
       ],
       translationsKeys: AppTranslation.translations,
       locale: const Locale('zh', 'TW'),

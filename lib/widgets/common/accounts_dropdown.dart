@@ -14,7 +14,6 @@ class AccountsDropdown extends StatelessWidget {
   AccountsDropdown({super.key});
 
   final _accountController = Get.find<AccountController>();
-  final _reportController = Get.find<ExaminationReportController>();
   final _examinationListController = Get.find<ExaminationListController>();
 
   @override
@@ -44,8 +43,10 @@ class AccountsDropdown extends StatelessWidget {
   Future<void> handleChangeAccount(UserData? userData) async {
     UserData finalData = userData?? _accountController.userData.value!;
     _accountController.selectWithUid(finalData.uid);
-    _reportController.fetchUserProfileUid(finalData.uid);
-    _examinationListController.fetchExaminationList(finalData.phoneNumber);
+    _examinationListController.fetchExaminationList(
+      phoneNumber: finalData.phoneNumber,
+      name: finalData.noPhoneUser? finalData.username: null,
+    );
   }
 
   DropdownMenuItem<UserData> buildAccountMenuItem(UserData account) {

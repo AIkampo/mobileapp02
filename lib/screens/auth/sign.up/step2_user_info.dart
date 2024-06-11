@@ -24,7 +24,6 @@ class Step2UserInfo extends StatefulWidget {
 class _Step2UserInfoState extends State<Step2UserInfo> {
   late RegisterAccountController registerController;
   final _signUpFormKey = GlobalKey<FormBuilderState>();
-  final isLoading = false.obs;
 
   @override
   void initState() {
@@ -68,6 +67,7 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
                     name: 'birthday',
                     initialEntryMode: DatePickerEntryMode.calendar,
                     initialValue: DateTime.now(),
+                    lastDate: DateTime.now(),
                     inputType: InputType.date,
                     decoration: InputDecoration(
                       filled: true,
@@ -142,10 +142,8 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     width: double.infinity,
                     child: CupertinoButton.filled(
+                      onPressed: registerUser,
                       child: Text("confirm".tr),
-                      onPressed: () {
-                        registerUser();
-                      },
                     ),
                   ),
                 ],
@@ -159,17 +157,17 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
     if (!(_signUpFormKey.currentState?.validate()?? false)) {
       return;
     }
-    isLoading.value = true;
-    String? errMessage = await registerController.registerAccount(
+     Future registerTask = registerController.registerAccount(
       username: _signUpFormKey.currentState!.fields["username"]?.value,
       birthday: _signUpFormKey.currentState!.fields["birthday"]?.value,
       sex: _signUpFormKey.currentState!.fields["sex"]?.value,
       rh: _signUpFormKey.currentState!.fields["rh"]?.value,
       bloodType: _signUpFormKey.currentState!.fields["bloodType"]?.value,
     );
+    await Get.toNamed("/progress.loading", arguments: {"task": registerTask});
+    String? errMessage = await registerTask;
     if (errMessage != null) {
       if (mounted) KampoDialog.confirmToPop(context, '', errMessage);
     }
-    isLoading.value = false;
   }
 }

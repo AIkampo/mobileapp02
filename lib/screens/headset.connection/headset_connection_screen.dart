@@ -1,8 +1,10 @@
-import 'package:ai_kampo_app/screens/headset.connection/connection_tips.dart';
-import 'package:ai_kampo_app/screens/headset.connection/headset.list/headset_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
+
+import 'package:ai_kampo_app/screens/headset.connection/connection_tips.dart';
+import 'package:ai_kampo_app/screens/headset.connection/headset.list/headset_list.dart';
+
 
 class HeadsetConnectionScreen extends StatefulWidget {
   const HeadsetConnectionScreen({super.key});

@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   final List<Widget> _screens = [
-    ExaminationListScreen(),
+    const ExaminationListScreen(),
     const InfoCenterScreen(),
     const ClinicsWebviewScreen(),
     const SettingsScreen()
