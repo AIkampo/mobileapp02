@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/gen/flutterblueplus.pbserver.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class ConnectedHeadset extends StatelessWidget {
   const ConnectedHeadset({super.key, required this.headset});

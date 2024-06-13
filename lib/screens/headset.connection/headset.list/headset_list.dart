@@ -61,16 +61,16 @@ class HeadsetList extends StatelessWidget {
     //Disconnect all the connected headsets
     await disconnectHeadset();
 
-    await FlutterBluePlus.instance
-        .startScan(timeout: const Duration(seconds: 10))
-        .then((value) {})
-        .whenComplete(() {
+    await FlutterBluePlus
+    .startScan(timeout: const Duration(seconds: 10))
+    .then((value) {})
+    .whenComplete(() {
       _hlController.isScanning.value = false;
     });
   }
 
   static Future<void> disconnectHeadset() async {
-    List<BluetoothDevice> connectedHeadsets = await FlutterBluePlus.instance.connectedDevices;
+    List<BluetoothDevice> connectedHeadsets = FlutterBluePlus.connectedDevices;
     if (connectedHeadsets.isNotEmpty) {
       for (BluetoothDevice headset in connectedHeadsets) {
         await headset.disconnect();

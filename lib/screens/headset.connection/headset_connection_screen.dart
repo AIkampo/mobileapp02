@@ -33,24 +33,22 @@ class _HeadsetConnectionScreenState extends State<HeadsetConnectionScreen> {
           )
         ],
       ),
-      body: StreamBuilder<BluetoothState>(
-          stream: FlutterBluePlus.instance.state,
-          initialData: BluetoothState.unknown,
+      body: StreamBuilder<BluetoothAdapterState>(
+          stream: FlutterBluePlus.adapterState,
+          initialData: BluetoothAdapterState.unknown,
           builder: (context, snapshot) {
             switch (snapshot.data) {
-              case BluetoothState.turningOn:
+              case BluetoothAdapterState.turningOn:
                 return Container(
                   child: const Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
 
-              case (BluetoothState.on):
+              case (BluetoothAdapterState.on):
                 return HeadsetList();
               default:
-                return ConnectionTips(
-                  bleState: snapshot.data!,
-                );
+                return ConnectionTips();
             }
           }),
     );

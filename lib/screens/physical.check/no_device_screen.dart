@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
+
 class NoDeviceScreen extends StatefulWidget {
   const NoDeviceScreen({super.key});
 
@@ -69,7 +70,7 @@ class _NoDeviceScreenState extends State<NoDeviceScreen> {
                       ),
                       subtitle: Text("尚未開啟"),
                       trailing: CupertinoButton(
-                          onPressed: () => FlutterBluePlus.instance.turnOn(),
+                          onPressed: () => FlutterBluePlus.turnOn(),
                           child: Text("開啟"))),
                   SizedBox(
                     height: 12,

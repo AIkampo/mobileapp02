@@ -6,9 +6,8 @@ import 'package:get/get.dart';
 import 'package:location/location.dart';
 
 class ConnectionTips extends StatelessWidget {
-  ConnectionTips({super.key, required this.bleState});
+  ConnectionTips({super.key});
 
-  final BluetoothState bleState;
   final Location _location = Location();
   final _isLocationEnable = false.obs;
 

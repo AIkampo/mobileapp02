@@ -4,11 +4,12 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 Widget headsetListView() {
   return StreamBuilder<List<ScanResult>>(
-    stream: FlutterBluePlus.instance.scanResults,
+    stream: FlutterBluePlus.onScanResults,
     initialData: const [],
     builder: (context, snapshot) {
       List<BluetoothDevice> oberonHeadsets = [];
       snapshot.data?.forEach((device) {
+        // TODO: TO be tested
         if (device.device.name == "OBERON-Y") {
           oberonHeadsets.add(device.device);
         }
