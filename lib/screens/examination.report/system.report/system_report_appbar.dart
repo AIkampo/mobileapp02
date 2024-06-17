@@ -22,10 +22,10 @@ class SystemReportAppBar extends StatelessWidget {
       actions: [
         Card(
           child: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Column(
               children: [
-                Text(
+                const Text(
                   "參考分數",
                   style: TextStyle(
                     fontSize: 18,
@@ -39,13 +39,6 @@ class SystemReportAppBar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // Container(
-                //     alignment: Alignment.center,
-                //     width: 50,
-                //     decoration: BoxDecoration(
-                //         color: Colors.green[50],
-                //         borderRadius: BorderRadius.circular(3)),
-                //     child: Text("+4"))
               ],
             ),
           ),
@@ -53,7 +46,7 @@ class SystemReportAppBar extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: Image.asset(organData.img!),
-        title: Text(organData.name!),
+        title: Text(organData.meridianName!),
         centerTitle: true,
       ),
     );

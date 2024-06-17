@@ -159,7 +159,10 @@ class _HeadsetListState extends State<HeadsetList> {
     await disconnectHeadset();
 
     await FlutterBluePlus
-    .startScan(timeout: const Duration(seconds: 10))
+    .startScan(
+      timeout: const Duration(seconds: 10),
+      androidUsesFineLocation: true,
+    )
     .then((value) {})
     .whenComplete(() {
       _hlController.isScanning.value = false;
