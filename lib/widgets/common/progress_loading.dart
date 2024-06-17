@@ -45,19 +45,21 @@ class TransparentRoute extends PageRoute<void> {
 }
 
 class ProgressLoadingPage extends StatefulWidget {
-  const ProgressLoadingPage({Key? key}) : super(key: key);
+  final Future task;
+  const ProgressLoadingPage({
+    Key? key,
+    required this.task,
+  }) : super(key: key);
 
   @override
   _ProgressLoadingPageState createState() => _ProgressLoadingPageState();
 }
 
 class _ProgressLoadingPageState extends State<ProgressLoadingPage> {
-  final Future task = Get.arguments['task'];
-
   @override
   void initState() {
     super.initState();
-    task.then((value) => Get.back(result: value))
+    widget.task.then((value) => Get.back(result: value))
       .catchError((err) => Get.back());
   }
 

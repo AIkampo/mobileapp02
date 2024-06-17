@@ -9,6 +9,8 @@ import 'package:ai_kampo_app/controller/register_account_controller.dart';
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 
+import '../../../widgets/common/progress_loading.dart';
+
 
 class AddSubAccountStepsScreen extends StatefulWidget {
   const AddSubAccountStepsScreen({super.key});
@@ -168,7 +170,7 @@ class _Step2SubAccountPhoneState extends State<Step2SubAccountPhone> {
     FocusManager.instance.primaryFocus?.unfocus();
     Future addTask = subAccountController
       .addExistedSubAccount(_phoneNumber.value);
-    await Get.toNamed("/progress.loading", arguments: {"task": addTask});
+    await Get.dialog(ProgressLoadingPage(task: addTask));
     String? errMessage = await addTask;
     if (errMessage == null) {
       widget.onNext();
@@ -261,7 +263,7 @@ class _Step2SubAccountProfileState extends State<Step2SubAccountProfile> {
       rh: _subAccountFormkey.currentState!.fields["rh"]?.value,
       bloodType: _subAccountFormkey.currentState!.fields["bloodType"]?.value,
     );
-    await Get.toNamed("/progress.loading", arguments: {"task": addTask});
+    await Get.dialog(ProgressLoadingPage(task: addTask));
     String? errMessage = await addTask;
     if (errMessage == null) {
       widget.onNext();

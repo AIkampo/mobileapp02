@@ -84,7 +84,7 @@ class NineSystem extends StatelessWidget {
                       child: Text(
                         data.meridianName?? "",
                         style: const TextStyle(
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                           color: Colors.white,

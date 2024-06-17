@@ -31,23 +31,29 @@ class _ExaminationReportScreenState extends State<ExaminationReportScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 77,
+          toolbarHeight: 120,
           automaticallyImplyLeading: false,
-          title: ReportProfile(),
-          bottom: const TabBar(tabs: [
-            Tab(
-              child: Text(
-                "檢測結果",
-                style: TextStyle(fontSize: 22),
+          title: Container(
+            color: Colors.white,
+            child: ReportProfile()
+          ),
+          bottom: const TabBar(
+            labelColor: Colors.white,
+            tabs: [
+              Tab(
+                child: Text(
+                  "檢測結果",
+                  style: TextStyle(fontSize: 22),
+                ),
               ),
-            ),
-            Tab(
-              child: Text(
-                "健康指引",
-                style: TextStyle(fontSize: 22),
-              ),
-            )
-          ]),
+              Tab(
+                child: Text(
+                  "健康指引",
+                  style: TextStyle(fontSize: 22),
+                ),
+              )
+            ]
+          ),
         ),
         body: TabBarView(
           children: [

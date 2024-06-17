@@ -8,7 +8,6 @@ Widget bottomView() {
   final hlController = Get.find<HeadsetListContorller>();
 
   return Container(
-    height: 200,
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: const BorderRadius.only(
@@ -16,6 +15,7 @@ Widget bottomView() {
       color: Colors.blue.shade50,
     ),
     child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
           title: const Text(

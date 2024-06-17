@@ -1,3 +1,4 @@
+import 'package:ai_kampo_app/theme.dart';
 import 'package:ai_kampo_app/widgets/common/progress_loading.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,7 +18,6 @@ import 'package:ai_kampo_app/screens/auth/sign.up/service_agreement_screen.dart'
 import 'package:ai_kampo_app/screens/auth/sign.up/sign_up_steps_screen.dart';
 import 'package:ai_kampo_app/screens/auth/sign_in_screen.dart';
 import 'package:ai_kampo_app/screens/common/loading_screen.dart';
-import 'package:ai_kampo_app/screens/healthy.guidance/healthy_guide_screen.dart';
 import 'package:ai_kampo_app/screens/info.center/my.points/my_points_screen.dart';
 import 'package:ai_kampo_app/screens/main/main_screen.dart';
 import 'package:ai_kampo_app/screens/headset.connection/headset_connection_screen.dart';
@@ -62,12 +62,7 @@ class AIKampoApp extends StatelessWidget {
     return GetMaterialApp(
       title: '智能漢方',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFF7890C8),
-          secondary: const Color(0xFFB6ADDE),
-        ),
-      ),
+      theme: kampoTheme,
       initialBinding: InitialBindings(),
       initialRoute: "/splash",
       getPages: [
@@ -87,7 +82,6 @@ class AIKampoApp extends StatelessWidget {
         ),
         GetPage(name: "/subscribe", page: () => const SubscribeScreen()),
         GetPage(name: "/loading", page: () => const LoadingScreen()),
-        GetPage(name: "/healthy.guide", page: () => const HealthyGuideScreen()),
         GetPage(name: "/service.agreement", page: () => const ServiceAgreementScreen()),
         GetPage(name: "/sub.accounts", page: () => const SubAccountsScreen()),
         GetPage(name: "/add.sub.account", page: () => const AddSubAccountStepsScreen()),
@@ -96,12 +90,6 @@ class AIKampoApp extends StatelessWidget {
         GetPage(name: "/examination.tips", page: () => ExaminationTipsScreen()),
         GetPage(name: "/confirm.points", page: () => ConfirmPointScreen()),
         GetPage(name: "/tcm.nine.constitutions", page: () => const TcmNineConstitutionsScreen()),
-        GetPage(
-          name: "/progress.loading",
-          page: () => const ProgressLoadingPage(),
-          transitionDuration: Duration.zero,
-          opaque: false,
-        )
       ],
       translationsKeys: AppTranslation.translations,
       locale: const Locale('zh', 'TW'),

@@ -110,9 +110,10 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
   void initState() {
     super.initState();
     registerController = widget.registerController;
+    getVerificationCode();
   }
 
-  Future<void> getVerificationCode(context) async {
+  Future<void> getVerificationCode() async {
     isLoading.value = true;
     if (!await checkNetwork(context)) {
       isLoading.value = false;
@@ -170,6 +171,7 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
           const Text('請輸入驗證碼', style: TextStyle(fontSize: 28)),
           const SizedBox(height: 20),
           PinCodeTextField(
+            cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             appContext: context,
             length: 6,
@@ -185,16 +187,14 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 210,
-                height: 50,
+              Expanded(
                 child: ElevatedButton(
                   onPressed: _verificationCode.value.length == 6?
                     checkVerificationCode: null,
                   child: const Text('認證', style: TextStyle(fontSize: 22)),
                 ),
               ),
-              const SizedBox(width: 20),
+              const VerticalDivider(width: 20),
               TextButton(
                 onPressed: widget.onCancel,
                 child: const Text('取消', style: TextStyle(fontSize: 22)),
@@ -205,7 +205,7 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
           if (_countDownVal.value <= 0)
             TextButton(
               onPressed: () {
-                getVerificationCode(context);
+                getVerificationCode();
               },
               child: const Text(
                 "重新發送",

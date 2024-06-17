@@ -9,6 +9,8 @@ import 'package:ai_kampo_app/widgets/common/user_avatar.dart';
 import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 import 'package:ai_kampo_app/controller/register_account_controller.dart';
 
+import '../../../widgets/common/progress_loading.dart';
+
 
 class Step2UserInfo extends StatefulWidget {
   final RegisterAccountController registerController;
@@ -164,7 +166,7 @@ class _Step2UserInfoState extends State<Step2UserInfo> {
       rh: _signUpFormKey.currentState!.fields["rh"]?.value,
       bloodType: _signUpFormKey.currentState!.fields["bloodType"]?.value,
     );
-    await Get.toNamed("/progress.loading", arguments: {"task": registerTask});
+    await Get.dialog(ProgressLoadingPage(task: registerTask));
     String? errMessage = await registerTask;
     if (errMessage != null) {
       if (mounted) KampoDialog.confirmToPop(context, '', errMessage);

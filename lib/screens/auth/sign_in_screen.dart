@@ -173,6 +173,7 @@ class _SignInScreenState extends State<SignInScreen> {
               _phoneNumber.value = value;
             },
             decoration: InputDecoration(
+              filled: true,
               prefixIcon: const Icon(Icons.phone_android_sharp),
               border: const OutlineInputBorder(),
               labelText: "phone".tr,

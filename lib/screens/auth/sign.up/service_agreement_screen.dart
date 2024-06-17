@@ -6,6 +6,7 @@ import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../widgets/common/progress_loading.dart';
 import '../../../widgets/kampo_dialog.dart';
 
 
@@ -86,7 +87,7 @@ class _ServiceAgreementScreenState extends State<ServiceAgreementScreen> {
       uid: _accountController.userId.value,
       agreeServiceAgreement: true,
     );
-    await Get.toNamed("/progress.loading", arguments: {"task": updateTask});
+    await Get.dialog(ProgressLoadingPage(task: updateTask));
     String? errMessage = await updateTask;
     if (errMessage != null) {
       if (mounted) await KampoDialog.confirmToPop(context, '', errMessage);

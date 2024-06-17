@@ -58,7 +58,7 @@ class _SplashWithCheckingScreenState extends State<SplashWithCheckingScreen> {
       Get.offAllNamed("/main");
     }
     else {
-      Get.toNamed("/sign.in");
+      Get.offAllNamed("/sign.in");
     }
   }
 

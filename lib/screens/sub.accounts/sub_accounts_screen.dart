@@ -258,7 +258,10 @@ class _FamilyRequestContentState extends State<FamilyRequestContent>
                             )
                               Obx(() {
                                 return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green[700],
+                                    foregroundColor: Colors.white,
+                                  ),
                                   onPressed: loadingRequestId.contains(request.requestId)?
                                     null: () => _onRequestAccept(request.requestId),
                                   child: const Text("確認"),
@@ -272,7 +275,10 @@ class _FamilyRequestContentState extends State<FamilyRequestContent>
                             if (request.state == RegisterState.pending)
                               Obx(() {
                                 return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red[800]),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red[800],
+                                    foregroundColor: Colors.white,
+                                  ),
                                   onPressed: loadingRequestId.contains(request.requestId)?
                                     null: () => _onRequestReject(request.requestId),
                                   child: const Text("拒絕"),
@@ -458,6 +464,7 @@ class _FamilyMemberContentState extends State<FamilyMemberContent> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red[800],
+                        foregroundColor: Colors.white,
                       ),
                       onPressed: confirmToDismissDialog,
                       child: const Text("解散家庭", style: TextStyle(fontSize: 16)),

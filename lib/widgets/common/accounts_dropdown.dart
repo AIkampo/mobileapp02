@@ -20,7 +20,10 @@ class AccountsDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       if (_accountController.userData.value == null) return Container();
-      if (false == _accountController.isFamilyHolder.value) {
+      if (
+        false == _accountController.isFamilyHolder.value ||
+        _accountController.subAccountsData.isEmpty
+      ) {
         return buildAccountMenuItem(_accountController.userData.value!);
       }
       return DropdownButton<UserData>(

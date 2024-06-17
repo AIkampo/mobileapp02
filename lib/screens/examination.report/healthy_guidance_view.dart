@@ -19,27 +19,27 @@ class _HealthyGuidanceViewState extends State<HealthyGuidanceView> {
   final List dataList = [
     {
       "screen": () => DietScreen(),
-      "title": "健康飲食指引",
+      "title": "健康飲食",
       "icon": "assets/icons/diet.png"
     },
     {
       "screen": () => NutrientsScreen(),
-      "title": "微量營養素指引",
+      "title": "微量營養素",
       "icon": "assets/icons/nutrients.png"
     },
     {
       "screen": () => ColorScreen(),
-      "title": "正能量顔色指引",
+      "title": "正能量顔色",
       "icon": "assets/icons/color.png"
     },
     {
       "screen": () => AcupunctureScreen(),
-      "title": "能量針灸指引",
+      "title": "能量針灸",
       "icon": "assets/icons/acupuncture.png"
     },
     {
       "screen": () => GemScreen(),
-      "title": "能量寶石指引",
+      "title": "能量寶石",
       "icon": "assets/icons/gem.png"
     },
   ];
@@ -68,6 +68,7 @@ class _HealthyGuidanceViewState extends State<HealthyGuidanceView> {
                     },
                     child: Card(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
