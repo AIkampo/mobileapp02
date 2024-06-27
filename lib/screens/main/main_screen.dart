@@ -20,15 +20,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
     const BottomNavigationBarItem(icon: Icon(CupertinoIcons.doc_text_search), label: "檢測報告"),
-    const BottomNavigationBarItem(icon: Icon(CupertinoIcons.doc_richtext), label: "資訊中心"),
-    const BottomNavigationBarItem(icon: Icon(Icons.local_hospital_outlined), label: "聯盟診所"),
+    // const BottomNavigationBarItem(icon: Icon(CupertinoIcons.doc_richtext), label: "資訊中心"),
+    // const BottomNavigationBarItem(icon: Icon(Icons.local_hospital_outlined), label: "聯盟診所"),
     const BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: "設定"),
   ];
 
   final List<Widget> _screens = [
     const ExaminationListScreen(),
-    const InfoCenterScreen(),
-    const ClinicsWebviewScreen(),
+    // const InfoCenterScreen(),
+    // const ClinicsWebviewScreen(),
     const SettingsScreen()
   ];
 
