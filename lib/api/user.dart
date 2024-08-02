@@ -143,9 +143,9 @@ Future<void> registerMobileUser({
   required String phoneNumber,
   required String username,
   required DateTime birthday,
-  required String sex,
-  required String rh,
-  required String bloodType,
+  required Gender gender,
+  required Rhesus rh,
+  required BloodType bloodType,
 }) async {
   try {
     HttpsCallable callable = FirebaseFunctions
@@ -156,9 +156,9 @@ Future<void> registerMobileUser({
       "phoneNumber": phoneNumber,
       "username": username,
       "birthday": dateTimeToYearUntilDay(birthday),
-      "sex": sex,
-      "rh": rh,
-      "bloodType": bloodType,
+      "sex": genderToOberonCode[gender],
+      "rh": rhesusToOberonCode[rh],
+      "bloodType": bloodTypeToOberonCode[bloodType],
     })
     .timeout(const Duration(seconds: 15));
     print("registerMobileUser Result: ${result.data}");
@@ -480,14 +480,14 @@ class MobileUser {
   Future<UserData?> addNoPhoneFamilyMember({
     String? username,
     DateTime? birthday,
-    String? sex,
-    String? rh,
-    String? bloodType,
+    Gender? gender,
+    Rhesus? rh,
+    BloodType? bloodType,
   }) async {
     if (
       username == null ||
       birthday == null ||
-      sex == null ||
+      gender == null ||
       rh == null ||
       bloodType == null
     ) {
@@ -503,9 +503,9 @@ class MobileUser {
           "familyHolder": familyHolder?? "",
           "username": username,
           "birthday": dateTimeToYearUntilDay(birthday),
-          "sex": sex,
-          "rh": rh,
-          "bloodType": bloodType,
+          "sex": genderToOberonCode[gender],
+          "rh": rhesusToOberonCode[rh],
+          "bloodType": bloodTypeToOberonCode[bloodType],
         })
         .timeout(const Duration(seconds: 15));
         print("joinFamily Result: ${result.data}");

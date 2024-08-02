@@ -10,8 +10,6 @@ import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:ai_kampo_app/widgets/common/dynamic_listview.dart';
 import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 
-import '../../common/config.dart';
-
 
 class SubAccountsScreen extends StatefulWidget {
   const SubAccountsScreen({super.key});
@@ -504,8 +502,8 @@ class _FamilyMemberContentState extends State<FamilyMemberContent> {
                           Colors.grey[200]: null,
                         child: ListTile(
                           leading: Icon(
-                            account.sex == 'M' ? Icons.male : Icons.female,
-                            color: account.sex == 'M' ? Colors.blue : Colors.red,
+                            account.gender == Gender.male ? Icons.male : Icons.female,
+                            color: account.gender == Gender.male ? Colors.blue : Colors.red,
                             size: 48,
                           ),
                           title: Text(account.username),
@@ -515,8 +513,8 @@ class _FamilyMemberContentState extends State<FamilyMemberContent> {
                               children: [
                                 Text(
                                   "${account.birthday == null? "": dateTimeToYearUntilDay(account.birthday!)}  "
-                                  "${account.sex == "M"? "男": "女"}  "
-                                  "${UserProfile.bloodTypeList[int.parse(account.bloodType)]}型",
+                                  "${account.gender == Gender.male? "男": "女"}  "
+                                  "${bloodTypeToText[account.bloodType]}型",
                                 ),
                                 const Text("無電話號碼"),
                               ],

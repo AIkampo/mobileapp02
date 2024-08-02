@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class TcmNineConstitutionsController extends GetxController {
   final currentUserUid = ''.obs;
   final currentUserPhoneNumber = ''.obs;
-  final currentUserSex = 'F'.obs;
+  final currentUserGender = Gender.female.obs;
   final currentEvaluationType = 0.obs;
   final currentQuestionIndex = 0.obs;
   final isFillOut = false.obs;
@@ -45,6 +45,6 @@ class TcmNineConstitutionsController extends GetxController {
   void selectUser(UserData userData) {
     currentUserUid.value = userData.uid;
     currentUserPhoneNumber.value = userData.phoneNumber;
-    currentUserSex.value = userData.sex;
+    currentUserGender.value = userData.gender;
   }
 }

@@ -8,7 +8,7 @@ part of 'user_report_list.dart';
 
 UserReportListData _$UserReportListDataFromJson(Map<String, dynamic> json) =>
     UserReportListData(
-      patientSn: json['pacient_sn'] as int?,
+      patientSn: (json['pacient_sn'] as num?)?.toInt(),
       reseller: json['reseller'] as String?,
       thisMacSn: json['this_mac_sn'] as String?,
       oberonMac: json['oberonMac'] as String?,

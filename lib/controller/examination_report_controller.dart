@@ -197,7 +197,7 @@ class ExaminationReportController extends GetxController {
 
     Map<String, List<ScoreModel>> allSystemData = {};
     List<Future> systemDataTasks = [];
-    for (String organ in Examination.nineSystemIndexList) {
+    for (String organ in ExaminationConfig.nineSystemIndexList) {
       Future task = OberonAPI.getOrganSystemData(organ, caseId).then((res) {
         if (res.data['success']) {
           List tempList = res.data['data'].toList();
@@ -219,7 +219,7 @@ class ExaminationReportController extends GetxController {
     }
     await Future.wait(systemDataTasks);
 
-    for (String organ in Examination.nineSystemIndexList) {
+    for (String organ in ExaminationConfig.nineSystemIndexList) {
       List<ScoreModel> organSystemData = allSystemData[organ]?? [];
 
       List<Future> linkTasks = [];

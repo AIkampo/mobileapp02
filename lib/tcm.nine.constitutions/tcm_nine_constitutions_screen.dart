@@ -28,31 +28,32 @@ class TcmNineConstitutionsScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-         const Expanded(child: Text("")),
-         const Padding(
-            padding: EdgeInsets.all(22.0),
-            child: Text(
-              "爲了可以跟瞭解您的身體狀況，本系統每個月會跳出“體質表”供您填寫，以便提供您更正確的檢測報告。",
-              style: TextStyle(color: Colors.red, fontSize: 26),
-            ),
-          ),
-         const Expanded(child: Text("")),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CupertinoButton.filled(
-                child: Text("開始檢測"),
-                onPressed: () {
-                  Get.to(() => EvaluationScreen());
-                },
-              ),
-            ),
-          )
-        ],
-      ),
+      body: Center(child: Text("TODO")),
+      // body: Column(
+      //   children: [
+      //    const Expanded(child: Text("")),
+      //    const Padding(
+      //       padding: EdgeInsets.all(22.0),
+      //       child: Text(
+      //         "爲了可以跟瞭解您的身體狀況，本系統每個月會跳出“體質表”供您填寫，以便提供您更正確的檢測報告。",
+      //         style: TextStyle(color: Colors.red, fontSize: 26),
+      //       ),
+      //     ),
+      //    const Expanded(child: Text("")),
+      //     SizedBox(
+      //       width: double.infinity,
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: CupertinoButton.filled(
+      //           child: Text("開始檢測"),
+      //           onPressed: () {
+      //             Get.to(() => EvaluationScreen());
+      //           },
+      //         ),
+      //       ),
+      //     )
+      //   ],
+      // ),
     );
   }
 }

@@ -7,9 +7,9 @@ part of 'quota.dart';
 // **************************************************************************
 
 UserQuota _$UserQuotaFromJson(Map<String, dynamic> json) => UserQuota(
-      monthlyQuota: json['monthlyQuota'] as int,
-      remainingMonthlyQuota: json['remainingMonthlyQuota'] as int,
-      oneTimeQuota: json['oneTimeQuota'] as int,
+      monthlyQuota: (json['monthlyQuota'] as num).toInt(),
+      remainingMonthlyQuota: (json['remainingMonthlyQuota'] as num).toInt(),
+      oneTimeQuota: (json['oneTimeQuota'] as num).toInt(),
     );
 
 Map<String, dynamic> _$UserQuotaToJson(UserQuota instance) => <String, dynamic>{

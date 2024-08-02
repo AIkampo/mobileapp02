@@ -84,12 +84,12 @@ class KampoColors {
   }
 }
 
-class UserProfile {
+class UserProfileConfig {
   static List<String> bloodTypeList = ["O", "A", "B", "AB", "未知"];
   static List<String> rhList = ["+", "-", "未知"];
 }
 
-class Examination {
+class ExaminationConfig {
   //[0 消化, 1 呼吸, 2 泌尿, 3 循環, 4 淋巴, 5 內分泌, 6 神經, 7 感知, 8 骨骼]
   static List<String> nineSystemIndexList = [
     "digestion",

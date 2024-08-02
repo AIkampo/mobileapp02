@@ -121,7 +121,7 @@ class ExaminationButton extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  account.sex == "M"
+                  account.gender == Gender.male
                       ? const Icon(
                           Icons.male,
                           color: Colors.blue,
@@ -141,7 +141,7 @@ class ExaminationButton extends StatelessWidget {
                     Text(account.phoneNumber),
                   if (account.noPhoneUser)
                     Text(
-                      "${UserProfile.bloodTypeList[int.parse(account.bloodType)]}型  "
+                      "${bloodTypeToText[account.bloodType]}型  "
                       "${account.birthday == null? "": dateTimeToYearUntilDay(account.birthday!)}  ",
                       style: const TextStyle(fontSize: 18, color: Colors.grey),
                     ),

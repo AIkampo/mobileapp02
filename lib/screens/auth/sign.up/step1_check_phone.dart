@@ -171,6 +171,7 @@ class _StepCheckVerificationState extends State<StepCheckVerification> {
           const Text('請輸入驗證碼', style: TextStyle(fontSize: 28)),
           const SizedBox(height: 20),
           PinCodeTextField(
+            backgroundColor: Colors.transparent,
             cursorColor: Colors.black,
             keyboardType: TextInputType.number,
             appContext: context,

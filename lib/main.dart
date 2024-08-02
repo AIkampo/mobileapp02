@@ -1,15 +1,9 @@
 import 'package:ai_kampo_app/theme.dart';
-import 'package:ai_kampo_app/widgets/common/progress_loading.dart';
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'firebase_options.dart';
 import 'package:ai_kampo_app/controller/initial_bindings.dart';
@@ -93,7 +87,11 @@ class AIKampoApp extends StatelessWidget {
       ],
       translationsKeys: AppTranslation.translations,
       locale: const Locale('zh', 'TW'),
-      localizationsDelegates: const [FormBuilderLocalizations.delegate],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
     );
   }
 }

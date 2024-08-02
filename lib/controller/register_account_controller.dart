@@ -72,9 +72,9 @@ class RegisterAccountController extends GetxController {
   Future<String?> registerAccount({
     required String username,
     required DateTime birthday,
-    required String sex,
-    required String rh,
-    required String bloodType,
+    required Gender gender,
+    required Rhesus rh,
+    required BloodType bloodType,
     String? familyHolder,
   }) async {
     assert(_smsVerification != null);
@@ -86,7 +86,7 @@ class RegisterAccountController extends GetxController {
         phoneNumber: _smsVerification!.phoneNumber,
         username: username,
         birthday: birthday,
-        sex: sex,
+        gender: gender,
         rh: rh,
         bloodType: bloodType,
       );
@@ -174,15 +174,15 @@ class SubAccountController extends GetxController {
   Future<String?> addNoPhoneAccount({
     String? username,
     DateTime? birthday,
-    String? sex,
-    String? rh,
-    String? bloodType,
+    Gender? gender,
+    Rhesus? rh,
+    BloodType? bloodType,
   }) async {
     try {
       UserData? memberData = await MobileUser().addNoPhoneFamilyMember(
         username: username,
         birthday: birthday,
-        sex: sex,
+        gender: gender,
         rh: rh,
         bloodType: bloodType,
       );

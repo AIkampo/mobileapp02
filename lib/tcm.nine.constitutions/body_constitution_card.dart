@@ -1,10 +1,12 @@
-import 'package:ai_kampo_app/common/nbc.in.tcm.dart';
-import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:screenshot/screenshot.dart';
+
+import 'package:ai_kampo_app/models/user_model.dart';
+import 'package:ai_kampo_app/common/nbc.in.tcm.dart';
+import 'package:ai_kampo_app/controller/tcm_nine_constitutions_controller.dart';
 
 class BodyConstitutionCard extends StatelessWidget {
   BodyConstitutionCard({super.key, this.userConsitutionType = 0});
@@ -56,7 +58,7 @@ class BodyConstitutionCard extends StatelessWidget {
                   height: 30,
                 ),
                 Image.asset(
-                  "assets/images/constitution/${Get.find<TcmNineConstitutionsController>().currentUserSex.value == 'M' ? 'man' : 'woman'}/${NBCinTCM.images[userConsitutionType]}",
+                  "assets/images/constitution/${Get.find<TcmNineConstitutionsController>().currentUserGender.value == Gender.male ? 'man' : 'woman'}/${NBCinTCM.images[userConsitutionType]}",
                   scale: 1.8,
                 ),
                 SizedBox(

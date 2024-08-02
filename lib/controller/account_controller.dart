@@ -1,7 +1,7 @@
-import 'package:ai_kampo_app/api/firebase_api.dart';
+import 'dart:async';
+
 import 'package:ai_kampo_app/api/user.dart';
 import 'package:ai_kampo_app/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AccountController extends GetxController {
@@ -99,14 +99,18 @@ class AccountController extends GetxController {
       });
       tasks.add(task);
     }
-    await Future.wait(tasks);
-    subAccountsData.value = accountsInfo;
-    // refresh selected user
-    if (selectedUser.value != null) {
-      String targetUid = selectedUser.value!.uid;
-      int targetIdx = subAccountsData.indexWhere((e) => e.uid == targetUid);
-      selectedUser.value = targetIdx == -1?
+    try {
+      await Future.wait(tasks).timeout(const Duration(seconds: 10));
+      subAccountsData.value = accountsInfo;
+      // refresh selected user
+      if (selectedUser.value != null) {
+        String targetUid = selectedUser.value!.uid;
+        int targetIdx = subAccountsData.indexWhere((e) => e.uid == targetUid);
+        selectedUser.value = targetIdx == -1?
         userData.value: subAccountsData[targetIdx];
+      }
+    } on TimeoutException catch (_) {
+      print("refreshAllAccountsInfo timeout");
     }
   }
 
@@ -172,7 +176,6 @@ class AccountController extends GetxController {
       holderAccountData.value = null;
       familyMember.clear();
       subAccountsData.clear();
-      holderAccountData.value = null;
     }
     catch (e) {
       return e.toString();
@@ -185,9 +188,9 @@ class AccountController extends GetxController {
     bool? agreeServiceAgreement,
     String? username,
     DateTime? birthday,
-    String? sex,
-    String? rh,
-    String? bloodType,
+    Gender? gender,
+    Rhesus? rh,
+    BloodType? bloodType,
     DateTime? lastPhysiqueRatingDateTime,
   }) async {
     if (uid.isEmpty) {
@@ -203,12 +206,19 @@ class AccountController extends GetxController {
         newAgreeServiceAgreement: agreeServiceAgreement,
         newUsername: username,
         newBirthday: birthday,
-        newSex: sex,
+        newGender: gender,
         newRh: rh,
         newBloodType: bloodType,
         newLastPhysiqueRatingDateTime: lastPhysiqueRatingDateTime,
       );
       userData.refresh();
+      if (
+        holderAccountData.value != null &&
+        uid == holderAccountData.value!.uid
+      ) {
+        holderAccountData.value = userData.value;
+        holderAccountData.refresh();
+      }
     }
     else if (subAccountsData.indexWhere((e) => e.uid == uid) != -1) {
       int targetIdx = subAccountsData.indexWhere((e) => e.uid == uid);
@@ -216,7 +226,7 @@ class AccountController extends GetxController {
         newAgreeServiceAgreement: agreeServiceAgreement,
         newUsername: username,
         newBirthday: birthday,
-        newSex: sex,
+        newGender: gender,
         newRh: rh,
         newBloodType: bloodType,
         newLastPhysiqueRatingDateTime: lastPhysiqueRatingDateTime,

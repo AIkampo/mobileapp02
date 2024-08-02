@@ -13,5 +13,11 @@ ThemeData kampoTheme = ThemeData(
     backgroundColor: KampoColors.primary,
     centerTitle: true,
   ),
-  dividerColor: Colors.transparent,
+  dividerTheme: const DividerThemeData(color: Colors.transparent),
+  inputDecorationTheme: const InputDecorationTheme(
+    fillColor: Colors.white,
+    filled: true,
+    border: InputBorder.none,
+    errorStyle: TextStyle(color: Colors.red),
+  ),
 );

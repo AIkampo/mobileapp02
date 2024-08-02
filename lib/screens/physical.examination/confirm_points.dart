@@ -10,7 +10,7 @@ import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
 import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 import 'package:ai_kampo_app/models/quota.dart';
 import 'package:ai_kampo_app/utils/utils.dart';
-import 'examination_tips_screen.dart';
+
 
 class ConfirmPointScreen extends StatefulWidget {
   const ConfirmPointScreen({super.key});
@@ -160,7 +160,7 @@ class _ConfirmPointScreenState extends State<ConfirmPointScreen> {
               }),
               Obx(() {
                 UserData? data = _physicalExaminationController.selectedUser.value;
-                String genderStr = data == null? "": data.sex == "M"? "男": "女";
+                String genderStr = data == null? "": data.gender == Gender.male? "男": "女";
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -174,7 +174,7 @@ class _ConfirmPointScreenState extends State<ConfirmPointScreen> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "血型：${data == null? "": UserProfile.bloodTypeList[int.parse(data.bloodType)]}",
+                    "血型：${data == null? "": bloodTypeToText[data.bloodType]}",
                     style: const TextStyle(fontSize: 20),
                   ),
                 );
@@ -184,7 +184,7 @@ class _ConfirmPointScreenState extends State<ConfirmPointScreen> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "RH：${data == null? "": UserProfile.rhList[int.parse(data.rh)]}",
+                    "RH：${data == null? "": rhesusToText[data.rh]}",
                     style: const TextStyle(fontSize: 20),
                   ),
                 );

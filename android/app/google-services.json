@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "982447607474-6tvgcqdko5qvcbs6potg1p9b6083hj4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aikampo.app",
+            "certificate_hash": "26b9f07b957cfd6675f4637ea2928eb853d58be7"
+          }
+        },
+        {
           "client_id": "982447607474-q3fp9c31vb5b7vtnnlfr4u39fqvg9gif.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -39,10 +47,46 @@
               "client_type": 3
             },
             {
-              "client_id": "982447607474-s59h1pnhgo5rouoc5m4053khmbr84ai7.apps.googleusercontent.com",
+              "client_id": "982447607474-rnqa068gkojftc4qr36d4ssmo1eh8gav.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.kampo.app"
+                "bundle_id": "com.aikampo.aiKampoAppPhase1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982447607474:android:eafb9d47dfea08ea5743ab",
+        "android_client_info": {
+          "package_name": "com.example.mobile_cms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQC7C4p1RJGvt3mszGu-Bpuc7YWeskn58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982447607474-gct2ff15k3nlfq2trqvf75tm3kd0hpme.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "982447607474-rnqa068gkojftc4qr36d4ssmo1eh8gav.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aikampo.aiKampoAppPhase1"
               }
             }
           ]

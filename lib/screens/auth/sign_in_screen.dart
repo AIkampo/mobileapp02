@@ -199,6 +199,7 @@ class _SignInScreenState extends State<SignInScreen> {
         const Text('請輸入驗證碼', style: TextStyle(fontSize: 20)),
         const SizedBox(height: 12),
         PinCodeTextField(
+          backgroundColor: Colors.transparent,
           keyboardType: TextInputType.number,
           appContext: context,
           length: 6,

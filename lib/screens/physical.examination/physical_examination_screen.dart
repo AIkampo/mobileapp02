@@ -8,11 +8,9 @@ import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 
-import 'package:ai_kampo_app/api/firebase_api.dart';
 import 'package:ai_kampo_app/api/oberon_api.dart';
 import 'package:ai_kampo_app/common/config.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
-import 'package:ai_kampo_app/controller/examination_report_controller.dart';
 import 'package:ai_kampo_app/controller/physical_examination_controller.dart';
 import 'package:ai_kampo_app/models/examination_model.dart';
 import 'package:ai_kampo_app/models/examination_status_model.dart';
@@ -283,9 +281,9 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
       "Name": userProfile.username,
       "Birthday": DateFormat("yyyyMMdd").format(userProfile.birthday!),
       "Phone": userProfile.phoneNumber,
-      "Sex": userProfile.sex,
-      "BloodGroup": userProfile.bloodType,
-      "Rhesus": userProfile.rh,
+      "Sex": genderToOberonCode[userProfile.gender]!,
+      "BloodGroup": bloodTypeToOberonCode[userProfile.bloodType]!,
+      "Rhesus": rhesusToOberonCode[userProfile.rh]!,
       "Reseller": "tw-00026",
       "oberonType": "BT",
       "oberonSerial": _headsetId,

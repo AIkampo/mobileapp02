@@ -4,10 +4,7 @@ import 'package:get/get.dart';
 import 'package:ai_kampo_app/models/user_model.dart';
 import 'package:ai_kampo_app/controller/account_controller.dart';
 import 'package:ai_kampo_app/controller/examination_list_controller.dart';
-import 'package:ai_kampo_app/controller/examination_report_controller.dart';
-
-import '../../common/config.dart';
-import '../../utils/utils.dart';
+import 'package:ai_kampo_app/utils/utils.dart';
 
 
 class AccountsDropdown extends StatelessWidget {
@@ -60,7 +57,7 @@ class AccountsDropdown extends StatelessWidget {
           SizedBox(
             width: 10,
           ),
-          account.sex == 'M'?
+          account.gender == Gender.male?
             const Icon(
               Icons.male_outlined,
               color: Colors.blue,
@@ -84,7 +81,7 @@ class AccountsDropdown extends StatelessWidget {
             ),
           if (account.noPhoneUser)
             Text(
-            "${UserProfile.bloodTypeList[int.parse(account.bloodType)]}型  "
+            "${bloodTypeToText[account.bloodType]}型  "
             "${account.birthday == null? "": dateTimeToYearUntilDay(account.birthday!)}",
               style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
