@@ -28,12 +28,13 @@ class AccountController extends GetxController {
     // on change event
     user.value.addIdTokenChangedCallback((_) async {
       print("addIdTokenChangedCallback");
-      refreshAll();
+      refreshAll(showLoading: false);
     });
   }
 
-  Future<void> refreshAll() async {
-    isLoading.value = true;
+  Future<void> refreshAll({bool showLoading = true}) async {
+    print("refreshAll");
+    if(showLoading) isLoading.value = true;
     await user.value.updateCustomClaims();
     userLoggedIn.value = user.value.loggedIn;
     userId.value = user.value.userId?? "";
@@ -47,7 +48,7 @@ class AccountController extends GetxController {
     await refreshAllAccountsInfo();
     selectedUser.value ??= userData.value;
     user.refresh();
-    isLoading.value = false;
+    if(showLoading) isLoading.value = false;
   }
 
   UserData? uidToUserData(String uid) {
