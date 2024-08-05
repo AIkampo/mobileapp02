@@ -27,6 +27,7 @@ class AccountController extends GetxController {
     refreshAll();
     // on change event
     user.value.addIdTokenChangedCallback((_) async {
+      print("addIdTokenChangedCallback");
       refreshAll();
     });
   }
