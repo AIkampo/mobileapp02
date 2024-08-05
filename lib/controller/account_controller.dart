@@ -24,7 +24,7 @@ class AccountController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    refreshAll().then((_) => isLoading.value = false);
+    refreshAll();
     // on change event
     user.value.addIdTokenChangedCallback((_) async {
       refreshAll();
@@ -32,6 +32,7 @@ class AccountController extends GetxController {
   }
 
   Future<void> refreshAll() async {
+    isLoading.value = true;
     await user.value.updateCustomClaims();
     userLoggedIn.value = user.value.loggedIn;
     userId.value = user.value.userId?? "";
@@ -45,6 +46,7 @@ class AccountController extends GetxController {
     await refreshAllAccountsInfo();
     selectedUser.value ??= userData.value;
     user.refresh();
+    isLoading.value = false;
   }
 
   UserData? uidToUserData(String uid) {

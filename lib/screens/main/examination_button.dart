@@ -19,35 +19,34 @@ class ExaminationButton extends StatelessWidget {
   final _tcmController = Get.find<TcmNineConstitutionsController>();
   final _physicalExaminationController =
     Get.find<PhysicalExaminationController>();
-  final _isChecking = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => _accountController.isLoading.value || _isChecking.value
-          ? Center(
-              child: Container(
-                width: 16,
-                height: 16,
-                child: const CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              ),
-            )
-          : GestureDetector(
-              onTap: () async {
-                if (_accountController.isFamilyHolder.value) {
-                  _showAccountMenu(context);
-                } else {
-                  _physicalExaminationController.selectedUser.value =
-                    _accountController.userData.value;
-                  handleGoToScreen(_accountController.userId.value);
-                }
-              },
-              child: Image.asset(
-                "assets/icons/detection.png",
-              ),
-            ),
+      () => _accountController.isLoading.value?
+      Center(
+        child: Container(
+          width: 16,
+          height: 16,
+          child: const CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        ),
+      ):
+      GestureDetector(
+        onTap: () async {
+          if (_accountController.isFamilyHolder.value) {
+            _showAccountMenu(context);
+          } else {
+            _physicalExaminationController.selectedUser.value =
+              _accountController.userData.value;
+            handleGoToScreen(_accountController.userId.value);
+          }
+        },
+        child: Image.asset(
+          "assets/icons/detection.png",
+        ),
+      ),
     );
   }
 

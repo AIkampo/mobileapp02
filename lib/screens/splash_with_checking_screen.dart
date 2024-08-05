@@ -16,7 +16,7 @@ class SplashWithCheckingScreen extends StatefulWidget {
 }
 
 class _SplashWithCheckingScreenState extends State<SplashWithCheckingScreen> {
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
   final _accountController = Get.find<AccountController>();
 
   @override
@@ -63,16 +63,14 @@ class _SplashWithCheckingScreenState extends State<SplashWithCheckingScreen> {
   }
 
   Future monitorNetwork() async {
-    _connectivitySubscription =
-        Connectivity().onConnectivityChanged.listen((ConnectivityResult result) async {
-      await Utils.isNetworkAvailable().then((res) {
-        if (res) {
+    _connectivitySubscription = Connectivity().onConnectivityChanged
+      .listen((List<ConnectivityResult> result) async {
+        if (result.contains(ConnectivityResult.none)) {
+          Get.offAllNamed("/splash");
+        } else {
           _connectivitySubscription.cancel();
           checkAuth();
-        } else {
-          Get.offAllNamed("/splash");
         }
       });
-    });
   }
 }
