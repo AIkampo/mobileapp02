@@ -31,7 +31,7 @@ class HealthyGuidanceController extends GetxController {
     //RTU
     try {
       final response = await Dio().get(
-        "https://api.aikserver01.com/api/Score/23/${caseId}",
+        "https://api.aikampo.com/api/Score/23/${caseId}",
         options: Options(headers: OberonAPI.headers),
       );
       if (response.data['success']) {

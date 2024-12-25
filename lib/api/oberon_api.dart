@@ -101,13 +101,6 @@ class OberonAPI {
     );
   }
 
-  static Future getDietData(String caseId) {
-    return Dio().get(
-      "$apiUrl/Score/23/$caseId",
-      options: Options(headers: headers),
-    );
-  }
-
   static Future getNutrientsData(String caseId) {
     return Dio().get(
       "$apiUrl/Score/162/$caseId",
