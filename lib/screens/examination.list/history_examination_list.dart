@@ -32,13 +32,13 @@ class HistoryExaminationList extends StatelessWidget {
               length: _tabs.length,
               child: Column(
                 children: [
-                  KampoTitle(title: "歷史報告"),
+                  const KampoTitle(title: "歷史報告", topPadding: 0),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 12),
+                    margin: const EdgeInsets.symmetric(horizontal: 12),
                     child: TabBar(
                       labelColor: Colors.blue,
                       tabs: _tabs,
-                      labelStyle: TextStyle(fontSize: 16),
+                      labelStyle: const TextStyle(fontSize: 16),
                     ),
                   ),
                   Container(

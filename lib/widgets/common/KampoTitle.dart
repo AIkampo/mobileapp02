@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class KampoTitle extends StatelessWidget {
+  final double topPadding;
   const KampoTitle({
     Key? key,
     required this.title,
+    this.topPadding = 26,
   }) : super(key: key);
 
   final String title;
@@ -12,9 +14,7 @@ class KampoTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 26,
-        ),
+        SizedBox(height: topPadding),
         Container(
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.all(8),

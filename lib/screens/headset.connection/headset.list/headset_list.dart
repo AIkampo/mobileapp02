@@ -73,6 +73,7 @@ class _HeadsetListState extends State<HeadsetList> {
   void initState() {
     super.initState();
     _sacnHeadset();
+    print("HeadsetList initState");
   }
 
   @override

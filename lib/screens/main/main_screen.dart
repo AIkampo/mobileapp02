@@ -41,7 +41,6 @@ class _MainScreenState extends State<MainScreen> {
           backgroundColor: KampoColors.primary,
           toolbarHeight: 82,
           centerTitle: true,
-          leading: ExaminationButton(),
           title: Image.asset(
             "assets/images/logo.png",
             scale: 1.5,

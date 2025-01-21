@@ -27,49 +27,52 @@ class _ExaminationReportScreenState extends State<ExaminationReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 120,
-          automaticallyImplyLeading: false,
-          title: Container(
-            color: Colors.white,
-            child: ReportProfile()
-          ),
-          bottom: const TabBar(
-            labelColor: Colors.white,
-            tabs: [
-              Tab(
-                child: Text(
-                  "檢測結果",
-                  style: TextStyle(fontSize: 22),
+    return PopScope(
+      canPop: false,
+      child: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 120,
+            automaticallyImplyLeading: false,
+            title: Container(
+              color: Colors.white,
+              child: ReportProfile()
+            ),
+            bottom: const TabBar(
+              labelColor: Colors.white,
+              tabs: [
+                Tab(
+                  child: Text(
+                    "檢測結果",
+                    style: TextStyle(fontSize: 22),
+                  ),
                 ),
-              ),
-              Tab(
-                child: Text(
-                  "健康指引",
-                  style: TextStyle(fontSize: 22),
-                ),
-              )
-            ]
+                Tab(
+                  child: Text(
+                    "健康指引",
+                    style: TextStyle(fontSize: 22),
+                  ),
+                )
+              ]
+            ),
           ),
+          body: TabBarView(
+            children: [
+              ReportView(),
+              HealthyGuidanceView(),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.offAllNamed("/main");
+            },
+            backgroundColor: Colors.red.shade300,
+            child: const Icon(Icons.close),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+          floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         ),
-        body: TabBarView(
-          children: [
-            ReportView(),
-            HealthyGuidanceView(),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.offNamed("/main");
-          },
-          backgroundColor: Colors.red.shade300,
-          child: const Icon(Icons.close),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       ),
     );
   }

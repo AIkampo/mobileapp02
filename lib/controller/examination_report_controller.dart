@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:ai_kampo_app/controller/account_controller.dart';
-import 'package:any_link_preview/any_link_preview.dart';
 import 'package:get/get.dart';
 
 import 'package:ai_kampo_app/common/config.dart';
@@ -61,7 +60,12 @@ class ExaminationReportController extends GetxController {
   Future<void> fetchUserData(caseId) async {
     isUserProfileLoading.value = true;
     allergenList.clear();
-    await OberonAPI.getUserDataFromCaseId(caseId).then((res) {
+    String phone =
+      Get.find<AccountController>().selectedUser.value!.phoneNumber;
+    await OberonAPI.getUserDataFromPhone(
+      caseId: caseId,
+      phoneNumber: phone,
+    ).then((res) {
       if (res != null) {
         birth.value = res.birthDate?? "";
         name.value = res.name?? "";
@@ -221,32 +225,14 @@ class ExaminationReportController extends GetxController {
 
     for (String organ in ExaminationConfig.nineSystemIndexList) {
       List<ScoreModel> organSystemData = allSystemData[organ]?? [];
-
-      List<Future> linkTasks = [];
-      Map<String, String> linkToTitles = {};
+      List<LinkMetaData> metaData = [];
       for (ScoreModel data in organSystemData) {
-        if (data.description == null) continue;
-        Future task = AnyLinkPreview.getMetadata(link: data.description!)
-        .then((Metadata? metadata) {
-          linkToTitles[data.description!] = metadata != null?
-            (metadata.title?? data.description!): data.description!;
-        });
-        linkTasks.add(task);
+        metaData.add(LinkMetaData(
+          link: data.gptUrl?? "", title: data.title?? ""));
+        if (metaData.length >= 10) break;
       }
-      Future.wait(linkTasks)
-      .then((_) {
-        linkListState[organ]!.data.value = [for (String link in linkToTitles.keys)
-          LinkMetaData(link: link, title: linkToTitles[link]?? "")];
-        linkListState[organ]!.loadingData.value = false;
-        print("$organ link data READY!");
-      })
-      .timeout(const Duration(seconds: 15), onTimeout: () {
-        print("$organ link data collecting timeout!");
-        linkListState[organ]!.data.value = [for (String link in linkToTitles.keys)
-          LinkMetaData(link: link, title: linkToTitles[link]?? "")];
-        linkListState[organ]!.loadingData.value = false;
-        print("$organ link data READY!");
-      });
+      linkListState[organ]?.loadingData.value = false;
+      linkListState[organ]?.data.value = metaData;
     }
   }
 

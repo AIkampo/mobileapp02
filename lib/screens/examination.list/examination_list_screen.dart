@@ -1,3 +1,4 @@
+import 'package:ai_kampo_app/screens/main/examination_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,7 +74,7 @@ class _ExaminationListScreenState extends State<ExaminationListScreen> {
               } else {
                 return Column(
                   children: [
-                    TheLastExaminationReportButton(),
+                    ExaminationButton(),
                     HistoryExaminationList(),
                   ],
                 );

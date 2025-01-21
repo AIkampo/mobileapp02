@@ -18,6 +18,12 @@ import 'package:ai_kampo_app/widgets/kampo_dialog.dart';
 import 'package:ai_kampo_app/models/user_model.dart';
 
 
+enum SendExaminationDataError {
+  apiReturnFalse,
+  timeout,
+  other
+}
+
 class PhysicalExaminationScreen extends StatefulWidget {
   const PhysicalExaminationScreen({super.key});
 
@@ -28,9 +34,9 @@ class PhysicalExaminationScreen extends StatefulWidget {
 class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
   final _currentCarouselIndex = 1.obs;
   final CarouselController _carouselcontroller = CarouselController();
-  final _accountController = Get.find<AccountController>();
   final _physicalExaminationController =
     Get.find<PhysicalExaminationController>();
+  StreamSubscription? _dataStream;
   List tipsList = [
     {
       "title": "「健康指引」提供許多適合您體質的東西。",
@@ -64,6 +70,15 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
     _headsetId = _headset.id.toString();
     getService();
     handleCountdown();
+  }
+
+  @override
+  void dispose() {
+    if (_dataStream != null) {
+      _dataStream!.cancel();
+      _dataStream = null;
+    }
+    super.dispose();
   }
 
   late Timer countdownTimer;
@@ -203,27 +218,38 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
     ]);
 
     await _mainCharacteristic.setNotifyValue(true);
-    _mainCharacteristic.value.listen((value) {
-      if (oberonData.length >= KampoConfig.examinationDataLength && !_stopGetData) {
-        setState(() {
-          _stopGetData = true;
-        });
-        stopDetection();
-        handleSendExaminationData(
-          base64.encode(
-            oberonData.sublist(
-              0,
-              KampoConfig.examinationDataLength,
+    _dataStream = _mainCharacteristic.lastValueStream.listen(
+      (value) {
+        if (oberonData.length >= KampoConfig.examinationDataLength && !_stopGetData) {
+          setState(() {
+            _stopGetData = true;
+          });
+          stopDetection();
+          handleSendExaminationData(
+            base64.encode(
+              oberonData.sublist(
+                0,
+                KampoConfig.examinationDataLength,
+              ),
             ),
-          ),
-        );
-      } else {
-        oberonData.addAll(value);
-      }
-    });
+          );
+          if (_dataStream != null) _dataStream!.cancel();
+        } else {
+          oberonData.addAll(value);
+        }
+      },
+      onError: (err) {
+        print("error: $err");
+        throw Exception("BT data gathering error!");
+      },
+    );
   }
 
   Future<void> stopDetection() async {
+    if (_dataStream != null) {
+      _dataStream!.cancel();
+      _dataStream = null;
+    }
     await _mainCharacteristic.setNotifyValue(false);
     await _mainCharacteristic.write([
       0x00,
@@ -247,35 +273,61 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
   }
 
   Future<void> handleSendExaminationData(String examinationData) async {
-    await OberonAPI.getCaseId().then((res) async {
-      Map<String, dynamic> resJson = res.data;
-      String caseId;
+    for (int i = 0; i < KampoConfig.maxResendAttempts; i++) {
+      print("Attempts: ${i + 1}/${KampoConfig.maxResendAttempts}");
 
-      if (resJson['success']) {
-        caseId = resJson['data'];
-      } else {
-        throw Exception("Can't get caseId!");
-      }
+      String? caseId;
+      await OberonAPI.getCaseId().then((res) async {
+        Map<String, dynamic> resJson = res.data;
+        if (resJson['success']) {
+          caseId = resJson['data'];
+        } else {
+          throw Exception("Can't get caseId!");
+        }
+        if (_physicalExaminationController.selectedUser.value == null) {
+          KampoDialog.confirmAndOffAllNamed(context, "無法取得使用者資訊！", "", "main");
+        }
+      }).catchError((e) {
+        KampoDialog.confirmAndOffAllNamed(context, "無法取得CaseId($i)", "", "main");
+      });
+      if (caseId == null) return;
 
-      if (_physicalExaminationController.selectedUser.value == null) {
-        KampoDialog.confirmAndOffAllNamed(context, "無法取得使用者資訊！", "", "main");
-      }
-      doSendExaminationData(
-        caseId,
+      SendExaminationDataError? err = await doSendExaminationData(
+        caseId!,
         _physicalExaminationController.selectedUser.value!,
         examinationData,
       );
-    }).catchError((e) {
-      KampoDialog.confirmAndOffAllNamed(context, "無法取得CaseId", "", "main");
-    });
+      if (err == null) {
+        // end function if success
+        return;
+      }
+      else {
+        switch (err) {
+          case SendExaminationDataError.apiReturnFalse:
+            KampoDialog.confirmAndOffAllNamed(context, "檢測未成功!", "", "main");
+            break;
+          case SendExaminationDataError.other:
+            KampoDialog.confirmAndOffAllNamed(context, "傳送檢測資料未成功!", "", "main");
+            break;
+          case SendExaminationDataError.timeout:
+            // DO NOTHING
+            break;
+        }
+      }
+    }
+    // if failed after resending maxResendAttempts times
+    if (mounted) {
+      KampoDialog.confirmAndOffAllNamed(
+        context, "分析失敗請檢查網路連線!", "", "main");
+    }
   }
 
-  Future<void> doSendExaminationData(
+  Future<SendExaminationDataError?> doSendExaminationData(
     String caseId,
     UserData userProfile,
     String examinationData,
   ) async {
-
+    SendExaminationDataError? err;
     await OberonAPI.sendExaminationData({
       "CaseId": caseId,
       "Name": userProfile.username,
@@ -290,51 +342,60 @@ class _PhysicalExaminationScreenState extends State<PhysicalExaminationScreen> {
       "oberonData": examinationData,
       "oberMac": _headsetId,
       "devicePlatform": "MOBILE",
-    }).then((res) {
+    })
+    .then((res) async {
       final ExaminationModel examinationData =
           ExaminationModel.fromJson(jsonDecode(res.toString()));
-      _physicalExaminationController.consumeQuota();
 
       if (examinationData.success!) {
         _isAnalysing.value = true;
-        Future.delayed(Duration(seconds: KampoConfig.examinationAnalysingTime),
-            () => handleCheckExamination(caseId));
-      } else {
-        if (!_isAnalysing.value) {
-          KampoDialog.confirmAndOffAllNamed(context, "檢測未成功!", "", "main");
-          throw Exception("檢測未成功");
+        bool result = await Future.delayed(
+          Duration(seconds: KampoConfig.examinationAnalysingTime),
+          () => handleCheckExamination(caseId));
+        if (result) {
+          _physicalExaminationController.consumeQuota();
+          Get.toNamed("/examination.report", arguments: {"caseId": caseId});
+          return;
         }
+        else {
+          err = SendExaminationDataError.timeout;
+        }
+      } else {
+        err = SendExaminationDataError.apiReturnFalse;
       }
     }).catchError((e) {
-      KampoDialog.confirmAndOffAllNamed(context, "傳送檢測資料未成功!", "", "main");
+      err = SendExaminationDataError.other;
     });
+    return err;
   }
 
-  Future<void> handleCheckExamination(caseId) async {
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
+  Future<bool> handleCheckExamination(caseId) async {
+    bool success = false;
+    for (
+      int checkStatusAttempt = 0;
+      checkStatusAttempt < KampoConfig.checkStatusMaxAttempts;
+      checkStatusAttempt++
+    ) {
       await OberonAPI.checkAnalysisStatus(caseId).then((res) {
         final ExaminationStatusModel resJson =
-            ExaminationStatusModel.fromJson(jsonDecode(res.toString()));
+        ExaminationStatusModel.fromJson(jsonDecode(res.toString()));
 
         if (resJson.success!) {
           if (resJson.data == "Y") {
-            timer.cancel();
-            Get.toNamed("/examination.report", arguments: {"caseId": caseId});
-          } else if (resJson.data == "R") {
-            debugPrint("檢測資料尚未成功！");
+            success = true;
           }
         } else {
           KampoDialog.confirmAndOffAllNamed(context, "分析資料未成功！", "", "main");
-          timer.cancel();
         }
-      }).catchError((
-        error,
-      ) {
+      })
+      .catchError((error) {
         KampoDialog.confirmAndOffAllNamed(context, "分析檢測資料未成功！", "", "main");
-        timer.cancel();
-      }).whenComplete(() {
+      })
+      .whenComplete(() {
         _isAnalysing.value = false;
       });
-    });
+      if (success) break;
+    }
+    return success;
   }
 }

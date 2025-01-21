@@ -24,29 +24,47 @@ class ExaminationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => _accountController.isLoading.value?
-      Center(
-        child: Container(
+      const Center(
+        child: SizedBox(
           width: 16,
           height: 16,
-          child: const CircularProgressIndicator(
+          child: CircularProgressIndicator(
             color: Colors.white,
           ),
         ),
       ):
-      GestureDetector(
-        onTap: () async {
-          if (_accountController.isFamilyHolder.value) {
-            _showAccountMenu(context);
-          } else {
-            _physicalExaminationController.selectedUser.value =
-              _accountController.userData.value;
-            handleGoToScreen(_accountController.userId.value);
-          }
-        },
-        child: Image.asset(
-          "assets/icons/detection.png",
+      Container(
+        margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 4),
+        child: CupertinoButton.filled(
+          onPressed: () {
+            if (_accountController.isFamilyHolder.value) {
+              _showAccountMenu(context);
+            } else {
+              _physicalExaminationController.selectedUser.value =
+                  _accountController.userData.value;
+              handleGoToScreen(_accountController.userId.value);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                VerticalDivider(),
+                Text(
+                  "開始檢測",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 6,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+      )
     );
   }
 

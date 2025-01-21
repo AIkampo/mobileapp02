@@ -28,11 +28,12 @@ class OberonAPI {
     );
   }
 
-  static Future<UserReportListData?> getUserDataFromCaseId(
-    String caseId,
-  ) async {
+  static Future<UserReportListData?> getUserDataFromPhone({
+    required String caseId,
+    required String phoneNumber,
+  }) async {
     Response response = await Dio().post(
-      "$apiUrl/User/UserReportList",
+      "$apiUrl/User/UserReportListBytel1/$phoneNumber",
       options: Options(headers: headers),
       data: jsonEncode({
         "reseller_no": "tw-00026",

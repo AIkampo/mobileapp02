@@ -25,6 +25,8 @@ class KampoConfig {
   static int headsetExaminationTime = 120;
   //預估server 分析時間(second)
   static int examinationAnalysingTime = 90;
+  static int maxResendAttempts = 3;
+  static int checkStatusMaxAttempts = 6;
   static int totalExaminationTime = headsetExaminationTime + examinationAnalysingTime;
 
   //預計每隔多少天進行 體質表 評估

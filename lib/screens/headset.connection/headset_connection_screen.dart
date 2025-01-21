@@ -46,7 +46,7 @@ class _HeadsetConnectionScreenState extends State<HeadsetConnectionScreen> {
                 );
 
               case (BluetoothAdapterState.on):
-                return HeadsetList();
+                return const HeadsetList();
               default:
                 return ConnectionTips();
             }
